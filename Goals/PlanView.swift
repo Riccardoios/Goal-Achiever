@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreData
 import Combine
+import UserNotifications
 
 struct PlanView: View {
     
@@ -194,18 +195,13 @@ struct PlanView: View {
                             HStack {
                                 ForEach(0..<emojisArray.count) { item in
                                     
-                                    GeometryReader { geometry in
+                                    GoalIconView(emoji: self.emojisArray[item], isSelected: item == self.selectedIndex ? true : false)
                                         
-                                        GoalIconView(emoji: self.emojisArray[item], isSelected: item == self.selectedIndex ? true : false)
-                                            
-                                            .onTapGesture {
-                                                self.selectedIndex = item
-                                                self.timerVM.classicVibration()
+                                        .onTapGesture {
+                                            self.selectedIndex = item
+                                            self.timerVM.classicVibration()
                                         }
-                                        
-                                    }
-                                    .frame(width:100, height:130)
-                                    .padding(.vertical, -10)
+                                        .frame(width:100, height:130)
                                     
                                 }
                             }
@@ -284,7 +280,7 @@ struct PlanView: View {
                                         
                                         try? self.moc.save()
                                         
-                                        timerVM.notificationIdealDays()
+                                        self.notificationIdealDays()
                                         
                                         if Int(self.numberOfDays) != nil {
                                             timerVM.deadlineNotification(withinDays: Int(self.numberOfDays)!)
@@ -333,6 +329,38 @@ struct PlanView: View {
             
         }
         
+    }
+    
+    func notificationIdealDays() {
+        
+                let content = UNMutableNotificationContent()
+        
+                content.title = "Reminder of: " + (goals.first?.image ?? "") + (goals.first?.title ?? "Your goal")
+                content.body = self.timerVM.motivationQuote
+                content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "future_sms.mp3"))
+        
+                var datesOfNotifications = DateComponents()
+                let arrOfWeek = [goals.first?.sunday, goals.first?.monday, goals.first?.tuesday, goals.first?.wednesday, goals.first?.thursday, goals.first?.friday, goals.first?.saturnday]
+        
+                var arrOftrueIndexes = [Int]()
+                // find indexes of true
+                for ind in 0...6 {
+                    if arrOfWeek[ind] == true {
+                        arrOftrueIndexes.append(ind+1) // + 1 is for the weekday
+                    }
+                }
+        
+                for elem in arrOftrueIndexes {
+                    //trigger the notification as many time as there are element in the arr
+                    datesOfNotifications.weekday = elem // weekday works counting from 1 from sunday
+                    datesOfNotifications.hour = 9
+        
+                    let trigger = UNCalendarNotificationTrigger(dateMatching:datesOfNotifications, repeats: true)
+                    let request = UNNotificationRequest(identifier: "goal reminder notification" + "\(elem)", content: content, trigger: trigger)
+        
+                    UNUserNotificationCenter.current().add(request)
+        
+                }
     }
     
 }

@@ -215,7 +215,7 @@ struct DoView: View {
                     }
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                         print("Moving back to the foreground!")
-                        self.timerVM.prepareForForeground()
+                        self.saveSession(input: Int32(self.timerVM.getSecondsFromSleep()))
                     }
                     
                     Spacer()
@@ -246,7 +246,7 @@ struct DoView: View {
                     }
                     .onAppear{self.putAwayMenu = false}
                     .onDisappear{
-                        self.saveSession()
+                        self.saveSession(input: self.timerVM.secondForSession)
                     }
                     
                 }
@@ -258,14 +258,14 @@ struct DoView: View {
         }
     }
     
-    func saveSession() {
+    func saveSession(input: Int32) {
         let newSession = Sessions(context: self.moc)
         
         newSession.title = goals.first?.title
         newSession.date = Date()
         
         // save the seconds as well
-        newSession.secondsWorked = Int32(self.timerVM.secondForSession)
+        newSession.secondsWorked = input
         
         //reset the second for session
         self.timerVM.secondForSession = 0

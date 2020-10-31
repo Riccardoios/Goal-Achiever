@@ -57,7 +57,6 @@ struct TrackView: View {
                     Text(emoji)
                         .modifier(ShadowLightModifier())
                         .font(.system(size: 120))
-//                        .padding(.bottom, -50)
                     
                    
                     
@@ -212,6 +211,8 @@ struct TrackView: View {
                 }
             }
         }
+        
+        
     }
     
     init(goals: FetchedResults<Goal>, sessions: FetchedResults<Sessions>) {

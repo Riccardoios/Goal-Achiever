@@ -74,11 +74,10 @@ class TimerViewModel: ObservableObject {
     @Published var secondColorText = (#colorLiteral(red: 0.968627451, green: 0.5294117647, blue: 0.2392156863, alpha: 0.8337435788))
     @Published var firstSizeFont : CGFloat = 45
     @Published var secondSizeFont : CGFloat = 22
-    @Published var secondForSession: Int16 = 0
+    @Published var secondForSession: Int32 = 0
     
     //  @Published var remidUserToActivateNotification = true // this one needs to be stored on userdefault for the moment i will put it
     //  var arrayForThePercentage =  [10, 5, 10]// this has to be the same as timersarray and it shouldn be modify the nuber inside because they rappresent the 100% of the bar (the denominator)
-    
     
     
     var isPressed = 0
@@ -91,13 +90,9 @@ class TimerViewModel: ObservableObject {
     
     var count = 0
     
-    //for the coredata guys
-//    @Environment(\.managedObjectContext) var moc
-//
-//    @FetchRequest(entity: Goal.entity(), sortDescriptors: [
-//        NSSortDescriptor(key: #keyPath(Goal.dateEdited), ascending: false)
-//    ]) var goals: FetchedResults<Goal> // from the oldest to the newst
     var motivationQuote = ["Goals give us a roadmap to follow.", "Goals are a great way to hold ourselves accountable, even if we fail.",  "Setting goals and working to achieving them helps us define what we truly want in life.", "Setting goals  helps us prioritize things.", "“If you want to be happy, set a goal that commands your thoughts, liberates your energy and inspires your hopes.” —Andrew Carnegie", "“All who have accomplished great things have had a great aim, have fixed their gaze on a goal which was high, one which sometimes seemed impossible.” —Orison Swett Marden", "“Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success.” —Pablo Picasso", "“Success is the progressive realization of a worthy goal or ideal.” —Earl Nightingale", "“You have to set goals that are almost out of reach. If you set a goal that is attainable without much work or thought, you are stuck with something below your true talent and potential.” —Steve Garvey", "“By recording your dreams and goals on paper, you set in motion the process of becoming the person you most want to be. Put your future in good hands—your own.” —Mark Victor Hansen", "“The trouble with not having a goal is that you can spend your life running up and down the field and never score.” —Bill Copeland", "All successful people have a goal. No one can get anywhere unless he knows where he wants to go and what he wants to be or do. ” —Norman Vincent Peale", "“Goals. There’s no telling what you can do when you get inspired by them. There’s no telling what you can do when you believe in them. And there’s no telling what will happen when you act upon them.” —Jim Rohn"].randomElement()!
+    
+   
     
     //MARK: - TIMER FUNCS
     func timeString(time:TimeInterval) -> String {
@@ -151,7 +146,7 @@ class TimerViewModel: ObservableObject {
             
             
             self.percentage =  100 - (100 *  (CGFloat(self.timersArray[self.indexOfTimersArray])) / CGFloat(self.arrayForThePercentage[self.indexOfTimersArray]))
-//            print("index:", self.indexOfTimersArray, "second:", self.timersArray[self.indexOfTimersArray])
+            //            print("index:", self.indexOfTimersArray, "second:", self.timersArray[self.indexOfTimersArray])
             
             
             
@@ -224,7 +219,7 @@ class TimerViewModel: ObservableObject {
         return "\(Int(whichCycle))" + "/\(timersArray.count)"
         
     }
-
+    
     
     func updateArrayOfInputsAndTimersArray() {
         let worktime = arrayOfInput[0]
@@ -266,39 +261,39 @@ class TimerViewModel: ObservableObject {
     }
     
     
- // MARK: - NOTIFICATIONS
+    // MARK: - NOTIFICATIONS
     
-    func notificationIdealDays() {
+//    func notificationIdealDays() {
         
-//        let content = UNMutableNotificationContent()
-//
-//        content.title = "Reminder of: " + (fetchGoal().first?.image ?? "") + (fetchGoal().first?.title ?? "Your goal")
-//        content.body = motivationQuote
-//        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "future_sms.mp3"))
-//
-//        var datesOfNotifications = DateComponents()
-//        let arrOfWeek = [fetchGoal().first?.sunday, fetchGoal().first?.monday, fetchGoal().first?.tuesday, fetchGoal().first?.wednesday, fetchGoal().first?.thursday, fetchGoal().first?.friday, fetchGoal().first?.saturnday]
-//
-//        var arrOftrueIndexes = [Int]()
-//        // find indexes of true
-//        for ind in 0...6 {
-//            if arrOfWeek[ind] == true {
-//                arrOftrueIndexes.append(ind+1) // + 1 is for the weekday
-//            }
-//        }
-//
-//        for elem in arrOftrueIndexes {
-//            //trigger the notification as many time as there are element in the arr
-//            datesOfNotifications.weekday = elem // weekday works counting from 1 from sunday
-//            datesOfNotifications.hour = 9
-//
-//            let trigger = UNCalendarNotificationTrigger(dateMatching:datesOfNotifications, repeats: true)
-//            let request = UNNotificationRequest(identifier: "goal reminder notification" + "\(elem)", content: content, trigger: trigger)
-//
-//            UNUserNotificationCenter.current().add(request)
-//
-//        }
-    }
+        //        let content = UNMutableNotificationContent()
+        //
+        //        content.title = "Reminder of: " + (fetchGoal().first?.image ?? "") + (fetchGoal().first?.title ?? "Your goal")
+        //        content.body = motivationQuote
+        //        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "future_sms.mp3"))
+        //
+        //        var datesOfNotifications = DateComponents()
+        //        let arrOfWeek = [fetchGoal().first?.sunday, fetchGoal().first?.monday, fetchGoal().first?.tuesday, fetchGoal().first?.wednesday, fetchGoal().first?.thursday, fetchGoal().first?.friday, fetchGoal().first?.saturnday]
+        //
+        //        var arrOftrueIndexes = [Int]()
+        //        // find indexes of true
+        //        for ind in 0...6 {
+        //            if arrOfWeek[ind] == true {
+        //                arrOftrueIndexes.append(ind+1) // + 1 is for the weekday
+        //            }
+        //        }
+        //
+        //        for elem in arrOftrueIndexes {
+        //            //trigger the notification as many time as there are element in the arr
+        //            datesOfNotifications.weekday = elem // weekday works counting from 1 from sunday
+        //            datesOfNotifications.hour = 9
+        //
+        //            let trigger = UNCalendarNotificationTrigger(dateMatching:datesOfNotifications, repeats: true)
+        //            let request = UNNotificationRequest(identifier: "goal reminder notification" + "\(elem)", content: content, trigger: trigger)
+        //
+        //            UNUserNotificationCenter.current().add(request)
+        //
+        //        }
+//    }
     
     func setNotification(within: Int) {
         
@@ -324,23 +319,23 @@ class TimerViewModel: ObservableObject {
     
     func deadlineNotification(withinDays: Int) {
         
-//        let content = UNMutableNotificationContent()
-//
-//        content.title = "Today is the deadline of " + (fetchGoal().first?.image ?? "") + (fetchGoal().first?.title ?? "Your goal")
-//        content.body = "You have chosen today as a deadline to accomplish your goal. Best wishes to you!"
-//        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "transport.mp3"))
-//
-//
-//        let days = withinDays * 86400
-//
-//            // show this notification within
-//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(days), repeats: false)
-//
-//            // choose a random identifier
-//            let request = UNNotificationRequest(identifier: "deadline notification", content: content, trigger: trigger)
-//
-//            // add notification request
-//            UNUserNotificationCenter.current().add(request)
+        //        let content = UNMutableNotificationContent()
+        //
+        //        content.title = "Today is the deadline of " + (fetchGoal().first?.image ?? "") + (fetchGoal().first?.title ?? "Your goal")
+        //        content.body = "You have chosen today as a deadline to accomplish your goal. Best wishes to you!"
+        //        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "transport.mp3"))
+        //
+        //
+        //        let days = withinDays * 86400
+        //
+        //            // show this notification within
+        //            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(days), repeats: false)
+        //
+        //            // choose a random identifier
+        //            let request = UNNotificationRequest(identifier: "deadline notification", content: content, trigger: trigger)
+        //
+        //            // add notification request
+        //            UNUserNotificationCenter.current().add(request)
         
     }
     
@@ -356,33 +351,33 @@ class TimerViewModel: ObservableObject {
     }
     
     
-    // MARK: - BACKGROUND FUNC 
+    // MARK: - BACKGROUND FUNC
+    
     func prepareForBackground() {
         if myTimer == nil {
+            
             // don't set anithing
-        } else { // in this case the timer is activated
-            setNotification(within: self.timersArray[self.indexOfTimersArray]) // set the timer at
+            
+        } else {
+            
+            // in this case the timer is activated
+            
+            setNotification(within: self.timersArray[self.indexOfTimersArray])
+            
+            // set the timer at
             
             timeDateBackground = Calendar.current.dateComponents([.hour, .minute, .second], from: Date()) //save the time it is now
-            
-            
             
         }
     }
     
-    func prepareForForeground() {
+    func getSecondsFromSleep()->Int {
         if myTimer == nil {
-            // don't set anithing
-            // start where I was
-            // understad where I was
-            // percentage = 0
-            // Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in                               self.percentage = 100
-            //            }
-            
-            
+            //  in this case the timer wasn't turn it on
             print ("the timer is nil")
+            return 0
         } else {
-            // in this case the timer was activated so the goal is to set everything like the timer is still going
+            // in this case the timer was activated but the phone is locked so the os have turn it of the timer func; the goal here is to set the timer as it never turn it off counting the diff from prepare for background and this func itself.
             
             //check what time it is and check with what time was when i prepare the background
             timeDateForeground = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
@@ -391,12 +386,6 @@ class TimerViewModel: ObservableObject {
             //calcule again the second of the timer once it is on
             let timerAdjusted = self.timersArray[self.indexOfTimersArray] - secondPassedFromSleep!
             
-            if (secondPassedFromSleep != nil) {
-                
-            
-                self.saveSession(input: secondPassedFromSleep!)
-            }
-            print("secondPassedFromSleep", secondPassedFromSleep!)
             
             if timerAdjusted <= 0 { // if the time passed from the sleep is more than the current timer it means the app has to go to the next timer if there is one
                 
@@ -406,14 +395,20 @@ class TimerViewModel: ObservableObject {
                 
             } else {
                 self.timersArray[self.indexOfTimersArray] = timerAdjusted
-            
+                
             }
+            
+            if (secondPassedFromSleep != nil) {
+                
+                print("secondPassedFromSleep", secondPassedFromSleep!)
+                return secondPassedFromSleep!
+            } else { return 0 }
             
             
         }
     }
     
- 
+    
     //MARK: - VIBRATION FUNC
     func classicVibration() {
         let generator = UINotificationFeedbackGenerator()
@@ -449,42 +444,43 @@ class TimerViewModel: ObservableObject {
     }
     
 //    func fetchGoal() -> [Goal] {
-//      let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
+//        let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
 //        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Goal.dateEdited, ascending: false)]
-//      do {
-//        let appDelegate = UIApplication.shared.delegate //as! PersistenceController
-//        let managedObjectContext = appDelegate.container.viewContext//appDelegate.persistentContainer.viewContext
-//        let goals = try managedObjectContext.fetch(fetchRequest)
-//        return goals
-//      } catch let error as NSError {
-//        print("Error fetching Goals: \(error.localizedDescription), \(error.userInfo)")
-//      }
-//      return [Goal]()
-//    }
-    
-    
-@Environment(\.managedObjectContext) var managedObjectContext
-    
-    func saveSession(input:Int) {
-
-//        try? self.moc.save()
-        
-//        let appDelegate = UIApplication.shared.delegate //as! PersistenceController
-//        let managedObjectContext = appDelegate.container.viewContext
-        
-//          let session = Sessions(context: managedObjectContext)
-//            session.date = Date()
-//            session.title = self.fetchGoal().first?.title
-//            session.secondsWorked = Int32(input)
+//        do {
+//            //        let appDelegate = UIApplication.shared.delegate //as! PersistenceController
+//            //        let managedObjectContext = appDelegate.container.viewContext//appDelegate.persistentContainer.viewContext
+//            let goals = try managedObjectContext.fetch(fetchRequest)
+//            return goals
 //
-//          do {
-//            try managedObjectContext.save()
-//          } catch let error as NSError {
-//            print("Error saving Session: \(error.localizedDescription), \(error.userInfo)")
-//          }
-        
-        
-    }
+//        } catch let error as NSError {
+//            print("Error fetching Goals: \(error.localizedDescription), \(error.userInfo)")
+//        }
+//        return [Goal]()
+//    }
+//
+    
+    
+    
+//    func saveSession(input:Int) {
+//
+//        //        let appDelegate = UIApplication.shared.delegate //as! PersistenceController
+//        //        let managedObjectContext = appDelegate.container.viewContext
+//
+//        let session = Sessions(context: managedObjectContext)
+//        session.date = Date()
+//        session.title = self.fetchGoal().first?.title ?? "notitle"
+//        session.secondsWorked = Int32(input)
+//
+//        try? self.managedObjectContext.save()
+//
+//        //          do {
+//        //            try managedObjectContext.save()
+//        //          } catch let error as NSError {
+//        //            print("Error saving Session: \(error.localizedDescription), \(error.userInfo)")
+//        //          }
+//
+//
+//    }
     
     func renameTheSec (seconds : Int32) -> String {
         
@@ -492,18 +488,18 @@ class TimerViewModel: ObservableObject {
         let hours = ((seconds%86400) / 3600) % 3600
         let minutes = ((seconds%3600) % 3600) / 60
         let secondz = ((seconds%3600) % 3600) % 60
-
+        
         var stD = ""
         var stH = ""
         var stM = ""
         var stS = "0s"
-
+        
         if days > 0 {
             stD = String(days) + "d "
             stM = ""
             stS = ""
         }
-
+        
         if hours > 0 {
             stH = String(hours) + "h "
             stS = ""

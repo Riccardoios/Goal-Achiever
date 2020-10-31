@@ -9,19 +9,15 @@
 
 /*
  TO DO LIST:
-
-  ios 13 (base for the 14 as well)
-  first goal has to be open in the info
-- func where i delete the old session for performances purpuses
-
  
  ios 14 bug
-X import in a new ios 14 project form scratch
-X shadowlight too dark
-X the keyboard move the menu
-X choose emoji not centered
-- icon view make it centered
-- fetch the request in timerVM
+
+X icon view make it centered
+X save the session from background
+- Restore notifications system
+- func where i delete the old session for performances purpuses
+- rename foocus with Goals
+- space in the spacer of weekgoal
  
  
  - video lunch
