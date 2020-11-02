@@ -6,7 +6,6 @@
 //  Copyright © 2020 Riccardo Carlotto. All rights reserved.
 //
 
-
 import Combine
 import AVFoundation
 import UserNotifications
@@ -261,39 +260,9 @@ class TimerViewModel: ObservableObject {
     }
     
     
-    // MARK: - NOTIFICATIONS
+    // MARK: - NOTIFICATION FOR TIMER
     
-//    func notificationIdealDays() {
-        
-        //        let content = UNMutableNotificationContent()
-        //
-        //        content.title = "Reminder of: " + (fetchGoal().first?.image ?? "") + (fetchGoal().first?.title ?? "Your goal")
-        //        content.body = motivationQuote
-        //        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "future_sms.mp3"))
-        //
-        //        var datesOfNotifications = DateComponents()
-        //        let arrOfWeek = [fetchGoal().first?.sunday, fetchGoal().first?.monday, fetchGoal().first?.tuesday, fetchGoal().first?.wednesday, fetchGoal().first?.thursday, fetchGoal().first?.friday, fetchGoal().first?.saturnday]
-        //
-        //        var arrOftrueIndexes = [Int]()
-        //        // find indexes of true
-        //        for ind in 0...6 {
-        //            if arrOfWeek[ind] == true {
-        //                arrOftrueIndexes.append(ind+1) // + 1 is for the weekday
-        //            }
-        //        }
-        //
-        //        for elem in arrOftrueIndexes {
-        //            //trigger the notification as many time as there are element in the arr
-        //            datesOfNotifications.weekday = elem // weekday works counting from 1 from sunday
-        //            datesOfNotifications.hour = 9
-        //
-        //            let trigger = UNCalendarNotificationTrigger(dateMatching:datesOfNotifications, repeats: true)
-        //            let request = UNNotificationRequest(identifier: "goal reminder notification" + "\(elem)", content: content, trigger: trigger)
-        //
-        //            UNUserNotificationCenter.current().add(request)
-        //
-        //        }
-//    }
+
     
     func setNotification(within: Int) {
         
@@ -317,27 +286,7 @@ class TimerViewModel: ObservableObject {
         }
     }
     
-    func deadlineNotification(withinDays: Int) {
-        
-        //        let content = UNMutableNotificationContent()
-        //
-        //        content.title = "Today is the deadline of " + (fetchGoal().first?.image ?? "") + (fetchGoal().first?.title ?? "Your goal")
-        //        content.body = "You have chosen today as a deadline to accomplish your goal. Best wishes to you!"
-        //        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "transport.mp3"))
-        //
-        //
-        //        let days = withinDays * 86400
-        //
-        //            // show this notification within
-        //            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(days), repeats: false)
-        //
-        //            // choose a random identifier
-        //            let request = UNNotificationRequest(identifier: "deadline notification", content: content, trigger: trigger)
-        //
-        //            // add notification request
-        //            UNUserNotificationCenter.current().add(request)
-        
-    }
+
     
     func requestNotificationAutorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
@@ -442,45 +391,6 @@ class TimerViewModel: ObservableObject {
         
         
     }
-    
-//    func fetchGoal() -> [Goal] {
-//        let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Goal.dateEdited, ascending: false)]
-//        do {
-//            //        let appDelegate = UIApplication.shared.delegate //as! PersistenceController
-//            //        let managedObjectContext = appDelegate.container.viewContext//appDelegate.persistentContainer.viewContext
-//            let goals = try managedObjectContext.fetch(fetchRequest)
-//            return goals
-//
-//        } catch let error as NSError {
-//            print("Error fetching Goals: \(error.localizedDescription), \(error.userInfo)")
-//        }
-//        return [Goal]()
-//    }
-//
-    
-    
-    
-//    func saveSession(input:Int) {
-//
-//        //        let appDelegate = UIApplication.shared.delegate //as! PersistenceController
-//        //        let managedObjectContext = appDelegate.container.viewContext
-//
-//        let session = Sessions(context: managedObjectContext)
-//        session.date = Date()
-//        session.title = self.fetchGoal().first?.title ?? "notitle"
-//        session.secondsWorked = Int32(input)
-//
-//        try? self.managedObjectContext.save()
-//
-//        //          do {
-//        //            try managedObjectContext.save()
-//        //          } catch let error as NSError {
-//        //            print("Error saving Session: \(error.localizedDescription), \(error.userInfo)")
-//        //          }
-//
-//
-//    }
     
     func renameTheSec (seconds : Int32) -> String {
         

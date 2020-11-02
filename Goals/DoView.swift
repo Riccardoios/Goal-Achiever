@@ -171,7 +171,7 @@ struct DoView: View {
                                     
                                 }
                                 .alert(isPresented: permissionsBinding) { () -> Alert in
-                                    Alert(title: Text("Please Enable notification Access in Settings -> Foocus -> Notifications -> Allow Notifications, otherwise Foocus won't work properly"))
+                                    Alert(title: Text("Please Enable notification Access in Settings -> Goals -> Notifications -> Allow Notifications, otherwise Goals won't work properly"))
                                 }
                                 
                                 

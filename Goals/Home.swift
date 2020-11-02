@@ -10,17 +10,17 @@
 /*
  TO DO LIST:
  
- ios 14 bug
+ios 14 bug
 
-X icon view make it centered
-X save the session from background
-- Restore notifications system
+X Restore notifications system
+X rename foocus with Goals
+X space in the spacer of weekgoal
 - func where i delete the old session for performances purpuses
-- rename foocus with Goals
-- space in the spacer of weekgoal
+- func of scroll up ios 14 rather than id
+- permissions of notfications alert if are set to no
  
  
- - video lunch
+X video lunch
 
 NEXT FEATURES
 1. i want to evidence somehow the setting button in order to make it press (small shake maybe? as pages ios)

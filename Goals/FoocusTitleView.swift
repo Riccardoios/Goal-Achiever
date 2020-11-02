@@ -32,7 +32,7 @@ struct FoocusTitleView: View {
     func changeTitle()-> String {
         // instead of [0] i want to go to the id that is equal to the property of timervm
         // for in in loop that loop all the id and gives back the one that is equal to the id if there isn't is gonna give back the string foocus
-        var result = "Foocus"
+        var result = "Focus"
         
         if self.timerVM.indexOfTimersArray % 2 == 0 {
             

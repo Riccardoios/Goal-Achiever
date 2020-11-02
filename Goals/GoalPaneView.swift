@@ -84,7 +84,7 @@ struct GoalPaneView: View {
                         .modifier(ShadowLightModifier())
                         .padding(.horizontal)
                     
-                    weekButtons(weekArray: $week, spaceInTheSpacer: -4)
+                    weekButtons(weekArray: $week)
                         .onAppear{
                             self.loadTheWeek()
                     }

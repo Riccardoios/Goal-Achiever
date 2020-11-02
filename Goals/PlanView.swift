@@ -36,7 +36,7 @@ struct PlanView: View {
     
     var body: some View {
         
-         ZStack {
+        ZStack {
             
             ScrollView(.vertical, showsIndicators: true){
                 
@@ -47,11 +47,11 @@ struct PlanView: View {
                         Group {
                             
                             HStack {
-                            Text("My goals")
-                                .font(.system(size: timerVM.firstSizeFont * myCoef, weight: .regular ))
-                                .foregroundColor(Color(timerVM.firstColorText))
-                                .modifier(ShadowLightModifier())
-                                .padding(.horizontal)
+                                Text("My goals")
+                                    .font(.system(size: timerVM.firstSizeFont * myCoef, weight: .regular ))
+                                    .foregroundColor(Color(timerVM.firstColorText))
+                                    .modifier(ShadowLightModifier())
+                                    .padding(.horizontal)
                                 
                                 Spacer()
                                 
@@ -76,10 +76,10 @@ struct PlanView: View {
                             }
                             .padding(.horizontal)
                             
-//                            ForEach(goals, id:\.self, content: { index in
-//                                GoalPaneView(goals: index, enlarge: .constant(index = 0 ? true : false), showPlanView: self.$showPlanView, showDoView: self.$showDoView, showChartsView: self.$showChartsView)
-//
-//                            })
+                            //                            ForEach(goals, id:\.self, content: { index in
+                            //                                GoalPaneView(goals: index, enlarge: .constant(index = 0 ? true : false), showPlanView: self.$showPlanView, showDoView: self.$showDoView, showChartsView: self.$showChartsView)
+                            //
+                            //                            })
                             ForEach(goals, id:\.self, content: { index in
                                 GoalPaneView(goals: index, showPlanView: self.$showPlanView, showDoView: self.$showDoView, showChartsView: self.$showChartsView)
                                 
@@ -108,7 +108,8 @@ struct PlanView: View {
                                     .onTapGesture {
                                         self.showGoalExamples.toggle()
                                         self.timerVM.classicVibration()
-                                }
+                                        
+                                    }
                                 
                             }
                             
@@ -138,7 +139,7 @@ struct PlanView: View {
                                             .frame(width: screen.width - 70, height: 300)
                                             .onTapGesture {
                                                 self.showGoalExamples.toggle()
-                                        }
+                                            }
                                     }
                                     
                                 }
@@ -180,14 +181,14 @@ struct PlanView: View {
                                 if inputValue.count > 15 { // limit the character to 15
                                     self.goalTitle.removeLast()
                                 }
-                        }
+                            }
                         
                         Text("Choose one image")
                             .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
                             .foregroundColor(Color(timerVM.firstColorText))
                             .modifier(ShadowLightModifier())
                             .padding(.horizontal)
-                            
+                        
                         
                         
                         ScrollView(.horizontal) {
@@ -283,7 +284,7 @@ struct PlanView: View {
                                         self.notificationIdealDays()
                                         
                                         if Int(self.numberOfDays) != nil {
-                                            timerVM.deadlineNotification(withinDays: Int(self.numberOfDays)!)
+                                            self.deadlineNotification(withinDays: Int(self.numberOfDays)!)
                                         }
                                         
                                         self.scrollViewID = UUID()
@@ -315,6 +316,7 @@ struct PlanView: View {
                 .onTapGesture {
                     self.showGoalExamples = false
                 }
+                
             }
             .onAppear{
                 let center = UNUserNotificationCenter.current()
@@ -331,36 +333,60 @@ struct PlanView: View {
         
     }
     
+    //MARK: - NOTIFICATIONS FUNCS 
+    
     func notificationIdealDays() {
         
-                let content = UNMutableNotificationContent()
+        let content = UNMutableNotificationContent()
         
-                content.title = "Reminder of: " + (goals.first?.image ?? "") + (goals.first?.title ?? "Your goal")
-                content.body = self.timerVM.motivationQuote
-                content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "future_sms.mp3"))
+        content.title = "Reminder of: " + (goals.first?.image ?? "") + (goals.first?.title ?? "Your goal")
+        content.body = self.timerVM.motivationQuote
+        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "future_sms.mp3"))
         
-                var datesOfNotifications = DateComponents()
-                let arrOfWeek = [goals.first?.sunday, goals.first?.monday, goals.first?.tuesday, goals.first?.wednesday, goals.first?.thursday, goals.first?.friday, goals.first?.saturnday]
+        var datesOfNotifications = DateComponents()
+        let arrOfWeek = [goals.first?.sunday, goals.first?.monday, goals.first?.tuesday, goals.first?.wednesday, goals.first?.thursday, goals.first?.friday, goals.first?.saturnday]
         
-                var arrOftrueIndexes = [Int]()
-                // find indexes of true
-                for ind in 0...6 {
-                    if arrOfWeek[ind] == true {
-                        arrOftrueIndexes.append(ind+1) // + 1 is for the weekday
-                    }
-                }
+        var arrOftrueIndexes = [Int]()
+        // find indexes of true
+        for ind in 0...6 {
+            if arrOfWeek[ind] == true {
+                arrOftrueIndexes.append(ind+1) // + 1 is for the weekday
+            }
+        }
         
-                for elem in arrOftrueIndexes {
-                    //trigger the notification as many time as there are element in the arr
-                    datesOfNotifications.weekday = elem // weekday works counting from 1 from sunday
-                    datesOfNotifications.hour = 9
+        for elem in arrOftrueIndexes {
+            //trigger the notification as many time as there are element in the arr
+            datesOfNotifications.weekday = elem // weekday works counting from 1 from sunday
+            datesOfNotifications.hour = 9
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching:datesOfNotifications, repeats: true)
+            let request = UNNotificationRequest(identifier: "goal reminder notification" + "\(elem)", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request)
+            
+        }
+    }
+    
+    func deadlineNotification(withinDays: Int) {
         
-                    let trigger = UNCalendarNotificationTrigger(dateMatching:datesOfNotifications, repeats: true)
-                    let request = UNNotificationRequest(identifier: "goal reminder notification" + "\(elem)", content: content, trigger: trigger)
+        let content = UNMutableNotificationContent()
         
-                    UNUserNotificationCenter.current().add(request)
+        content.title = "Today is the deadline of " + (goals.first?.image ?? "") + (goals.first?.title ?? "Your goal")
+        content.body = "You have chosen today as a deadline to accomplish your goal. Best wishes to you!"
+        content.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "transport.mp3"))
         
-                }
+        
+        let days = withinDays * 86400
+        
+        // show this notification within
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(days), repeats: false)
+        
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: "deadline notification", content: content, trigger: trigger)
+        
+        // add notification request
+        UNUserNotificationCenter.current().add(request)
+        
     }
     
 }
