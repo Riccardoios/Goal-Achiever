@@ -19,6 +19,7 @@
 
 // save session on disappear of this view and set to 0 the pubblic seconds for session
 import SwiftUI
+import StoreKit
 
 struct DoView: View {
     
@@ -39,7 +40,12 @@ struct DoView: View {
     @State var circlePressed = false
     @State var showPreferencesView = false
     
+    @State var wQuestionB: CGFloat = 40
+    @State var hQuestionB: CGFloat = 40
+    
     @Binding var putAwayMenu: Bool
+    
+    @State var animateButton = false
     
     var body: some View {
         
@@ -65,12 +71,21 @@ struct DoView: View {
                     
                     HStack(alignment:.top){
                         
-                       
-                            ColorButtonView(isPressed: $showInfo, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
-                                .onTapGesture {
-                                    self.showInfo.toggle()
-                                }
+                        ZStack {
+                            
+                            WaveAnimationView(animate: animateButton)
+                                .frame(width: 65, height: 65)
                                 .padding(.leading)
+                            
+                            
+                            //MARK: - ? BUTTON
+                            ColorButtonView(isPressed: $showInfo, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
+                                .padding(.leading)
+                                
+                            
+                            
+                            
+                        }
                         
                         
                         Spacer()
@@ -162,7 +177,9 @@ struct DoView: View {
                                 }) {
                                     ButtonView(width: 100  * myCoef, height: 100  * myCoef, image: Image(systemName: "playpause"), imageSize: 0.8 , offsetX: -1, cornerRadius: 100)
                                         .onTapGesture {
-                                            self.timerVM.classicVibration(); self.timerVM.playPause()
+                                            self.timerVM.classicVibration(); self.timerVM.playPause();
+                                            showReviewAfter3()
+                                            
                                     }
                                     .onLongPressGesture(minimumDuration:1) {
                                         self.timerVM.robustVibration(); self.timerVM.setLongBreak()
@@ -244,9 +261,14 @@ struct DoView: View {
                         
                         Spacer()
                     }
-                    .onAppear{self.putAwayMenu = false}
+                    .onAppear{
+                        self.putAwayMenu = false;
+                        self.mightAnimateQuestionMarkButton()
+                        
+                    }
                     .onDisappear{
                         self.saveSession(input: self.timerVM.secondForSession)
+                       
                     }
                     
                 }
@@ -273,6 +295,38 @@ struct DoView: View {
         
         try? self.moc.save()
     }
+    
+    func mightAnimateQuestionMarkButton() {
+        
+        if goals.first?.title != nil {
+            
+            if sessions.first?.title != goals.first?.title {
+                self.animateButton = true
+            }
+        }
+        
+    }
+    
+    func showReviewAfter3() {
+        
+        let runs = timerVM.getRunCounts()
+        print("Show Review")
+        
+        if runs == 5 || runs == 30 || runs == 50 || runs == 100 {
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
+            }
+           
+            
+        } else {
+            
+            print("Runs are not enough to request review!")
+            
+        }
+        
+    }
+    
+    
     
 }
 

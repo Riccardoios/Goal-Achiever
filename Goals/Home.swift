@@ -9,23 +9,19 @@
 
 /*
  TO DO LIST:
- 
-ios 14 bug
 
-X Restore notifications system
-X rename foocus with Goals
-X space in the spacer of weekgoal
+X give a feedback alert when to decide
+X evidence the ? button once you have no sessions saved
+- check on real device if it countinue to ask the review
+- premium version where start to see how to hide the preimum content
+- add the premium subscription
+- advertise as much as I can
+- it is really time to go to upWork
+ 
+ SECONDARY
 - func where i delete the old session for performances purpuses
-- func of scroll up ios 14 rather than id
 - permissions of notfications alert if are set to no
  
- 
-X video lunch
-
-NEXT FEATURES
-1. i want to evidence somehow the setting button in order to make it press (small shake maybe? as pages ios)
-2. picker view in the setting?
-3. review request notificatin alert and company
  
 */
 
@@ -114,8 +110,12 @@ struct Home: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         // for ios 14 the keyboard now move the all view to the top but with this line you cancel this behavior
+        .onAppear{
+            self.timerVM.incrementAppRuns()
+        }
         
     }
+    
     
 }
 

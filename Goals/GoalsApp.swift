@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct GoalsApp: App {
+    
+    
+    
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
@@ -18,4 +22,6 @@ struct GoalsApp: App {
                 .environmentObject(TimerViewModel())
         }
     }
+    
+    
 }

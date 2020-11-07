@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A9652A12553F8100054C5A5 /* WaveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */; };
 		3AEAC3432548F0ED0056B8C9 /* GoalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */; };
 		3AEAC3472548F0EE0056B8C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AEAC3462548F0EE0056B8C9 /* Assets.xcassets */; };
 		3AEAC34A2548F0EE0056B8C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AEAC3492548F0EE0056B8C9 /* Preview Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
 		3AEAC33F2548F0ED0056B8C9 /* Goals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsApp.swift; sourceTree = "<group>"; };
 		3AEAC3462548F0EE0056B8C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				3AEAC3622548F5450056B8C9 /* RingView.swift */,
 				3AEAC3702548F5460056B8C9 /* TimerView.swift */,
 				3AEAC36C2548F5460056B8C9 /* TimerVM.swift */,
+				3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */,
 				3AEAC3462548F0EE0056B8C9 /* Assets.xcassets */,
 				3AEAC3502548F0EE0056B8C9 /* Info.plist */,
 				3AEAC34D2548F0EE0056B8C9 /* Goals.xcdatamodeld */,
@@ -259,6 +262,7 @@
 				3AEAC38F2548F5470056B8C9 /* IconView.swift in Sources */,
 				3AEAC3882548F5470056B8C9 /* ToggleButton.swift in Sources */,
 				3AEAC3862548F5470056B8C9 /* TrackView.swift in Sources */,
+				3A9652A12553F8100054C5A5 /* WaveAnimationView.swift in Sources */,
 				3AEAC3932548F5470056B8C9 /* weekButtons.swift in Sources */,
 				3AEAC3912548F5470056B8C9 /* MenuPane.swift in Sources */,
 				3AEAC37E2548F5470056B8C9 /* ColorButtonView.swift in Sources */,
@@ -396,6 +400,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Goals/Preview Content\"";
 				DEVELOPMENT_TEAM = 3339537SZN;
 				ENABLE_PREVIEWS = YES;
@@ -405,10 +410,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = riccardo.riccardo.Goals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -418,6 +424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Goals/Preview Content\"";
 				DEVELOPMENT_TEAM = 3339537SZN;
 				ENABLE_PREVIEWS = YES;
@@ -427,10 +434,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = riccardo.riccardo.Goals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

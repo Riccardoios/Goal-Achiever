@@ -10,6 +10,7 @@
 
 
 import SwiftUI
+import StoreKit
 
 struct TrackView: View {
     
@@ -58,11 +59,19 @@ struct TrackView: View {
                         .modifier(ShadowLightModifier())
                         .font(.system(size: 120))
                     
-                   
+                    
                     
                     RatingView(rating: .constant(score))
                         .modifier(ShadowLightModifier())
                         .padding(.bottom)
+                        .onAppear{
+                            if score >= 4 {
+                                //request review
+                                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                                    SKStoreReviewController.requestReview(in: scene)
+                                }
+                            }
+                        }
                     
                 }
                 
@@ -132,20 +141,20 @@ struct TrackView: View {
                                 
                                 Spacer().frame(height:25) //same height of the tag
                             }
-                                .frame(height:200) //same height as columView
-                                .padding(.trailing, -10)
+                            .frame(height:200) //same height as columView
+                            .padding(.trailing, -10)
                             
-//   ForEach(Array(zip(values, tagsX)), id: \.1) { item in
-//
-//                                ColumView(value: .constant(item.0), tag: .constant(item.1))
+                            //   ForEach(Array(zip(values, tagsX)), id: \.1) { item in
+                            //
+                            //                                ColumView(value: .constant(item.0), tag: .constant(item.1))
                             
                             ForEach(0..<values.count, id: \.self) { i in
                                 
                                 ColumView(value: .constant(self.values[i]), tag: .constant(self.tagsX[i]))
                                 
                             }
-                        
-//                            }
+                            
+                            //                            }
                         }
                     }
                 }
@@ -189,12 +198,12 @@ struct TrackView: View {
                                     Text("\(self.sortedImages[ind])")
                                         .foregroundColor(Color(self.timerVM.firstColorText))
                                         .modifier(ShadowLightModifier())
-                                        
+                                    
                                     
                                     Text(self.sortedTitles[ind])
                                         .foregroundColor(Color(self.timerVM.firstColorText))
                                         .modifier(ShadowLightModifier())
-                                        
+                                    
                                     
                                     Spacer()
                                     
@@ -217,7 +226,7 @@ struct TrackView: View {
     
     init(goals: FetchedResults<Goal>, sessions: FetchedResults<Sessions>) {
         
-       
+        
         
         let firstGoal = goals.first?.title ?? "the impossible title is here" //too long to be real
         

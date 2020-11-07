@@ -28,7 +28,6 @@ struct PlanView: View {
     @State var motivationText : String = ""
     @EnvironmentObject var timerVM : TimerViewModel
     @State var showGoalExamples = false
-    @State private var scrollViewID = UUID() // a workaround to make the scrollview go to top
     
     @Binding var showPlanView: Bool
     @Binding var showDoView: Bool
@@ -63,7 +62,7 @@ struct PlanView: View {
                                 AntiRilievoView(width: screen.width - 25, height: goals.isEmpty ? 100 * myCoef : 0, cornerRadious: 30)
                                 
                                 if goals.isEmpty {
-                                    Text("You have 0 goals yet, to create one fill up the short form below")
+                                    Text("You have 0 goals yet, Create one filling up the short form below 😉")
                                         .font(.system(size: (timerVM.secondSizeFont - 3) * myCoef, weight: .regular))
                                         .fixedSize(horizontal: false, vertical: true)
                                         .lineLimit(nil)
@@ -254,7 +253,7 @@ struct PlanView: View {
                                     
                                     Spacer()
                                     
-                                    // MARK: - save goal button
+                                    // MARK: - SAVE GOAL B.
                                     
                                     Button(action: {
                                         self.timerVM.robustVibration()
@@ -287,7 +286,9 @@ struct PlanView: View {
                                             self.deadlineNotification(withinDays: Int(self.numberOfDays)!)
                                         }
                                         
-                                        self.scrollViewID = UUID()
+                                        self.showDoView = true
+                                        self.showPlanView = false
+                                        self.showChartsView = false
                                         
                                     }) {
                                         ZStack{
@@ -327,7 +328,7 @@ struct PlanView: View {
                 })
             }
             .dismissKeyboardOnTap()
-            .id(scrollViewID)
+            
             
         }
         
@@ -388,6 +389,8 @@ struct PlanView: View {
         UNUserNotificationCenter.current().add(request)
         
     }
+    
+    
     
 }
 

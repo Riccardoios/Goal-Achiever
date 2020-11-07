@@ -83,7 +83,7 @@ struct CrownView: View {
                 } else {
                     
                     
-                    Text("1. press ⏯ when you are working for your goal \n2. press ⏩ to go straight to the break \n3. press the settings button to change the break and working time \n4. long press ⏯ for a longer break")
+                    Text("1. Press ⏯ when you are working for your goal \n2. Press ⏩ to go straight to the break \n3. Press the settings button to change the break and working time \n4. Long press ⏯ for a longer break")
                         .font(.system(size: 17))
                         .foregroundColor(Color(timerVM.secondColorText))
                         .modifier(ShadowLightModifier())
