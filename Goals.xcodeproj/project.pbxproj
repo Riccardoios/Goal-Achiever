@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0361C02559DAEF0001142A /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0361BF2559DAEF0001142A /* LaunchView.swift */; };
+		3A269CCD255A2E25002A2B67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A269CCC255A2E25002A2B67 /* Assets.xcassets */; };
 		3A9652A12553F8100054C5A5 /* WaveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */; };
 		3AEAC3432548F0ED0056B8C9 /* GoalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */; };
-		3AEAC3472548F0EE0056B8C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AEAC3462548F0EE0056B8C9 /* Assets.xcassets */; };
 		3AEAC34A2548F0EE0056B8C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AEAC3492548F0EE0056B8C9 /* Preview Assets.xcassets */; };
 		3AEAC34F2548F0EE0056B8C9 /* Goals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC34D2548F0EE0056B8C9 /* Goals.xcdatamodeld */; };
 		3AEAC35D2548F4AD0056B8C9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC35C2548F4AD0056B8C9 /* Persistence.swift */; };
@@ -43,10 +44,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0361BF2559DAEF0001142A /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		3A269CCC255A2E25002A2B67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
 		3AEAC33F2548F0ED0056B8C9 /* Goals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsApp.swift; sourceTree = "<group>"; };
-		3AEAC3462548F0EE0056B8C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AEAC3492548F0EE0056B8C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3AEAC34E2548F0EE0056B8C9 /* Goals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Goals.xcdatamodel; sourceTree = "<group>"; };
 		3AEAC3502548F0EE0056B8C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */,
 				3AEAC3732548F5460056B8C9 /* Home.swift */,
+				3A0361BF2559DAEF0001142A /* LaunchView.swift */,
 				3AEAC36F2548F5460056B8C9 /* PlanView.swift */,
 				3AEAC3722548F5460056B8C9 /* DoView.swift */,
 				3AEAC36B2548F5460056B8C9 /* TrackView.swift */,
@@ -155,7 +158,7 @@
 				3AEAC3702548F5460056B8C9 /* TimerView.swift */,
 				3AEAC36C2548F5460056B8C9 /* TimerVM.swift */,
 				3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */,
-				3AEAC3462548F0EE0056B8C9 /* Assets.xcassets */,
+				3A269CCC255A2E25002A2B67 /* Assets.xcassets */,
 				3AEAC3502548F0EE0056B8C9 /* Info.plist */,
 				3AEAC34D2548F0EE0056B8C9 /* Goals.xcdatamodeld */,
 				3A88127D254A41F0004B0440 /* tones */,
@@ -231,8 +234,8 @@
 			files = (
 				3AEAC3992548F5B40056B8C9 /* transport.mp3 in Resources */,
 				3AEAC3982548F5B40056B8C9 /* future_sms.mp3 in Resources */,
+				3A269CCD255A2E25002A2B67 /* Assets.xcassets in Resources */,
 				3AEAC34A2548F0EE0056B8C9 /* Preview Assets.xcassets in Resources */,
-				3AEAC3472548F0EE0056B8C9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AEAC38B2548F5470056B8C9 /* TimerView.swift in Sources */,
+				3A0361C02559DAEF0001142A /* LaunchView.swift in Sources */,
 				3AEAC3922548F5470056B8C9 /* BarPreferenceView.swift in Sources */,
 				3AEAC37C2548F5470056B8C9 /* BarView.swift in Sources */,
 				3AEAC35D2548F4AD0056B8C9 /* Persistence.swift in Sources */,

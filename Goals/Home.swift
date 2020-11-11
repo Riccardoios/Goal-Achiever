@@ -10,9 +10,12 @@
 /*
  TO DO LIST:
 
-X give a feedback alert when to decide
-X evidence the ? button once you have no sessions saved
-- check on real device if it countinue to ask the review
+ - Notification of the day 1 ( remind the user he has the app)
+ - Put the time when the notification get trigged
+ - Settings move to a new tab
+ X Start the application with the circle animation
+ - Find acquisition channels for free
+
 - premium version where start to see how to hide the preimum content
 - add the premium subscription
 - advertise as much as I can
@@ -40,7 +43,7 @@ let myCoef = screen.size.width / 375 // if iphone x = 1 if iphone se = 0.82
 
 struct Home: View {
     
-    @State var circlePressed = false
+    @State var showHome = false
 //    @State var showPreferencesView = true
     @EnvironmentObject var timerVM : TimerViewModel
     @Environment(\.managedObjectContext) var moc
@@ -71,6 +74,11 @@ struct Home: View {
         //        })
         //
         //        return
+        
+        if showHome == false {
+            LaunchView(showHome: $showHome)
+        } else {
+        
         
         ZStack {
 
@@ -114,6 +122,7 @@ struct Home: View {
             self.timerVM.incrementAppRuns()
         }
         
+    }
     }
     
     
