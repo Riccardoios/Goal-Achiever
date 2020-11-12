@@ -12,12 +12,14 @@ import UserNotifications
 import SwiftUI
 import CoreData
 
+// to create a func that makes the array with just one value of 0 and if a var Normal timer is true so instead of subtract you add + 1 to the timer and the game is alright
+
 
 class TimerViewModel: ObservableObject {
     
     // for request reviews
     let runIncrementerSetting = "numberOfRuns"  // UserDefauls dictionary key where we store number of runs
-    let minimumRunCount = 3                     // Minimum number of runs that we should have until we ask for review
+//    let minimumRunCount = 3                     // Minimum number of runs that we should have until we ask for review
     
     
     //    @Published var timersArray =  [10, 5, 10]
@@ -82,7 +84,7 @@ class TimerViewModel: ObservableObject {
     
     //  @Published var remidUserToActivateNotification = true // this one needs to be stored on userdefault for the moment i will put it
     //  var arrayForThePercentage =  [10, 5, 10]// this has to be the same as timersarray and it shouldn be modify the nuber inside because they rappresent the 100% of the bar (the denominator)
-    
+//    var isNormalTimer = false
     
     var isPressed = 0
     var audioPlayer : AVAudioPlayer?
@@ -97,6 +99,15 @@ class TimerViewModel: ObservableObject {
     var motivationQuote = ["Goals give us a roadmap to follow.", "Goals are a great way to hold ourselves accountable, even if we fail.",  "Setting goals and working to achieving them helps us define what we truly want in life.", "Setting goals  helps us prioritize things.", "“If you want to be happy, set a goal that commands your thoughts, liberates your energy and inspires your hopes.” —Andrew Carnegie", "“All who have accomplished great things have had a great aim, have fixed their gaze on a goal which was high, one which sometimes seemed impossible.” —Orison Swett Marden", "“Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success.” —Pablo Picasso", "“Success is the progressive realization of a worthy goal or ideal.” —Earl Nightingale", "“You have to set goals that are almost out of reach. If you set a goal that is attainable without much work or thought, you are stuck with something below your true talent and potential.” —Steve Garvey", "“By recording your dreams and goals on paper, you set in motion the process of becoming the person you most want to be. Put your future in good hands—your own.” —Mark Victor Hansen", "“The trouble with not having a goal is that you can spend your life running up and down the field and never score.” —Bill Copeland", "All successful people have a goal. No one can get anywhere unless he knows where he wants to go and what he wants to be or do. ” —Norman Vincent Peale", "“Goals. There’s no telling what you can do when you get inspired by them. There’s no telling what you can do when you believe in them. And there’s no telling what will happen when you act upon them.” —Jim Rohn"].randomElement()!
     
     
+    
+    //MARK: - NORMAL TIMER FUNCS
+    
+//    func activateNormalTimer() {
+//        indexOfTimersArray = 0
+//        timersArray = [0]
+//        isNormalTimer = true
+//
+//    }
     
     //MARK: - TIMER FUNCS
     func timeString(time:TimeInterval) -> String {
@@ -148,8 +159,12 @@ class TimerViewModel: ObservableObject {
         //                timer.invalidate()
         
         myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            
             self.timersArray[self.indexOfTimersArray] -= 1
+//            if self.isNormalTimer {
+//                self.timersArray[self.indexOfTimersArray] += 1
+//            } else if !self.isNormalTimer { // !self.isNormalTimer
+//                self.timersArray[self.indexOfTimersArray] -= 1
+//            }
             self.secondForSession += 1
             // add second to record
             
@@ -184,7 +199,7 @@ class TimerViewModel: ObservableObject {
     
     func reset() {
         myTimer?.invalidate()
-        
+//        isNormalTimer = false
         indexOfTimersArray = 0
         timersArray = setTimers(worktime: arrayOfInput[0], breaktime: arrayOfInput[1], cycles: arrayOfInput[2] )
         longBreakTime = arrayOfInput[3]

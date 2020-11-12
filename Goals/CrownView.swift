@@ -82,15 +82,17 @@ struct CrownView: View {
                    
                 } else {
                     
-                    
-                    Text("1. Press ⏯ when you are working for your goal \n2. Press ⏩ to go straight to the break \n3. Press the settings button to change the break and working time \n4. Long press ⏯ for a longer break")
-                        .font(.system(size: 17))
-                        .foregroundColor(Color(timerVM.secondColorText))
-                        .modifier(ShadowLightModifier())
-                        .frame(width: 250, height: 250)
-                        .onTapGesture {
-                            self.rectangularize.toggle()
+                    ScrollView{
+                        Text(" 1. Press ⏯ when you are working for your goal \n\n2. Press ⏩ or ⏯ when you finish. Your time spent will be saved and analyzed in the track view \n\nWhat is the 🍅 timer? \n\nIt is a time management method that uses the timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks to enable it tap the toggle to ON. \n\nHow it works when enabled? \n\n1. Press ⏯ when you are working for your goal \n\n2. Press ⏩ to go straight to the break \n\n3. Press the settings button to change the break and working time \n\n4. Long press ⏯ for a longer break \n\nWhy should I use it? \n\nThere are many research out there that proved a person need about 10 to 25 minutes to achieve high focus, and you also cannot effectively do something really intensive for much longer than 25-30 minutes. 🍅 timer help you to reduce that loosing focus effect. And you only need 5 minutes of break to recover your high focus.")
+                            .font(.system(size: 17))
+                            .foregroundColor(Color(timerVM.secondColorText))
+                            .modifier(ShadowLightModifier())
+                            .frame(width: 250)
+                            .onTapGesture {
+                                self.rectangularize.toggle()
+                            }
                     }
+                    .frame(height:240)
                 }
             }
             

@@ -29,6 +29,7 @@ struct LaunchView: View {
                 Spacer()
                 Text("tap anywhere to start")
                     .opacity(showIndications ? 1 : 0)
+                    .padding(.bottom)
                     .animation(.linear)
                     .onAppear{
                         Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in                               self.showIndications = true

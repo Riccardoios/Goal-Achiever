@@ -37,14 +37,11 @@ struct DoView: View {
     @EnvironmentObject var timerVM : TimerViewModel
     @State var showInfo = false
     
-    @State var circlePressed = false
-    @State var showPreferencesView = false
     
     @State var wQuestionB: CGFloat = 40
     @State var hQuestionB: CGFloat = 40
     
-    @Binding var putAwayMenu: Bool
-    
+    @State var isNormalTimer = true
     @State var animateButton = false
     
     var body: some View {
@@ -62,13 +59,7 @@ struct DoView: View {
         return
             
             ZStack {
-                
-                if !showPreferencesView {
-                    
                 VStack {
-                    
-                    
-                    
                     HStack(alignment:.top){
                         
                         ZStack {
@@ -81,10 +72,7 @@ struct DoView: View {
                             //MARK: - ? BUTTON
                             ColorButtonView(isPressed: $showInfo, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
                                 .padding(.leading)
-                                
-                            
-                            
-                            
+                               
                         }
                         
                         
@@ -108,17 +96,34 @@ struct DoView: View {
                         Spacer()
                         }
                         
-                        
-                            ButtonView(width: 50, height: 50, image: Image(uiImage:#imageLiteral(resourceName: "noun_setting_196307")), offsetY: 2, cornerRadius: 90)
+                        ZStack(alignment: .center) {
+                            
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(width: 80, height: 80)
+                                .foregroundColor(Color(timerVM.backgroundColor))
+                                .modifier(ShadowLightModifier())
+                            
+                            
+                            VStack{
                                 
-                                .onTapGesture {
-                                    self.timerVM.myTimer?.invalidate()
-                                    self.circlePressed.toggle(); self.timerVM.robustVibration();
-                                    Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in                               self.showPreferencesView = true
+                                Text("🍅 Timer")
+                                    .modifier(ShadowLightModifier())
+                                    .font(.system(size: timerVM.secondSizeFont / 1.5))
+                                    .foregroundColor(Color(timerVM.firstColorText))
+                                
+                                
+                                ToggleButton(toggle: $isNormalTimer)
+                                    .onTapGesture {
+                                        self.timerVM.robustVibration();
+                                        self.isNormalTimer.toggle()
+//                                        self.detectWichTimer()
                                     }
+//                                    .onAppear{detectWichTimer()}
                             }
-                                .padding(.trailing)
-                          
+                            .frame(width: 80, height: 80)
+                            
+                        }
+                        .padding(.trailing)
                         
                     }.frame(minHeight:UIDevice.current.hasNotch ? nil : 110)
                     
@@ -240,29 +245,7 @@ struct DoView: View {
                 }
                     
                     Spacer()
-                    
-                    VStack{ //circle animation
-                        HStack{
-                            
-                            Spacer()
-                            
-                            Circle()
-                                .frame(width: circlePressed ? 2000 : 1, height: circlePressed ? 2000 : 1)
-                                .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
-                                .modifier(ShadowLightModifier())
-                                .onTapGesture {
-                                    self.circlePressed.toggle(); self.timerVM.robustVibration()
-                            }
-                            .animation(.easeInOut(duration: 5.0))
-                            .padding(.trailing, 30)
-                            
-                        }
-                        .frame(width:screen.width, height:100)
-                        
-                        Spacer()
-                    }
                     .onAppear{
-                        self.putAwayMenu = false;
                         self.mightAnimateQuestionMarkButton()
                         
                     }
@@ -271,12 +254,8 @@ struct DoView: View {
                        
                     }
                     
-                }
                 
-                if showPreferencesView {
-                    SettingsScreenView(showView: $showPreferencesView, ballActive: $circlePressed)
-                        .onAppear{self.putAwayMenu = true}
-                }
+                
         }
     }
     
@@ -326,6 +305,17 @@ struct DoView: View {
         
     }
     
+//    func detectWichTimer() {
+//        if isNormalTimer {
+//            self.timerVM.isNormalTimer = true
+//            self.timerVM.activateNormalTimer()
+//        } else {
+//            self.timerVM.isNormalTimer = false
+//            self.timerVM.reset()
+//        }
+//    }
+    
+    
     
     
 }
@@ -333,7 +323,7 @@ struct DoView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DoView(putAwayMenu: .constant(false)).environmentObject(TimerViewModel())
+            DoView().environmentObject(TimerViewModel())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
                 .previewDisplayName("iPhone SE")
             

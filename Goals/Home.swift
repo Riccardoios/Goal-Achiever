@@ -12,7 +12,7 @@
 
  - Notification of the day 1 ( remind the user he has the app)
  - Put the time when the notification get trigged
- - Settings move to a new tab
+ here - Settings move to a new tab (delete logic of move menupane )
  X Start the application with the circle animation
  - Find acquisition channels for free
 
@@ -44,15 +44,15 @@ let myCoef = screen.size.width / 375 // if iphone x = 1 if iphone se = 0.82
 struct Home: View {
     
     @State var showHome = false
-//    @State var showPreferencesView = true
     @EnvironmentObject var timerVM : TimerViewModel
     @Environment(\.managedObjectContext) var moc
     
     @State var showPlanView = true
     @State var showDoView = false
     @State var showChartsView = false
+    @State var showSettingsView = false
     
-    @State var putAwayMenu = false
+   
     
     @FetchRequest(entity: Goal.entity(), sortDescriptors: [
         NSSortDescriptor(key: #keyPath(Goal.dateEdited), ascending: false)
@@ -90,21 +90,25 @@ struct Home: View {
                     if showPlanView {
                         
                         PlanView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView)
-                            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+//                            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                         
                     }
                     if showDoView {
                         
-                        DoView(putAwayMenu: $putAwayMenu)
-                            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                        DoView()
+//                            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                     }
                     if showChartsView {
                         
                         TrackView(goals: goals, sessions: sessions)
                     }
                     
-                    if !putAwayMenu {
-                    MenuPane(showGoal:  $showPlanView , showHome: $showDoView , showCharts:  $showChartsView)
+                    if showSettingsView {
+                        SettingsScreenView()
+                    }
+                    
+                  
+                        MenuPane(showPlan:  $showPlanView , showDo: $showDoView , showCharts:  $showChartsView, showSettings: $showSettingsView)
                         .ignoresSafeArea(.keyboard, edges: .vertical)
 //                    .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                         
@@ -112,7 +116,7 @@ struct Home: View {
                             Spacer().frame(height: 18)
                         }
                        
-                    }
+                    
                 }
                 
         }

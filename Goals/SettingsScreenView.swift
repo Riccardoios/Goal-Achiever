@@ -11,11 +11,9 @@ import SwiftUI
 struct SettingsScreenView: View {
     
 //    @State var textPressed = false
-    @State var screenActivated = true 
     @EnvironmentObject var timerVM : TimerViewModel
     var spaceInTheSpacer: CGFloat = 25
-    @Binding var showView : Bool
-    @Binding var ballActive : Bool
+    @State var animateSave = false
 //    @State var myArr = [true, true, false, false] // for the logic of the color Buttons
 //    @State var MyPreviousArr = [true, true, false, false] // same
 //    @State var arrayOfIndexesOfChangedValues = [0,1] // same
@@ -147,23 +145,25 @@ struct SettingsScreenView: View {
                             Spacer()
                             
                             Button(action: {
-                                self.showView = false;
-                                self.ballActive = false;
 
                                 self.timerVM.indexOfTimersArray = 0;
 
 //                                self.timerVM.changeColorCircleBar(Sequence: self.arrayOfIndexesOfChangedValues);
                                 
                                 self.timerVM.reset()
+                                self.animateSave.toggle()
 
                                print (self.timerVM.arrayOfInput)
                                 
                             }) {
                                 ZStack{
                                     
+                                    WaveAnimationView(animate: animateSave, lineWidth: 4, repetitions: 1)
+                                        .frame(width:70, height:70)
+                                                                            
                                     ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
                                     
-                                    Text("Done")
+                                    Text("Save")
                                         .foregroundColor(Color(timerVM.firstColorText))
                                         .modifier(ShadowLightModifier())
                                     
@@ -363,17 +363,15 @@ struct SettingsScreenView: View {
                         }
                         
                         ZStack {
-                            ButtonView(width: 150, height: 70, cornerRadius: 25, showImage: false)
+                            ButtonView(width: 170, height: 70, cornerRadius: 25, showImage: false)
                                 .onTapGesture {
                                     
                                     self.timerVM.settingsOnDefault()
                                     self.timerVM.isPressed = 0
-                                    self.timerVM.enableNoStop = false;
-                                    self.showView = false;
-                                    self.ballActive = false;
+                                    self.timerVM.enableNoStop = false
                             }
                             
-                            Text("Default Settings")
+                            Text("Default Set-Up")
                                 .foregroundColor(Color(timerVM.firstColorText))
                                 .font(.system(size: timerVM.secondSizeFont))
                                 .modifier(ShadowLightModifier())
@@ -385,7 +383,6 @@ struct SettingsScreenView: View {
                     //this work for disactivate the all animation linear for the bar preference view
                     
                 }
-                .opacity(screenActivated ? 1 : 0)
                 .animation(.linear)
                 
                 
@@ -423,7 +420,7 @@ struct SettingsScreenView: View {
 struct SettingsScreenView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SettingsScreenView(showView: .constant(true), ballActive: .constant(true)).environmentObject(TimerViewModel())
+            SettingsScreenView().environmentObject(TimerViewModel())
                     .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
                 .previewDisplayName("iPhone SE")
             
@@ -431,7 +428,7 @@ struct SettingsScreenView_Previews: PreviewProvider {
 //                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
 //            .previewDisplayName("iPad pro")
             
-            SettingsScreenView(showView: .constant(true), ballActive: .constant(true)).environmentObject(TimerViewModel())
+            SettingsScreenView().environmentObject(TimerViewModel())
                 .previewDevice(PreviewDevice(rawValue: "iPhone XR"))
             .previewDisplayName("iPhone XR")
             

@@ -12,25 +12,27 @@ import SwiftUI
 struct MenuPane: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
-    @Binding var showGoal : Bool
-    @Binding var showHome : Bool
+    @Binding var showPlan : Bool
+    @Binding var showDo : Bool
     @Binding var showCharts : Bool
+    @Binding var showSettings: Bool
     
     var body: some View {
          ZStack {
                 
                 Rectangle()
                     .cornerRadius(30)
-                    .frame(width:screen.width, height:90)
+                    .frame(width:screen.width - 10, height:90)
                     .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
                     .modifier(ShadowLightModifier())
                 
                 ZStack {
                     
                     AntiRilievoView(width: 90, height: 90, cornerRadious: 25)
-                        
-                        .offset(x: showGoal ? -screen.width / 3.5 : .zero)
-                        .offset(x: showCharts ? screen.width / 3.5 : .zero)
+                        .offset(x: showPlan ? -screen.width / 2.9 : .zero)
+                        .offset(x:showDo ? -screen.width / 8.2 : .zero)
+                        .offset(x: showCharts ? screen.width / 9 : .zero)
+                        .offset(x: showSettings ? screen.width / 2.9 : .zero)
                         .animation(.linear)
                     
                     HStack {
@@ -39,11 +41,12 @@ struct MenuPane: View {
                         
                         VStack(alignment: .center, spacing: -3.0) {
                             
-                            IconView(image:Image(uiImage:#imageLiteral(resourceName: "blueprint")), color: showGoal ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                            IconView(image:Image(uiImage:#imageLiteral(resourceName: "blueprint")), color: showPlan ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                                .animation(.linear)
                                 .onTapGesture {
                                     self.timerVM.classicVibration()
                                     withAnimation {
-                                    self.showGoal = true; self.showHome = false; self.showCharts = false
+                                    self.showPlan = true; self.showDo = false; self.showCharts = false; self.showSettings = false
                                     }
                             }
                             
@@ -51,7 +54,7 @@ struct MenuPane: View {
                             
                             
                             Text("PLAN")
-                                .foregroundColor(showGoal ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                                .foregroundColor(showPlan ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
                                 .modifier(ShadowLightModifier())
                                 .animation(.linear)
                             
@@ -61,18 +64,18 @@ struct MenuPane: View {
                         
                         VStack(alignment: .center, spacing: -3.0) {
                             
-                            IconView(image:Image(uiImage:#imageLiteral(resourceName: "goal")), color: showHome ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                            IconView(image:Image(uiImage:#imageLiteral(resourceName: "goal")), color: showDo ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                                .animation(.linear)
                                 .onTapGesture {
                                     self.timerVM.classicVibration()
                                     withAnimation {
-                                    self.showHome = true; self.showGoal = false; self.showCharts = false
+                                    self.showDo = true; self.showPlan = false; self.showCharts = false; self.showSettings = false
                                     }
                             }
                             
                             
-                            
                             Text("DO")
-                                .foregroundColor(showHome ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                                .foregroundColor(showDo ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
                                 .modifier(ShadowLightModifier())
                                 .animation(.linear)
                             
@@ -84,10 +87,11 @@ struct MenuPane: View {
                         VStack(alignment: .center, spacing: -3.0) {
                             IconView(image:Image(uiImage:#imageLiteral(resourceName: "graph")),
                                      color: showCharts ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                                .animation(.linear)
                                 .onTapGesture {
                                     self.timerVM.classicVibration()
                                     withAnimation {
-                                    self.showCharts = true; self.showGoal = false; self.showHome = false
+                                        self.showCharts = true; self.showPlan = false; self.showDo = false; self.showSettings = false
                                     }
                             }
                             
@@ -97,9 +101,32 @@ struct MenuPane: View {
                                 .animation(.linear)
                         }
                         
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .center, spacing: -3.0) {
+                            
+                            IconView(image:Image(uiImage:#imageLiteral(resourceName: "noun_setting_196307")), color: showSettings ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                                .animation(.linear)
+                                .onTapGesture {
+                                    self.timerVM.classicVibration()
+                                    withAnimation {
+                                        self.showSettings = true; self.showPlan = false; self.showDo = false; self.showCharts = false
+                                    }
+                            }
+                            
+                            
+                            Text("SETUP")
+                                .foregroundColor(showSettings ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
+                                .modifier(ShadowLightModifier())
+                                .animation(.linear)
+                            
+                        }
+                        
+                        
                         Spacer()
                             
-                            .animation(.linear)
+                            
                     }
                 }
                 
@@ -117,6 +144,6 @@ struct MenuPane: View {
 
 struct MenuPane_Previews: PreviewProvider {
     static var previews: some View {
-        MenuPane(showGoal: .constant(true), showHome: .constant(false), showCharts: .constant(false)).environmentObject(TimerViewModel())
+        MenuPane(showPlan: .constant(false), showDo: .constant(true), showCharts: .constant(false), showSettings: .constant(false)).environmentObject(TimerViewModel())
     }
 }
