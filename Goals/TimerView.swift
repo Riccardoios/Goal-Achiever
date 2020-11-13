@@ -11,14 +11,15 @@ import SwiftUI
 struct TimerView: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
+    @Binding var isTomatoTimer: Bool
     
     var body: some View {
-        Text("\(timerVM.timeString(time: TimeInterval(timerVM.timersArray[timerVM.indexOfTimersArray])))")
+        Text(isTomatoTimer ? "\(timerVM.timeString(time: TimeInterval(timerVM.timersArray[timerVM.indexOfTimersArray])))" : "\(timerVM.timeString(time: TimeInterval(timerVM.normalTimer)))")
             .font(.system(size: 45 * myCoef, weight: .semibold))
             .foregroundColor(Color(timerVM.firstColorText))
             .modifier(ShadowLightModifier())
             .onTapGesture {
-                self.timerVM.playPause()
+                self.timerVM.playPauseTomatoTimer()
         }
         .animation(.none)
         .frame(width:300)

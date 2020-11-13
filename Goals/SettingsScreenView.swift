@@ -367,7 +367,7 @@ struct SettingsScreenView: View {
                                 .onTapGesture {
                                     
                                     self.timerVM.settingsOnDefault()
-                                    self.timerVM.isPressed = 0
+                                    self.timerVM.isPressedTomatoTimer = 0
                                     self.timerVM.enableNoStop = false
                             }
                             

@@ -24,24 +24,20 @@ import StoreKit
 struct DoView: View {
     
     @Environment(\.managedObjectContext) var moc
-    
     @FetchRequest(entity: Sessions.entity(), sortDescriptors: [
         NSSortDescriptor(key: #keyPath(Sessions.date), ascending: false)
     ]) var sessions: FetchedResults<Sessions>
-    
     @FetchRequest(entity: Goal.entity(), sortDescriptors: [
         NSSortDescriptor(key: #keyPath(Goal.dateEdited), ascending: false)
     ]) var goals: FetchedResults<Goal> // from the oldest to the newst
     
-    
     @EnvironmentObject var timerVM : TimerViewModel
     @State var showInfo = false
-    
     
     @State var wQuestionB: CGFloat = 40
     @State var hQuestionB: CGFloat = 40
     
-    @State var isNormalTimer = true
+    @State var isTomatoTimer = false
     @State var animateButton = false
     
     var body: some View {
@@ -82,20 +78,23 @@ struct DoView: View {
                             
                         VStack {
 
-                            FoocusTitleView()
+                            FoocusTitleView(isTomatoTimer: $isTomatoTimer)
 
-                            Text("\(timerVM.whichCycle())")
+                            
+                            
+                            Text(isTomatoTimer ? "\(timerVM.whichCycle())" : "")
                                 .foregroundColor(Color(timerVM.backgroundColor))
                                 .font(.system(size: timerVM.secondSizeFont * myCoef))
                                 .modifier(ShadowLightModifier())
                                 .frame(minWidth:110)
+                            
                             
                         }.frame(minHeight:110)
                         
 
                         Spacer()
                         }
-                        
+                        // MARK: - TOMATO BUTTONS
                         ZStack(alignment: .center) {
                             
                             RoundedRectangle(cornerRadius: 20)
@@ -112,13 +111,14 @@ struct DoView: View {
                                     .foregroundColor(Color(timerVM.firstColorText))
                                 
                                 
-                                ToggleButton(toggle: $isNormalTimer)
+                                ToggleButton(toggle: $isTomatoTimer)
+                                    .animation(.linear)
                                     .onTapGesture {
                                         self.timerVM.robustVibration();
-                                        self.isNormalTimer.toggle()
-//                                        self.detectWichTimer()
+                                       
+
                                     }
-//                                    .onAppear{detectWichTimer()}
+                                  
                             }
                             .frame(width: 80, height: 80)
                             
@@ -128,23 +128,24 @@ struct DoView: View {
                     }.frame(minHeight:UIDevice.current.hasNotch ? nil : 110)
                     
                     if UIDevice.current.hasNotch {
-                    FoocusTitleView()
+                        FoocusTitleView(isTomatoTimer: $isTomatoTimer)
 
-                    Text("\(timerVM.whichCycle())")
+                        
+                        
+                        Text(isTomatoTimer ? "\(timerVM.whichCycle())" : "")
                         .foregroundColor(Color(timerVM.backgroundColor))
                         .font(.system(size: timerVM.secondSizeFont * myCoef))
                         .modifier(ShadowLightModifier())
                         .padding(.bottom)
-                    
+                        
                     Spacer()
                     }
-                    //                .padding(.top, 30)
                     
                     
 //                    Spacer()
                     
 //                    VStack {
-                        CrownView(rectangularize: $showInfo)
+                    CrownView(rectangularize: $showInfo, isTomatoTimer: $isTomatoTimer)
                             .animation(.linear)
 //                    }
 //                    VStack {
@@ -168,28 +169,53 @@ struct DoView: View {
                             HStack {
                                 
                                 Button(action: {self.timerVM.classicVibration();
+                                    if isTomatoTimer {
                                     self.timerVM.backward()
+                                    } else {
+                                        saveSession(input: Int32(self.timerVM.normalTimer))
+                                        self.timerVM.backwardNormalTimer();
+                                        
+                                    }
                                 }) {
-                                    ButtonView(width: 60 * myCoef, height: 40  * myCoef,  image: Image(uiImage: #imageLiteral(resourceName: "noun_forward_1248722 copy")), imageSize: 1.3, offsetY: -2, cornerRadius: 40)
+                                    ButtonView(width: isTomatoTimer ? 60 * myCoef : 50  * myCoef, height: isTomatoTimer ? 40  * myCoef : 50 * myCoef,  image: isTomatoTimer ? Image(uiImage: #imageLiteral(resourceName: "noun_forward_1248722 copy")) : Image(systemName: "gobackward"), imageSize: isTomatoTimer ? 1.3 : 0.9, offsetY: -2, cornerRadius: 40)
                                 }
                                 
                                 Spacer()
+                                
+                                // MARK: - PLAYPAUSE BUTTON
                                 
                                 Button(action: {
                                     
                                     // i use this button just for the animation the actions are in ontap gestures
                                     
                                 }) {
-                                    ButtonView(width: 100  * myCoef, height: 100  * myCoef, image: Image(systemName: "playpause"), imageSize: 0.8 , offsetX: -1, cornerRadius: 100)
-                                        .onTapGesture {
-                                            self.timerVM.classicVibration(); self.timerVM.playPause();
-                                            showReviewAfter3()
-                                            
-                                    }
-                                    .onLongPressGesture(minimumDuration:1) {
-                                        self.timerVM.robustVibration(); self.timerVM.setLongBreak()
-                                    }
                                     
+                                    if isTomatoTimer {
+                                        ButtonView(width: 100  * myCoef, height: 100  * myCoef, image: Image(systemName: "playpause"), imageSize: 0.8 , offsetX: -1, cornerRadius: 100)
+                                            .onTapGesture {
+                                                self.timerVM.classicVibration(); self.timerVM.playPauseTomatoTimer();
+                                                showReviewAfter3()
+                                                
+                                            }
+                                            .onLongPressGesture(minimumDuration:1) {
+                                                self.timerVM.robustVibration(); self.timerVM.setLongBreak()
+                                            }
+                                            .onAppear{
+                                                self.timerVM.myNormalTimer?.invalidate()
+                                            }
+                                    } else {
+                                        
+                                        ButtonView(width: 100  * myCoef, height: 100  * myCoef, image: Image(systemName: "playpause"), imageSize: 0.8 , offsetX: -1, cornerRadius: 100)
+                                            .onTapGesture {
+                                                self.timerVM.classicVibration();
+                                               
+                                                self.timerVM.playPauseNormalTimer()
+                                            }
+                                            .onAppear{
+                                                self.timerVM.myTimer?.invalidate()
+                                            }
+                                        
+                                    }
                                     
                                 }
                                 .alert(isPresented: permissionsBinding) { () -> Alert in
@@ -199,14 +225,18 @@ struct DoView: View {
                                 
                                 Spacer()
                                 
-                                Button(action: {
-                                    
-                                    self.timerVM.classicVibration();
-                                    self.timerVM.forward();
-                                }) {
-                                    ButtonView(width: 60 * myCoef, height: 40  * myCoef, image:Image(uiImage:#imageLiteral(resourceName: "noun_forward_1248722")), imageSize: 1.3, offsetX: 3, offsetY: 2, cornerRadius: 40 )
+                                if isTomatoTimer{
+                                    Button(action: {
+                                        
+                                        self.timerVM.classicVibration();
+                                        self.timerVM.forward();
+                                    }) {
+                                        ButtonView(width: 60 * myCoef, height: 40 * myCoef, image:Image(uiImage:#imageLiteral(resourceName: "noun_forward_1248722")), imageSize: 1.3, offsetX: 3, offsetY: 2, cornerRadius: 40 )
+                                    }
+                                } else {
+                                    Spacer()
+                                        .frame(width: 60 * myCoef * myCoef, height: 40 * myCoef)
                                 }
-                                
                             }
                             .frame(width: 150 * myCoef, height:130 * myCoef)
                             .padding()
@@ -304,18 +334,7 @@ struct DoView: View {
         }
         
     }
-    
-//    func detectWichTimer() {
-//        if isNormalTimer {
-//            self.timerVM.isNormalTimer = true
-//            self.timerVM.activateNormalTimer()
-//        } else {
-//            self.timerVM.isNormalTimer = false
-//            self.timerVM.reset()
-//        }
-//    }
-    
-    
+
     
     
 }

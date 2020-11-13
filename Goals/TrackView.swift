@@ -43,7 +43,7 @@ struct TrackView: View {
                 
                 // MARK: - TITLE VIEW
                 Group {
-                    FoocusTitleView()
+                    FoocusTitleView(isTomatoTimer: .constant(false))
                     
                     Text("Statistics and Feedback")
                         .foregroundColor(Color(timerVM.firstColorText))

@@ -12,7 +12,8 @@
 
  - Notification of the day 1 ( remind the user he has the app)
  - Put the time when the notification get trigged
- here - Settings move to a new tab (delete logic of move menupane )
+ - implement the background for the new timer as i was doing it 
+ X Settings move to a new tab (delete logic of move menupane )
  X Start the application with the circle animation
  - Find acquisition channels for free
 
@@ -51,8 +52,6 @@ struct Home: View {
     @State var showDoView = false
     @State var showChartsView = false
     @State var showSettingsView = false
-    
-   
     
     @FetchRequest(entity: Goal.entity(), sortDescriptors: [
         NSSortDescriptor(key: #keyPath(Goal.dateEdited), ascending: false)

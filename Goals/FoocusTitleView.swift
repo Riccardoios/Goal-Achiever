@@ -16,7 +16,7 @@ struct FoocusTitleView: View {
         NSSortDescriptor(key: #keyPath(Goal.dateEdited), ascending: false)]//, predicate: NSPredicate(format: "id == %@", idOfTheSelected)
         // here be able to put insetad of yo a idd the one i saved in the timerVM
     ) var goals: FetchedResults<Goal> // from the oldest to the newst
-    
+    @Binding var isTomatoTimer: Bool
     
     var body: some View {
         Text(changeTitle())
@@ -34,7 +34,7 @@ struct FoocusTitleView: View {
         // for in in loop that loop all the id and gives back the one that is equal to the id if there isn't is gonna give back the string foocus
         var result = "Focus"
         
-        if self.timerVM.indexOfTimersArray % 2 == 0 {
+        if self.timerVM.indexOfTimersArray % 2 == 0 || isTomatoTimer == false {
             
             if self.goals.first != nil{
                 result = self.goals.first!.image! + " " + self.goals.first!.title!
