@@ -115,7 +115,8 @@ struct DoView: View {
                                     .animation(.linear)
                                     .onTapGesture {
                                         self.timerVM.robustVibration();
-                                       
+//                                        self.timerVM.reset()
+//                                        self.timerVM.normalTimer = 0
 
                                     }
                                   
@@ -201,7 +202,8 @@ struct DoView: View {
                                                 self.timerVM.robustVibration(); self.timerVM.setLongBreak()
                                             }
                                             .onAppear{
-                                                self.timerVM.myNormalTimer?.invalidate()
+                                                self.timerVM.myTimer?.invalidate();
+                                                self.timerVM.isPressedNormalTimer+=1
                                             }
                                     } else {
                                         

@@ -13,6 +13,7 @@ import SwiftUI
 import CoreData
 
 
+
 class TimerViewModel: ObservableObject {
     
     // for request reviews
@@ -70,6 +71,8 @@ class TimerViewModel: ObservableObject {
             objectWillChange.send()
         }
     }
+  
+    
     
     @Published var arrayOfInput = [25,5,4,15]
     //  @Published var indexOfTimersArray = 0
@@ -97,7 +100,6 @@ class TimerViewModel: ObservableObject {
     
     // for the background and foreground guys
     weak var myTimer : Timer?
-    weak var myNormalTimer : Timer?
     var timeDateBackground = DateComponents()
     var timeDateForeground = DateComponents()
     
@@ -105,14 +107,18 @@ class TimerViewModel: ObservableObject {
     
     var motivationQuote = ["Goals give us a roadmap to follow.", "Goals are a great way to hold ourselves accountable, even if we fail.",  "Setting goals and working to achieving them helps us define what we truly want in life.", "Setting goals  helps us prioritize things.", "“If you want to be happy, set a goal that commands your thoughts, liberates your energy and inspires your hopes.” —Andrew Carnegie", "“All who have accomplished great things have had a great aim, have fixed their gaze on a goal which was high, one which sometimes seemed impossible.” —Orison Swett Marden", "“Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success.” —Pablo Picasso", "“Success is the progressive realization of a worthy goal or ideal.” —Earl Nightingale", "“You have to set goals that are almost out of reach. If you set a goal that is attainable without much work or thought, you are stuck with something below your true talent and potential.” —Steve Garvey", "“By recording your dreams and goals on paper, you set in motion the process of becoming the person you most want to be. Put your future in good hands—your own.” —Mark Victor Hansen", "“The trouble with not having a goal is that you can spend your life running up and down the field and never score.” —Bill Copeland", "All successful people have a goal. No one can get anywhere unless he knows where he wants to go and what he wants to be or do. ” —Norman Vincent Peale", "“Goals. There’s no telling what you can do when you get inspired by them. There’s no telling what you can do when you believe in them. And there’s no telling what will happen when you act upon them.” —Jim Rohn"].randomElement()!
     
-//    @Published var normalTimer:Int = 0
+    
+  
+    
+    
+    
     
     //MARK: - NORMAL TIMER FUNCS
     
     func playNormalTimer() {
         
         self.percentage = 100
-        myNormalTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             self.normalTimer += 1
             self.secondForSession += 1
         }
@@ -124,7 +130,7 @@ class TimerViewModel: ObservableObject {
         if isPressedNormalTimer % 2 == 0 {
             playNormalTimer()
         } else {
-            myNormalTimer?.invalidate()
+            myTimer?.invalidate()
              
         }
         isPressedNormalTimer+=1
@@ -132,7 +138,7 @@ class TimerViewModel: ObservableObject {
     }
     
     func backwardNormalTimer() {
-        myNormalTimer?.invalidate()
+        myTimer?.invalidate()
         normalTimer = 0
         isPressedNormalTimer+=1
     }
@@ -383,6 +389,7 @@ class TimerViewModel: ObservableObject {
             // in this case the timer was activated but the phone is locked so the os have turn it of the timer func; the goal here is to set the timer as it never turn it off counting the diff from prepare for background and this func itself.
             
             //check what time it is and check with what time was when i prepare the background
+            
             timeDateForeground = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
             let secondPassedFromSleep = Calendar.current.dateComponents([.second], from: timeDateBackground, to: timeDateForeground).second
             
@@ -398,6 +405,7 @@ class TimerViewModel: ObservableObject {
                 
             } else {
                 self.timersArray[self.indexOfTimersArray] = timerAdjusted
+                normalTimer += secondPassedFromSleep!
                 
             }
             
@@ -406,9 +414,9 @@ class TimerViewModel: ObservableObject {
                 print("secondPassedFromSleep", secondPassedFromSleep!)
                 return secondPassedFromSleep!
             } else { return 0 }
-            
-            
         }
+            
+        
     }
     
     

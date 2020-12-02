@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct GoalsApp: App {
     
-    
+
     
     let persistenceController = PersistenceController.shared
 
@@ -19,6 +19,7 @@ struct GoalsApp: App {
             Home()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(TimerViewModel())
+                .environmentObject(SubscriptionManager())
         }
     }
     

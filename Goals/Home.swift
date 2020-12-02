@@ -12,10 +12,9 @@
 
  - Notification of the day 1 ( remind the user he has the app)
  - Put the time when the notification get trigged
- - implement the background for the new timer as i was doing it 
- X Settings move to a new tab (delete logic of move menupane )
- X Start the application with the circle animation
+ - set the icon as Premium when is purchased
  - Find acquisition channels for free
+
 
 - premium version where start to see how to hide the preimum content
 - add the premium subscription
@@ -52,6 +51,7 @@ struct Home: View {
     @State var showDoView = false
     @State var showChartsView = false
     @State var showSettingsView = false
+    @State var showPayWallView = false
     
     @FetchRequest(entity: Goal.entity(), sortDescriptors: [
         NSSortDescriptor(key: #keyPath(Goal.dateEdited), ascending: false)
@@ -94,7 +94,9 @@ struct Home: View {
                     }
                     if showDoView {
                         
-                        DoView()
+//                        DoView()
+//                        SubscriptionProductButtons()
+                        PayWallView(showPayWallView: .constant(true))
 //                            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                     }
                     if showChartsView {
@@ -107,8 +109,10 @@ struct Home: View {
                     }
                     
                   
-                        MenuPane(showPlan:  $showPlanView , showDo: $showDoView , showCharts:  $showChartsView, showSettings: $showSettingsView)
+                   
+                        MenuPane(showPlan: $showPlanView , showDo: $showDoView , showCharts: $showChartsView, showSettings: $showSettingsView)
                         .ignoresSafeArea(.keyboard, edges: .vertical)
+                    
 //                    .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                         
                         if !UIDevice.current.hasNotch {
