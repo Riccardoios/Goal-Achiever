@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3A0361C02559DAEF0001142A /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0361BF2559DAEF0001142A /* LaunchView.swift */; };
 		3A1FC7F32563A51C00596576 /* Purchases in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1FC7F22563A51C00596576 /* Purchases */; };
-		3A1FC7F62563AD9B00596576 /* SubscriptionProductButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1FC7F52563AD9B00596576 /* SubscriptionProductButtons.swift */; };
 		3A1FC7F82564F2AC00596576 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1FC7EE25634A0300596576 /* StoreKit.framework */; };
 		3A3BAF40257215F100056A4F /* PayWallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3BAF3F257215F100056A4F /* PayWallView.swift */; };
 		3A6D09FD2562A8C200A3336D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D09FC2562A8C200A3336D /* Assets.xcassets */; };
@@ -51,7 +50,6 @@
 /* Begin PBXFileReference section */
 		3A0361BF2559DAEF0001142A /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		3A1FC7EE25634A0300596576 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		3A1FC7F52563AD9B00596576 /* SubscriptionProductButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProductButtons.swift; sourceTree = "<group>"; };
 		3A3BAF3F257215F100056A4F /* PayWallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallView.swift; sourceTree = "<group>"; };
 		3A6D09FC2562A8C200A3336D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				3AEAC3702548F5460056B8C9 /* TimerView.swift */,
 				3AEAC36C2548F5460056B8C9 /* TimerVM.swift */,
 				3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */,
-				3A1FC7F52563AD9B00596576 /* SubscriptionProductButtons.swift */,
 				3A3BAF3F257215F100056A4F /* PayWallView.swift */,
 				3AABFE20256B9D7D00A7BAE8 /* SubscriptionManager.swift */,
 				3AEAC3502548F0EE0056B8C9 /* Info.plist */,
@@ -294,7 +291,6 @@
 				3AEAC3872548F5470056B8C9 /* TimerVM.swift in Sources */,
 				3AEAC3942548F5470056B8C9 /* ColumView.swift in Sources */,
 				3AEAC38F2548F5470056B8C9 /* IconView.swift in Sources */,
-				3A1FC7F62563AD9B00596576 /* SubscriptionProductButtons.swift in Sources */,
 				3AEAC3882548F5470056B8C9 /* ToggleButton.swift in Sources */,
 				3AABFE21256B9D7D00A7BAE8 /* SubscriptionManager.swift in Sources */,
 				3AEAC3862548F5470056B8C9 /* TrackView.swift in Sources */,

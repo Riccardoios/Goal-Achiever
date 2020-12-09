@@ -329,7 +329,6 @@ struct PlanView: View {
             }
             .dismissKeyboardOnTap()
             
-            
         }
         
     }

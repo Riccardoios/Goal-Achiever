@@ -7,17 +7,6 @@
 //  Copyright © 2020 Riccardo Carlotto. All rights reserved.
 //
 
-/*
- - after do the setting view that take in consideratino all the views as settings and also edit the button that is embedded in all the views not anymore in the home
- */
-
-// when you press the play button the timer will run and it will track your performances in the track view you can customize your timer of doing your goal and your breaks
-
-
-// we set the timer with the pomodoro tecqnique which make you more effective
-
-
-// save session on disappear of this view and set to 0 the pubblic seconds for session
 import SwiftUI
 import StoreKit
 
@@ -34,8 +23,8 @@ struct DoView: View {
     @EnvironmentObject var timerVM : TimerViewModel
     @State var showInfo = false
     
-    @State var wQuestionB: CGFloat = 40
-    @State var hQuestionB: CGFloat = 40
+//    @State var wQuestionB: CGFloat = 40
+//    @State var hQuestionB: CGFloat = 40
     
     @State var isTomatoTimer = false
     @State var animateButton = false
@@ -80,8 +69,6 @@ struct DoView: View {
 
                             FoocusTitleView(isTomatoTimer: $isTomatoTimer)
 
-                            
-                            
                             Text(isTomatoTimer ? "\(timerVM.whichCycle())" : "")
                                 .foregroundColor(Color(timerVM.backgroundColor))
                                 .font(.system(size: timerVM.secondSizeFont * myCoef))
@@ -132,7 +119,6 @@ struct DoView: View {
                         FoocusTitleView(isTomatoTimer: $isTomatoTimer)
 
                         
-                        
                         Text(isTomatoTimer ? "\(timerVM.whichCycle())" : "")
                         .foregroundColor(Color(timerVM.backgroundColor))
                         .font(.system(size: timerVM.secondSizeFont * myCoef))
@@ -178,10 +164,10 @@ struct DoView: View {
                                         
                                     }
                                 }) {
-                                    ButtonView(width: isTomatoTimer ? 60 * myCoef : 50  * myCoef, height: isTomatoTimer ? 40  * myCoef : 50 * myCoef,  image: isTomatoTimer ? Image(uiImage: #imageLiteral(resourceName: "noun_forward_1248722 copy")) : Image(systemName: "gobackward"), imageSize: isTomatoTimer ? 1.3 : 0.9, offsetY: -2, cornerRadius: 40)
+                                    ButtonView(width: 60 * myCoef , height:  40  * myCoef,  image: Image(uiImage: #imageLiteral(resourceName: "noun_forward_1248722 copy")), imageSize: 1.3, offsetY: -2, cornerRadius: 40)
                                 }
                                 
-                                Spacer()
+                                Spacer()  //.frame(width:50)
                                 
                                 // MARK: - PLAYPAUSE BUTTON
                                 
@@ -227,18 +213,19 @@ struct DoView: View {
                                 
                                 Spacer()
                                 
-                                if isTomatoTimer{
+//                                if isTomatoTimer{
                                     Button(action: {
-                                        
-                                        self.timerVM.classicVibration();
-                                        self.timerVM.forward();
+                                        if isTomatoTimer{
+                                            self.timerVM.classicVibration();
+                                            self.timerVM.forward();
+                                        }
                                     }) {
                                         ButtonView(width: 60 * myCoef, height: 40 * myCoef, image:Image(uiImage:#imageLiteral(resourceName: "noun_forward_1248722")), imageSize: 1.3, offsetX: 3, offsetY: 2, cornerRadius: 40 )
                                     }
-                                } else {
-                                    Spacer()
-                                        .frame(width: 60 * myCoef * myCoef, height: 40 * myCoef)
-                                }
+//                                } else {
+//                                    Spacer()
+//                                        .frame(width: 60 * myCoef * myCoef, height: 40 * myCoef)
+//                                }
                             }
                             .frame(width: 150 * myCoef, height:130 * myCoef)
                             .padding()

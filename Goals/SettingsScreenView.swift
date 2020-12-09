@@ -199,16 +199,22 @@ struct SettingsScreenView: View {
                             Spacer()
                                 .frame(height: spaceInTheSpacer)
                             
-                            HStack {
+                            ZStack {
                                 
                                 Button {
                                     self.showPayWall = true
                                 } label: {
-                                    ButtonView(width: 100, height: 50, cornerRadius: 30, showImage: false)
+                                    ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
                                 }
                                 .sheet(isPresented: $showPayWall) {
-                                    PayWallView(showPayWallView: .constant(true))
+                                    PayWallView().environmentObject(TimerViewModel())
                                         }
+                                
+                                
+                                Text("Go Premium 💎")
+                                    .modifier(ShadowLightModifier())
+                                    .font(.system(size: timerVM.secondSizeFont))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
                                 
                                 
                                 

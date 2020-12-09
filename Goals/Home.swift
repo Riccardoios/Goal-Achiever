@@ -94,10 +94,9 @@ struct Home: View {
                     }
                     if showDoView {
                         
-//                        DoView()
-//                        SubscriptionProductButtons()
-                        PayWallView(showPayWallView: .constant(true))
-//                            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                        DoView()
+  
+
                     }
                     if showChartsView {
                         
