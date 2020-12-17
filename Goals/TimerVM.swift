@@ -13,7 +13,6 @@ import SwiftUI
 import CoreData
 
 
-
 class TimerViewModel: ObservableObject {
     
     // for request reviews
@@ -72,7 +71,6 @@ class TimerViewModel: ObservableObject {
         }
     }
   
-    
     
     @Published var arrayOfInput = [25,5,4,15]
     //  @Published var indexOfTimersArray = 0

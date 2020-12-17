@@ -28,7 +28,7 @@ struct MenuPane: View {
                 
                 ZStack {
                     
-                    AntiRilievoView(width: 90, height: 90, cornerRadious: 25)
+                    AntiRilievoView(width: 90, height: 90, cornerRadius: 25)
                         .offset(x: showPlan ? -screen.width / 2.9 : .zero)
                         .offset(x:showDo ? -screen.width / 8.2 : .zero)
                         .offset(x: showCharts ? screen.width / 9 : .zero)

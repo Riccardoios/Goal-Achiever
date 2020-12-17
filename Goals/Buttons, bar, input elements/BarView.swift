@@ -26,7 +26,7 @@ struct BarView: View {
             
             
             ZStack (alignment:.leading) {
-                AntiRilievoView(width: width, height: height, cornerRadious: 45)
+                AntiRilievoView(width: width, height: height, cornerRadius: 45)
                 
                 HStack{
                     

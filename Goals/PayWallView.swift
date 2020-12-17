@@ -5,7 +5,23 @@
 //  Created by Riccardo Carlotto on 28/11/2020.
 //
 
-// INFO: Purchases instance already set. Did you mean to configure two Purchases objects?
+// build the func that unlock the all app in premium: so redesign the all app in this new way
+/*
+ - the temporary premium version
+ - tomato timer method
+ - set notification at specific time
+ - 
+ 
+ 
+ the final premium version has
+ - more charts or all the charts i have to decide
+ - build one more chart?
+ - the tomato method avaibility
+ - set the nofitications at specific time (build entirely this func)
+ - Personalise the app colour (here i need to create a view where you can access the color (using the old one and see)
+ 
+ i can omit the personalise color and go on for the moment
+ */
 
 import SwiftUI
 import Purchases
@@ -19,14 +35,30 @@ struct PayWallView: View {
     var arrOfDetails2 = [["1.99", "3.99", "35.00", "45.00"], [" / Week = 🍬", " / Month = ☕️", " / Year = 🥮", " / Lifetime = 🍱"]]
     
     var body: some View {
+      
+        // check the legend of the 2d arr
         
-//        var nOfProducts:Int {
-//            return subManager.offeringObj?.availablePackages.count ?? 0
-//        }
+        var arrOfPackage: [Purchases.Package]{
+            
+            var result = [Purchases.Package]()
+            let packages = subManager.offeringObj?.availablePackages
+            
+            guard packages != nil else {
+                return result
+            }
+            
+            for i in 0..<packages!.count {
+                let package = packages![i]
+                result.append(package)
+            }
+            
+            return result
+        }
         
         var arrOfDetails: [[String]] {
-            var arrOfDuration = [String]()
-            var arrOfPrice = [String]()
+            var arrOfDuration = [String]()              //arrOfDetail[0]
+            var arrOfPrice = [String]()                 //arrOfDetail[1]
+            
             let packages = subManager.offeringObj?.availablePackages
             
             guard packages != nil else {
@@ -36,16 +68,16 @@ struct PayWallView: View {
             var duration = ""
             
             for i in 0..<packages!.count {
-                
+            
                 let product = packages![i].product
                 let subscriptionPeriod = product.subscriptionPeriod
                 let price = packages![i].localizedPriceString
-            
+                
                 
                 switch subscriptionPeriod!.unit {
                 
-//                case SKProduct.PeriodUnit.week:
-//                    duration = " / \(subscriptionPeriod!.numberOfUnits) Week = 🍬"
+                case SKProduct.PeriodUnit.week:
+                    duration = " / \(subscriptionPeriod!.numberOfUnits) Week = 🍬"
                 case SKProduct.PeriodUnit.month:
                     duration = " / \(subscriptionPeriod!.numberOfUnits) Month = ☕️"
                 case SKProduct.PeriodUnit.year:
@@ -58,6 +90,7 @@ struct PayWallView: View {
                 
                 arrOfPrice.append(price)
                 arrOfDuration.append(duration)
+                
                 
             }
             
@@ -72,11 +105,6 @@ struct PayWallView: View {
                     .ignoresSafeArea(.all)
                 
                 VStack{
-                    
-                    //                    Text("Go Premium")
-                    //                        .foregroundColor(.blue)//(timerVM.backgroundColor))
-                    //                        .modifier(ShadowLightModifier())
-                    //                        .font(.system(size: 35))
                     
                     ZStack {
                     
@@ -129,7 +157,7 @@ struct PayWallView: View {
                     
                     ZStack{
                         
-                        AntiRilievoView(width: screen.width - 30, height: 400, cornerRadious: 40)
+                        AntiRilievoView(width: screen.width - 30, height: 400, cornerRadius: 40)
                             .offset(x:7.5, y:-15)
                         
                         
@@ -205,9 +233,13 @@ struct PayWallView: View {
                     
                    
                     
-                    ForEach(0..<arrOfDetails[0].count, id: \.self) { i in
+                    ForEach((0..<arrOfDetails[0].count).reversed(), id: \.self) { i in
                         
-                        Button(action: {print(i, "action")}, label: {
+                        Button(action: {
+                            
+                            purchase(package: arrOfPackage[i])
+                            
+                        }, label: {
                             
                             ZStack{
                                 
@@ -219,13 +251,37 @@ struct PayWallView: View {
                                 .modifier(ShadowLightModifier())
                                 .font(.system(size: timerVM.secondSizeFont - 4))
                                 .frame(width: screen.width - 160, height: 60)
-                                
                             }
                         })
-                        
                     }
                     
-                   
+                    Spacer().frame(height:50)
+                    
+                    if subManager.subscriptionStatus == false {
+                        
+                        Button(action: {
+                            Purchases.shared.restoreTransactions { (purchaserInfo, error) in
+                                
+                                if let purchaserInfo = purchaserInfo {
+                                    if purchaserInfo.entitlements["pro"]?.isActive == true {
+                                        
+                                        self.subManager.subscriptionStatus = true
+                                        self.presentationMode.wrappedValue.dismiss()
+                                        
+                                    }
+                                }
+                                //... check purchaserInfo to see if entitlement is now active
+                            }
+                        }) {
+                            Text("Restore Purchase")
+                                .underline()
+                                .font(.system(size: 15))
+                                .modifier(ShadowLightModifier())
+                                .foregroundColor(Color(timerVM.firstColorText))
+                            
+                        }
+                        
+                    }
                     
                 }
                 .ignoresSafeArea(.all)
@@ -233,10 +289,24 @@ struct PayWallView: View {
                 .padding(.bottom, 50)
                 .padding(.top, 10)
                 
+               
+                
                 
             }
         }
     }
+    
+    func purchase(package: Purchases.Package) {
+      
+            Purchases.shared.purchasePackage(package) { (transaction, purchaserInfo, error, userCancelled) in
+                if purchaserInfo?.entitlements["pro"]?.isActive == true {
+                    self.subManager.subscriptionStatus = true
+                self.presentationMode.wrappedValue.dismiss()
+                
+              }
+            }
+    }
+    
 }
 
 struct SwiftUIView_Previews: PreviewProvider {

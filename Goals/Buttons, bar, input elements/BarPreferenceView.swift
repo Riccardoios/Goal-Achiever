@@ -38,23 +38,23 @@ struct BarPreferenceView: View {
                     }
                     
                     Group {
-                        AntiRilievoView(width: 14, height: 20, cornerRadious: 9)
+                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadious: 9)
+                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadious: 9)
+                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadious: 9)
+                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadious: 9)
+                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                     }
                     
                     if screen.width >= 768 {
@@ -68,9 +68,9 @@ struct BarPreferenceView: View {
             }
             
                 if screen.width < 768 {
-                    AntiRilievoView(width: screen.width - 50 , height: 20, cornerRadious: 30)
+                    AntiRilievoView(width: screen.width - 50 , height: 20, cornerRadius: 30)
                 } else {
-                    AntiRilievoView(width: 364 , height: 20, cornerRadious: 30)
+                    AntiRilievoView(width: 364 , height: 20, cornerRadius: 30)
                 }
                 
             ZStack {

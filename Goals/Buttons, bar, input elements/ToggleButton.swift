@@ -16,7 +16,7 @@ struct ToggleButton: View {
     var body: some View {
         ZStack {
             
-            AntiRilievoView(width: 80, height: 42, cornerRadious: 30)
+            AntiRilievoView(width: 80, height: 42, cornerRadius: 30)
             
             Text("ON   OFF")
                 .font(.system(size: 12, weight: .regular))

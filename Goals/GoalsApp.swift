@@ -11,7 +11,6 @@ import SwiftUI
 struct GoalsApp: App {
     
 
-    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

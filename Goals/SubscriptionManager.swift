@@ -5,6 +5,9 @@
 //  Created by Riccardo Carlotto on 23/11/2020.
 //
 
+
+// sandboxuser riccardo.rich@libero.it Gennaro0987
+
 import Foundation
 import SwiftUI
 import Purchases
@@ -12,15 +15,14 @@ import Purchases
 public class SubscriptionManager: ObservableObject {
     public static let shared = SubscriptionManager()
     
-    public enum SubscriptionStatus {
-        case subscribed, notSubscribed
-    }
+   
     
     @Published public var monthlySubscription: Purchases.Package?
     @Published public var yearlySubscription: Purchases.Package?
     @Published public var lifetime: Purchases.Package?
     @Published public var inPaymentProgress = false
     @Published public var offeringObj : Purchases.Offering?
+    @Published public var subscriptionStatus = false
     
     
     
@@ -30,12 +32,37 @@ public class SubscriptionManager: ObservableObject {
             self.monthlySubscription = offerings?.current?.monthly
             self.lifetime = offerings?.current?.lifetime
             self.yearlySubscription = offerings?.current?.annual
-            
             self.offeringObj = offerings?.current
         }
         
+  
+        
     }
     
+//        private func processInfo(info: Purchases.PurchaserInfo?) {
+//            if info?.entitlements.all["pro"]?.isActive == true {
+//                subscriptionStatus = true
+//            } else {
+//                subscriptionStatus = false
+//            }
+//            inPaymentProgress = false
+//        }
+    
+    
+ 
+    
+    // the snippet
+
+    
+//        public func purchase(source: String, product: Purchases.Package) {
+//            guard !inPaymentProgress else { return }
+//            inPaymentProgress = true
+//            Purchases.shared.setAttributes(["source": source,
+//                                            "number_of_launch": "\(AppUserDefaults.shared.numberOfLaunch)"])
+//            Purchases.shared.purchasePackage(product) { (_, info, _, _) in
+//                self.processInfo(info: info)
+//            }
+//        }
     
    
     

@@ -28,7 +28,7 @@ struct ColorButtonView: View {
             
 //            Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00))
             
-            AntiRilievoView(width: antiRiSize, height: antiRiSize, cornerRadious: antiRiCorner)
+            AntiRilievoView(width: antiRiSize, height: antiRiSize, cornerRadius: antiRiCorner)
                 .opacity(isPressed ? 1 : 0)
             
             Group {

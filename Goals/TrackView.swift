@@ -13,6 +13,7 @@ import StoreKit
 struct TrackView: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
+    @EnvironmentObject var subManager: SubscriptionManager
     
     //emoji and motivation views
     var emoji = "😄"
@@ -78,7 +79,7 @@ struct TrackView: View {
                     
                     ZStack{
                         
-                        AntiRilievoView(width: screen.width - 50, height: UIDevice.current.hasNotch ? 220 : 190, cornerRadious: 50)
+                        AntiRilievoView(width: screen.width - 50, height: UIDevice.current.hasNotch ? 220 : 190, cornerRadius: 50)
                         
                         
                         Text(timerVM.motivationQuote)
@@ -102,7 +103,7 @@ struct TrackView: View {
                     
                     ZStack{
                         
-                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadious: 30)
+                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadius: 30)
                         
                         HStack {
                             
@@ -154,6 +155,12 @@ struct TrackView: View {
                             
                             //                            }
                         }
+                        .blur(radius: subManager.subscriptionStatus ? 0 : 7)
+                        
+                        if subManager.subscriptionStatus == false {
+                            PremiumOnlyView(width:screen.width - 30, height: 250, opacity: 0.6, cornerRadius: 30)
+                        }
+                        
                     }
                 }
                 // MARK: - TOTAL TIME LAST 7 DAYS
@@ -181,7 +188,7 @@ struct TrackView: View {
                     
                     ZStack{
                         
-                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadious: 30)
+                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadius: 30)
                         
                         
                         VStack (alignment: .leading, spacing: 10) {

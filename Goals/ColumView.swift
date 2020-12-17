@@ -19,7 +19,7 @@ struct ColumView: View {
             GeometryReader { geometry in
                 ZStack(alignment: .center) {
                     
-                    AntiRilievoView(width: geometry.size.width, height: geometry.size.height, cornerRadious: 45)
+                    AntiRilievoView(width: geometry.size.width, height: geometry.size.height, cornerRadius: 45)
                     
                     VStack {
                         Spacer()

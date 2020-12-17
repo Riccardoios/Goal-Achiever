@@ -8,16 +8,21 @@
 // 4.7"(SE), 5.5" (8 plus), 6.1" (iphone Xr), then ipads..
 
 /*
+ 
  TO DO LIST:
 
+ 
+  finishing with the in app purchase which means:
+ - add subscirption weekly and maybe lifetime
+ - add chart premium only view
+ 
+ 
  - Notification of the day 1 ( remind the user he has the app)
  - Put the time when the notification get trigged
  - set the icon as Premium when is purchased
  - Find acquisition channels for free
 
 
-- premium version where start to see how to hide the preimum content
-- add the premium subscription
 - advertise as much as I can
 - it is really time to go to upWork
  
@@ -37,6 +42,7 @@
 
 import SwiftUI
 import CoreData
+import Purchases
 
 let screen = UIScreen.main.bounds
 let myCoef = screen.size.width / 375 // if iphone x = 1 if iphone se = 0.82
@@ -45,6 +51,7 @@ struct Home: View {
     
     @State var showHome = false
     @EnvironmentObject var timerVM : TimerViewModel
+    @EnvironmentObject var subManager: SubscriptionManager
     @Environment(\.managedObjectContext) var moc
     
     @State var showPlanView = true
@@ -59,7 +66,6 @@ struct Home: View {
     //for the graphic charts
     
     @FetchRequest(entity: Sessions.entity(), sortDescriptors: []) var sessions: FetchedResults<Sessions>
-    
     
     
     var body: some View {
@@ -87,19 +93,13 @@ struct Home: View {
                 VStack {
                     
                     if showPlanView {
-                        
                         PlanView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView)
-//                            .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                         
                     }
                     if showDoView {
-                        
                         DoView()
-  
-
                     }
                     if showChartsView {
-                        
                         TrackView(goals: goals, sessions: sessions)
                     }
                     
@@ -126,6 +126,14 @@ struct Home: View {
         // for ios 14 the keyboard now move the all view to the top but with this line you cancel this behavior
         .onAppear{
             self.timerVM.incrementAppRuns()
+            
+            //check for user entitlements 
+            Purchases.shared.purchaserInfo { (purchaserInfo, error) in
+                if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
+                    self.subManager.subscriptionStatus = true
+                }
+            }
+            
         }
         
     }
@@ -139,7 +147,6 @@ struct Home_Previews: PreviewProvider {
         Home().environmentObject(TimerViewModel())
     }
 }
-
 extension UIDevice {
     var hasNotch: Bool {
         let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0

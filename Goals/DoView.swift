@@ -21,6 +21,7 @@ struct DoView: View {
     ]) var goals: FetchedResults<Goal> // from the oldest to the newst
     
     @EnvironmentObject var timerVM : TimerViewModel
+    @EnvironmentObject var subManager: SubscriptionManager
     @State var showInfo = false
     
 //    @State var wQuestionB: CGFloat = 40
@@ -110,6 +111,9 @@ struct DoView: View {
                             }
                             .frame(width: 80, height: 80)
                             
+                            if subManager.subscriptionStatus == false {
+                            PremiumOnlyView()
+                            }
                         }
                         .padding(.trailing)
                         

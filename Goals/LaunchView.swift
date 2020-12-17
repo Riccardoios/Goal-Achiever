@@ -28,6 +28,7 @@ struct LaunchView: View {
             VStack{
                 Spacer()
                 Text("tap anywhere to start")
+                    .foregroundColor(.black)
                     .opacity(showIndications ? 1 : 0)
                     .padding(.bottom)
                     .animation(.linear)
@@ -42,7 +43,8 @@ struct LaunchView: View {
                 .frame(width: 180, height: 180)
                 .offset(x: -2.5, y: -34.5)
                 .onAppear{
-                    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in                               self.animate = true
+                    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
+                        self.animate = true
                     }
                 }
             

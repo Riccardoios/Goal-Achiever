@@ -12,6 +12,7 @@ struct SettingsScreenView: View {
     
     //    @State var textPressed = false
     @EnvironmentObject var timerVM : TimerViewModel
+    @EnvironmentObject var subManager: SubscriptionManager
     var spaceInTheSpacer: CGFloat = 25
     @State var animateSave = false
     @State var showPayWall = false
@@ -199,6 +200,8 @@ struct SettingsScreenView: View {
                             Spacer()
                                 .frame(height: spaceInTheSpacer)
                             
+                            
+                            
                             ZStack {
                                 
                                 Button {
@@ -221,6 +224,7 @@ struct SettingsScreenView: View {
                             }
                             .padding(.horizontal, 33)
                             .padding(.bottom, 10)
+                            
                             
                             HStack {
                                 

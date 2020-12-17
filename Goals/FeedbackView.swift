@@ -47,7 +47,7 @@ struct FeedbackView: View {
             
                 ZStack{
                 
-                AntiRilievoView(width: 330, height: 130, cornerRadious: 60)
+                AntiRilievoView(width: 330, height: 130, cornerRadius: 60)
                     
                 Text(text)
                     .modifier(ShadowLightModifier())

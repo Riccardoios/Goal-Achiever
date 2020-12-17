@@ -27,7 +27,9 @@ struct PlanView: View {
     @State var weekSelection : [Bool] = [false, false, false, false, false, false, false]
     @State var motivationText : String = ""
     @EnvironmentObject var timerVM : TimerViewModel
+    @EnvironmentObject var subManager: SubscriptionManager
     @State var showGoalExamples = false
+    @State var notificationTime = Date() // this guy has to be implemented in the logic of the notification
     
     @Binding var showPlanView: Bool
     @Binding var showDoView: Bool
@@ -54,12 +56,11 @@ struct PlanView: View {
                                 
                                 Spacer()
                                 
-                                
                             }
                             
                             ZStack {
                                 
-                                AntiRilievoView(width: screen.width - 25, height: goals.isEmpty ? 100 * myCoef : 0, cornerRadious: 30)
+                                AntiRilievoView(width: screen.width - 25, height: goals.isEmpty ? 100 * myCoef : 0, cornerRadius: 30)
                                 
                                 if goals.isEmpty {
                                     Text("You have 0 goals yet, Create one filling up the short form below 😉")
@@ -125,7 +126,7 @@ struct PlanView: View {
                                 Spacer()
                                 ZStack {
                                     
-                                    AntiRilievoView(width: screen.width - 25, height: self.showGoalExamples ? 320 : 0, cornerRadious: 30)
+                                    AntiRilievoView(width: screen.width - 25, height: self.showGoalExamples ? 320 : 0, cornerRadius: 30)
                                     
                                     if showGoalExamples {
                                         
@@ -227,6 +228,46 @@ struct PlanView: View {
                                     weekButtons(weekArray: $weekSelection)
                                     
                                     Spacer()
+                                }
+                                
+                                Text("What time would you like to be reminded?")
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .lineLimit(nil)
+                                    .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
+                                    .foregroundColor(Color(timerVM.firstColorText))
+                                    .modifier(ShadowLightModifier())
+                                    .padding(.horizontal)
+                        
+                                
+                                ZStack{
+                                    
+                                    HStack {
+                                        
+                                        Spacer()
+                                        
+                                        ZStack {
+                                            Rectangle()
+                                                .cornerRadius(25)
+                                                .frame(width:100, height:50)
+                                                .foregroundColor(Color(timerVM.backgroundColor))
+                                                .modifier(ShadowLightModifier())
+                                            
+                                            
+                                            DatePicker("", selection: $notificationTime, displayedComponents: .hourAndMinute)
+                                                .labelsHidden()
+//                                            DatePicker("lala", selection: $notificationTime, displayedComponents: .hourAndMinute)
+//                                            .datePickerStyle(WheelDatePickerStyle())
+//                                                .labelsHidden()
+                                            
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    
+                                    if subManager.subscriptionStatus == false {
+                                        PremiumOnlyView(width:screen.width, height:100)
+                                    }
                                 }
                                 
                                 Text("Only you can best motivate yourself, write a sentence:")
@@ -356,10 +397,15 @@ struct PlanView: View {
         
         for elem in arrOftrueIndexes {
             //trigger the notification as many time as there are element in the arr
+            
             datesOfNotifications.weekday = elem // weekday works counting from 1 from sunday
-            datesOfNotifications.hour = 9
+            
+            datesOfNotifications.hour = Calendar.current.component(.hour, from: notificationTime)
+            
+            datesOfNotifications.minute = Calendar.current.component(.minute, from: notificationTime)
             
             let trigger = UNCalendarNotificationTrigger(dateMatching:datesOfNotifications, repeats: true)
+            
             let request = UNNotificationRequest(identifier: "goal reminder notification" + "\(elem)", content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request)

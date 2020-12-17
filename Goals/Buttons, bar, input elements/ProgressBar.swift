@@ -18,7 +18,7 @@ struct ProgressBar: View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     
-                    AntiRilievoView(width: geometry.size.width, height: geometry.size.height, cornerRadious: 45)
+                    AntiRilievoView(width: geometry.size.width, height: geometry.size.height, cornerRadius: 45)
                     
                     
                     HStack{
