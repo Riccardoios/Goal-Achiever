@@ -22,7 +22,7 @@ struct DoView: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
     @EnvironmentObject var subManager: SubscriptionManager
-    @State var showInfo = false
+    
     
 //    @State var wQuestionB: CGFloat = 40
 //    @State var hQuestionB: CGFloat = 40
@@ -30,13 +30,16 @@ struct DoView: View {
     @State var isTomatoTimer = false
     @State var animateButton = false
     
+    @State var rectangularize = false
+    @State var isAddSessionPressed = false
+    
     var body: some View {
         
         let permissionsBinding = Binding (
             get: {self.timerVM.remidUserToActivateNotification},
             set: {
                 
-                //               self.timerVM.requestNotificationAutorization();
+                //  self.timerVM.requestNotificationAutorization();
                 
                 self.timerVM.remidUserToActivateNotification = $0
                 
@@ -56,13 +59,16 @@ struct DoView: View {
                             
                             
                             //MARK: - ? BUTTON
-                            ColorButtonView(isPressed: $showInfo, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
+                            ColorButtonView(isPressed: $rectangularize, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
                                 .padding(.leading)
+
                                
                         }
                         
                         
                         Spacer()
+                        
+                        
                         
                         if !UIDevice.current.hasNotch {
                             
@@ -77,6 +83,8 @@ struct DoView: View {
                                 .frame(minWidth:110)
                             
                             
+                                
+                            
                         }.frame(minHeight:110)
                         
 
@@ -89,7 +97,6 @@ struct DoView: View {
                                 .frame(width: 80, height: 80)
                                 .foregroundColor(Color(timerVM.backgroundColor))
                                 .modifier(ShadowLightModifier())
-                            
                             
                             VStack{
                                 
@@ -131,13 +138,15 @@ struct DoView: View {
                         
                     Spacer()
                     }
-                    
+     
                     
 //                    Spacer()
                     
 //                    VStack {
-                    CrownView(rectangularize: $showInfo, isTomatoTimer: $isTomatoTimer)
-                            .animation(.linear)
+                    CrownView(rectangularize: $rectangularize, isTomatoTimer: $isTomatoTimer, isAddSessionPressed: $isAddSessionPressed) { (par) in
+                        saveSession(input: par)
+                    }
+                    .animation(.linear)
 //                    }
 //                    VStack {
 //                        Spacer()
@@ -167,7 +176,9 @@ struct DoView: View {
                                         self.timerVM.backwardNormalTimer();
                                         
                                     }
+                                    
                                 }) {
+                                    
                                     ButtonView(width: 60 * myCoef , height:  40  * myCoef,  image: Image(uiImage: #imageLiteral(resourceName: "noun_forward_1248722 copy")), imageSize: 1.3, offsetY: -2, cornerRadius: 40)
                                 }
                                 
@@ -184,6 +195,7 @@ struct DoView: View {
                                     if isTomatoTimer {
                                         ButtonView(width: 100  * myCoef, height: 100  * myCoef, image: Image(systemName: "playpause"), imageSize: 0.8 , offsetX: -1, cornerRadius: 100)
                                             .onTapGesture {
+                                                
                                                 self.timerVM.classicVibration(); self.timerVM.playPauseTomatoTimer();
                                                 showReviewAfter3()
                                                 
@@ -191,20 +203,21 @@ struct DoView: View {
                                             .onLongPressGesture(minimumDuration:1) {
                                                 self.timerVM.robustVibration(); self.timerVM.setLongBreak()
                                             }
-                                            .onAppear{
-                                                self.timerVM.myTimer?.invalidate();
-                                                self.timerVM.isPressedNormalTimer+=1
-                                            }
+//                                            .onAppear{
+//                                                self.timerVM.myTimer?.invalidate();
+//                                                self.timerVM.isPressedNormalTimer+=1
+//                                            }
                                     } else {
                                         
                                         ButtonView(width: 100  * myCoef, height: 100  * myCoef, image: Image(systemName: "playpause"), imageSize: 0.8 , offsetX: -1, cornerRadius: 100)
                                             .onTapGesture {
                                                 self.timerVM.classicVibration();
-                                               
                                                 self.timerVM.playPauseNormalTimer()
+                                                
                                             }
                                             .onAppear{
-                                                self.timerVM.myTimer?.invalidate()
+                                                self.timerVM.normalTimer = 0
+//                                                self.timerVM.myTimer?.invalidate()
                                             }
                                         
                                     }
@@ -269,11 +282,16 @@ struct DoView: View {
                     
                     Spacer()
                     .onAppear{
+                        
                         self.mightAnimateQuestionMarkButton()
+//                        self.timerVM.isPressedNormalTimer += 1
                         
                     }
                     .onDisappear{
+                        
                         self.saveSession(input: self.timerVM.secondForSession)
+                        self.timerVM.normalTimer = 0
+//
                        
                     }
                     

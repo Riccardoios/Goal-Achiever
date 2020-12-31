@@ -12,8 +12,15 @@ import UserNotifications
 import SwiftUI
 import CoreData
 
+/*
+ the logic of counting the session:
+ bug 1: it saves the  session in case it's already started it saves all
+ bug 2: sometimes i have to press play 2 times depending of ??
+ bug 3: take a break notification trigged after a while
+ */
 
 class TimerViewModel: ObservableObject {
+    
     
     // for request reviews
     let runIncrementerSetting = "numberOfRuns"  // UserDefauls dictionary key where we store number of runs
@@ -63,14 +70,15 @@ class TimerViewModel: ObservableObject {
             objectWillChange.send()
         }
     }
+      
+    
     
     @UserDefault("normalTimer", defaultValue: 0)
     var normalTimer: Int {
         willSet {
             objectWillChange.send()
-        }
+                    }
     }
-  
     
     @Published var arrayOfInput = [25,5,4,15]
     //  @Published var indexOfTimersArray = 0
@@ -87,6 +95,8 @@ class TimerViewModel: ObservableObject {
     @Published var firstSizeFont : CGFloat = 45
     @Published var secondSizeFont : CGFloat = 22
     @Published var secondForSession: Int32 = 0
+    
+    @Published var saveSessionValue:Int32 = 1
     
     //  @Published var remidUserToActivateNotification = true // this one needs to be stored on userdefault for the moment i will put it
     //  var arrayForThePercentage =  [10, 5, 10]// this has to be the same as timersarray and it shouldn be modify the nuber inside because they rappresent the 100% of the bar (the denominator)
@@ -106,12 +116,9 @@ class TimerViewModel: ObservableObject {
     var motivationQuote = ["Goals give us a roadmap to follow.", "Goals are a great way to hold ourselves accountable, even if we fail.",  "Setting goals and working to achieving them helps us define what we truly want in life.", "Setting goals  helps us prioritize things.", "“If you want to be happy, set a goal that commands your thoughts, liberates your energy and inspires your hopes.” —Andrew Carnegie", "“All who have accomplished great things have had a great aim, have fixed their gaze on a goal which was high, one which sometimes seemed impossible.” —Orison Swett Marden", "“Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success.” —Pablo Picasso", "“Success is the progressive realization of a worthy goal or ideal.” —Earl Nightingale", "“You have to set goals that are almost out of reach. If you set a goal that is attainable without much work or thought, you are stuck with something below your true talent and potential.” —Steve Garvey", "“By recording your dreams and goals on paper, you set in motion the process of becoming the person you most want to be. Put your future in good hands—your own.” —Mark Victor Hansen", "“The trouble with not having a goal is that you can spend your life running up and down the field and never score.” —Bill Copeland", "All successful people have a goal. No one can get anywhere unless he knows where he wants to go and what he wants to be or do. ” —Norman Vincent Peale", "“Goals. There’s no telling what you can do when you get inspired by them. There’s no telling what you can do when you believe in them. And there’s no telling what will happen when you act upon them.” —Jim Rohn"].randomElement()!
     
     
-  
-    
-    
-    
-    
     //MARK: - NORMAL TIMER FUNCS
+    
+    
     
     func playNormalTimer() {
         
@@ -161,6 +168,7 @@ class TimerViewModel: ObservableObject {
             playTimer()
         } else {
             myTimer?.invalidate()
+            
             // remove timer notification planned
             //            let center = UNUserNotificationCenter.current()
             //            center.removePendingNotificationRequests(withIdentifiers: ["timer notification"])
@@ -380,13 +388,17 @@ class TimerViewModel: ObservableObject {
     
     func getSecondsFromSleep()->Int {
         if myTimer == nil {
+            
             //  in this case the timer wasn't turn it on
+            
             print ("the timer is nil")
             return 0
         } else {
+            
             // in this case the timer was activated but the phone is locked so the os have turn it of the timer func; the goal here is to set the timer as it never turn it off counting the diff from prepare for background and this func itself.
             
-            //check what time it is and check with what time was when i prepare the background
+            
+            // check what time it is and check with what time was when i prepare the background
             
             timeDateForeground = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
             let secondPassedFromSleep = Calendar.current.dateComponents([.second], from: timeDateBackground, to: timeDateForeground).second

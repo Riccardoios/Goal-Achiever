@@ -447,9 +447,9 @@ struct SettingsScreenView: View {
 struct SettingsScreenView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SettingsScreenView().environmentObject(TimerViewModel())
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
-                .previewDisplayName("iPhone SE")
+//            SettingsScreenView().environmentObject(TimerViewModel())
+//                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+//                .previewDisplayName("iPhone SE")
             
             //            SettingsScreenView(showView: .constant(true), ballActive: .constant(true)).environmentObject(TimerViewModel())
             //                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))

@@ -5,22 +5,11 @@
 //  Created by Riccardo Carlotto on 28/11/2020.
 //
 
-// build the func that unlock the all app in premium: so redesign the all app in this new way
 /*
- - the temporary premium version
- - tomato timer method
- - set notification at specific time
- - 
- 
- 
- the final premium version has
- - more charts or all the charts i have to decide
- - build one more chart?
- - the tomato method avaibility
- - set the nofitications at specific time (build entirely this func)
+ - show the name of the app, the name of the subscritpion group, the name of the subscription ("all access or go premium")
+ - A link to the Terms of Use in your app
+ – A link to the privacy policy in your app
  - Personalise the app colour (here i need to create a view where you can access the color (using the old one and see)
- 
- i can omit the personalise color and go on for the moment
  */
 
 import SwiftUI
@@ -58,6 +47,7 @@ struct PayWallView: View {
         var arrOfDetails: [[String]] {
             var arrOfDuration = [String]()              //arrOfDetail[0]
             var arrOfPrice = [String]()                 //arrOfDetail[1]
+            var arrOfIdentifier = [String]()            //arrOfDetail[2]
             
             let packages = subManager.offeringObj?.availablePackages
             
@@ -72,16 +62,21 @@ struct PayWallView: View {
                 let product = packages![i].product
                 let subscriptionPeriod = product.subscriptionPeriod
                 let price = packages![i].localizedPriceString
+                var titleProduct = packages![i].identifier.description.capitalized
                 
+                for _ in 1...4 { //remove firat three characters
+                    titleProduct.remove(at: titleProduct.startIndex)
+                }
                 
                 switch subscriptionPeriod!.unit {
                 
                 case SKProduct.PeriodUnit.week:
-                    duration = " / \(subscriptionPeriod!.numberOfUnits) Week = 🍬"
+                    duration = " per Week = 🍬"
                 case SKProduct.PeriodUnit.month:
-                    duration = " / \(subscriptionPeriod!.numberOfUnits) Month = ☕️"
+                    duration = " per Month = ☕️"
                 case SKProduct.PeriodUnit.year:
-                    duration = " / \(subscriptionPeriod!.numberOfUnits) Year = 🥮"
+                    duration = " per Year = 🥮"
+                    //before it was like so inside the "" \(subscriptionPeriod!.numberOfUnits) per Year = 🥮
 //                case SKProduct.PeriodUnit:
 //                    duration = " / \(subscriptionPeriod!.numberOfUnits) Lifetime = 🍱"
                 default:
@@ -90,11 +85,12 @@ struct PayWallView: View {
                 
                 arrOfPrice.append(price)
                 arrOfDuration.append(duration)
+                arrOfIdentifier.append(titleProduct)
                 
                 
             }
             
-            return [arrOfPrice, arrOfDuration]
+            return [arrOfPrice, arrOfDuration, arrOfIdentifier]
         }
         
         return ScrollView(showsIndicators: true) {
@@ -153,11 +149,14 @@ struct PayWallView: View {
                         .padding(.horizontal, -20)
                         .padding(.top, -20)
                         
+//                    Text("\(subManager.offeringObj?.serverDescription ?? "Unkown")")
+//                    Text("\(subManager.offeringObj?.identifier ?? "Unkown") + identifier")
+//                    Text("\(subManager.offeringObj.debugDescription)")
                     
                     
                     ZStack{
                         
-                        AntiRilievoView(width: screen.width - 30, height: 400, cornerRadius: 40)
+                        AntiRilievoView(width: screen.width - 25, height: 400, cornerRadius: 40)
                             .offset(x:7.5, y:-15)
                         
                         
@@ -210,20 +209,20 @@ struct PayWallView: View {
                                     .padding(.trailing, 40)
                                 
                             }
-                            Text("🎨 Personalise the app colour")
-                                .padding(.leading, 30)
-                            
-                            HStack {
-                                
-                                Spacer()
-                                    .frame(width:60)
-                                
-                                Text("Make Goal Achiever even prettier")
-                                    .font(.system(size: 17))
-                                    .foregroundColor(Color(timerVM.secondColorText))
-                                    .padding(.bottom, 20)
-                                    .padding(.trailing, 40)
-                            }
+//                            Text("🎨 Personalise the app colour")
+//                                .padding(.leading, 30)
+//                            
+//                            HStack {
+//                                
+//                                Spacer()
+//                                    .frame(width:60)
+//                                
+//                                Text("Make Goal Achiever even prettier")
+//                                    .font(.system(size: 17))
+//                                    .foregroundColor(Color(timerVM.secondColorText))
+//                                    .padding(.bottom, 20)
+//                                    .padding(.trailing, 40)
+//                            }
                         }
                         .modifier(ShadowLightModifier())
                         .font(.system(size: 21))
@@ -243,10 +242,14 @@ struct PayWallView: View {
                             
                             ZStack{
                                 
-                                ButtonView(width: screen.width - 150, height: 60, cornerRadius: 30, showImage: false)
-                                
-                                HStack {
-                                    Text(arrOfDetails[0][i] + arrOfDetails[1][i])
+                                ButtonView(width: screen.width - 150, height: 90, cornerRadius: 30, showImage: false)
+                                //height was 60
+                                VStack {
+                                    Text(arrOfDetails[2][i])
+                        
+                                    HStack {
+                                        Text(arrOfDetails[0][i] + arrOfDetails[1][i])
+                                    }
                                 }
                                 .modifier(ShadowLightModifier())
                                 .font(.system(size: timerVM.secondSizeFont - 4))
@@ -282,6 +285,32 @@ struct PayWallView: View {
                         }
                         
                     }
+                    
+//                    Text("Payment will be charged to your iTunes account at confirmation of purchase - Subscription automatically renews bla bla bla ")
+//                        .fixedSize(horizontal: false, vertical: true)
+//                        .lineLimit(nil)
+//                        .font(.system(size: 15))
+//                        .modifier(ShadowLightModifier())
+//                        .foregroundColor(Color(timerVM.secondColorText))
+//                        .padding()
+                    
+                    HStack {
+                        
+                        Link("Privacy Policy", destination: URL(string: "https://riccardoios.github.io/goal-achiever")!)
+                            .font(.system(size: 15))
+                            .modifier(ShadowLightModifier())
+                            .foregroundColor(Color(timerVM.firstColorText))
+                        
+                        Divider()
+                        
+                        Link("Terms of Use", destination: URL(string: "https://riccardoios.github.io/goal-achiever-Terms-of-Use")!)
+                            .font(.system(size: 15))
+                            .modifier(ShadowLightModifier())
+                            .foregroundColor(Color(timerVM.firstColorText))
+                    }
+                    .padding()
+                    
+                        
                     
                 }
                 .ignoresSafeArea(.all)

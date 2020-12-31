@@ -11,17 +11,13 @@
  
  TO DO LIST:
 
- 
-  finishing with the in app purchase which means:
- - add subscirption weekly and maybe lifetime
- - add chart premium only view
- 
- 
+ - test on the main devices the screen
+
  - Notification of the day 1 ( remind the user he has the app)
- - Put the time when the notification get trigged
  - set the icon as Premium when is purchased
  - Find acquisition channels for free
-
+ - add subscirption weekly and maybe lifetime
+ - personalise app color view in settings
 
 - advertise as much as I can
 - it is really time to go to upWork

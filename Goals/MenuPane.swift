@@ -52,7 +52,6 @@ struct MenuPane: View {
                             
                             
                             
-                            
                             Text("PLAN")
                                 .foregroundColor(showPlan ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
                                 .modifier(ShadowLightModifier())

@@ -174,7 +174,7 @@ struct GoalPaneView: View {
     }
     
     func loadTheWeek() {
-        week = [goals.monday, goals.tuesday, goals.wednesday, goals.thursday, goals.friday, goals.saturnday, goals.sunday]
+        week = [goals.sunday, goals.monday, goals.tuesday, goals.wednesday, goals.thursday, goals.friday, goals.saturnday]
     }
     
     

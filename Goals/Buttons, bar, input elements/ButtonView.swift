@@ -18,6 +18,7 @@ struct ButtonView: View {
     var offsetY : CGFloat = 0
     var cornerRadius : CGFloat = 15
     var showImage = true
+    var colorImage = #colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)
     
     var body: some View {
         ZStack {
@@ -43,7 +44,7 @@ struct ButtonView: View {
                 .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
             
             
-            Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00))
+            Color(colorImage)
                 .mask(
                     image
                         .resizable()
