@@ -155,14 +155,15 @@ struct SettingsScreenView: View {
                                     
                                     self.timerVM.reset()
                                     self.animateSave.toggle()
+                                    self.timerVM.classicVibration()
                                     
                                     print (self.timerVM.arrayOfInput)
                                     
                                 }) {
                                     ZStack{
                                         
-                                        WaveAnimationView(animate: animateSave, lineWidth: 4, repetitions: 1)
-                                            .frame(width:70, height:70)
+                                        WaveAnimationView(animate: animateSave, lineWidth: 5, repetitions: 1)
+                                            .frame(width: 110, height: 110)
                                         
                                         ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
                                         
@@ -176,7 +177,6 @@ struct SettingsScreenView: View {
                                 
                             }
                             .padding(.top, 30)
-                            .padding(.trailing, 30)
                             
                             //                        ZStack {
                             //                            AntiRilievoView(width: screen.width - 50, height: textPressed ? 420 : 120, cornerRadious: 30)

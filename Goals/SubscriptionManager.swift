@@ -13,16 +13,16 @@ import SwiftUI
 import Purchases
 
 public class SubscriptionManager: ObservableObject {
+    
     public static let shared = SubscriptionManager()
     
-   
     
     @Published public var monthlySubscription: Purchases.Package?
     @Published public var yearlySubscription: Purchases.Package?
     @Published public var lifetime: Purchases.Package?
     @Published public var inPaymentProgress = false
     @Published public var offeringObj : Purchases.Offering?
-    @Published public var subscriptionStatus = false
+    @Published public var subscriptionStatus = true // to change to false this one
     
     
     

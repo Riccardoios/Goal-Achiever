@@ -58,7 +58,6 @@ struct AddSessionView: View {
                 BarPreferenceView(lowerBound: 1, upperBound: 600, output: $sessionTimeMinutes, movingWheelState: CGSize(width: -150, height: 0), accumulatedMoving:CGSize(width: -150, height: 0))
                     .scaledToFill()
                     
-                    
                 
                 ZStack{
                     ButtonView(width: 150, height: 50, cornerRadius: 30, showImage: false)
@@ -69,8 +68,8 @@ struct AddSessionView: View {
                         .font(.system(size: 23))
                         .modifier(ShadowLightModifier())
                         .onTapGesture {
-                            timerVM.saveSessionValue = Int32(sessionTimeMinutes*60)
-                            self.saveFunction(timerVM.saveSessionValue)
+                            timerVM.secondForSession = Int32(sessionTimeMinutes*60)
+                            self.saveFunction(timerVM.secondForSession)
                             rectangularize.toggle()
                             isAddSessionPressed = false
                             
@@ -84,7 +83,7 @@ struct AddSessionView: View {
     }
 }
 
-//struct AddSessionView_Previews: PreviewProvider {
+// struct AddSessionView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        AddSessionView(rectangularize: .constant(false), isAddSessionPressed: .constant(true), saveFunction: () -> Void)
 //            .environmentObject(TimerViewModel())

@@ -41,7 +41,6 @@
 		3AEAC38D2548F5470056B8C9 /* DoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3722548F5460056B8C9 /* DoView.swift */; };
 		3AEAC38E2548F5470056B8C9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3732548F5460056B8C9 /* Home.swift */; };
 		3AEAC38F2548F5470056B8C9 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3742548F5460056B8C9 /* IconView.swift */; };
-		3AEAC3902548F5470056B8C9 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3752548F5460056B8C9 /* FeedbackView.swift */; };
 		3AEAC3912548F5470056B8C9 /* MenuPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3762548F5470056B8C9 /* MenuPane.swift */; };
 		3AEAC3922548F5470056B8C9 /* BarPreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3772548F5470056B8C9 /* BarPreferenceView.swift */; };
 		3AEAC3932548F5470056B8C9 /* weekButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3782548F5470056B8C9 /* weekButtons.swift */; };
@@ -86,7 +85,6 @@
 		3AEAC3722548F5460056B8C9 /* DoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoView.swift; sourceTree = "<group>"; };
 		3AEAC3732548F5460056B8C9 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		3AEAC3742548F5460056B8C9 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
-		3AEAC3752548F5460056B8C9 /* FeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		3AEAC3762548F5470056B8C9 /* MenuPane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPane.swift; sourceTree = "<group>"; };
 		3AEAC3772548F5470056B8C9 /* BarPreferenceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarPreferenceView.swift; sourceTree = "<group>"; };
 		3AEAC3782548F5470056B8C9 /* weekButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weekButtons.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 				3AEAC3692548F5460056B8C9 /* CrownView.swift */,
 				3A4E38C6259A4D5C00E72471 /* AddSessionButton.swift */,
 				3AD36E4E259C53C200090EFC /* AddSessionView.swift */,
-				3AEAC3752548F5460056B8C9 /* FeedbackView.swift */,
 				3AEAC3712548F5460056B8C9 /* FoocusTitleView.swift */,
 				3AEAC3662548F5450056B8C9 /* GoalIconView.swift */,
 				3AEAC3682548F5460056B8C9 /* GoalPaneView.swift */,
@@ -296,7 +293,6 @@
 				3AEAC3842548F5470056B8C9 /* CrownView.swift in Sources */,
 				3A4E38C7259A4D5C00E72471 /* AddSessionButton.swift in Sources */,
 				3AEAC3802548F5470056B8C9 /* SettingsScreenView.swift in Sources */,
-				3AEAC3902548F5470056B8C9 /* FeedbackView.swift in Sources */,
 				3AEAC3812548F5470056B8C9 /* GoalIconView.swift in Sources */,
 				3AEAC37D2548F5470056B8C9 /* RingView.swift in Sources */,
 				3AEAC3872548F5470056B8C9 /* TimerVM.swift in Sources */,
@@ -444,7 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Goals/Preview Content\"";
 				DEVELOPMENT_TEAM = 3339537SZN;
 				ENABLE_PREVIEWS = YES;
@@ -454,7 +450,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.51;
 				PRODUCT_BUNDLE_IDENTIFIER = riccardo.riccardo.Goals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -468,7 +464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Goals/Preview Content\"";
 				DEVELOPMENT_TEAM = 3339537SZN;
 				ENABLE_PREVIEWS = YES;
@@ -478,7 +474,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.51;
 				PRODUCT_BUNDLE_IDENTIFIER = riccardo.riccardo.Goals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

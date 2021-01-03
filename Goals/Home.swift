@@ -11,8 +11,7 @@
  
  TO DO LIST:
 
- - test on the main devices the screen
-
+ 
  - Notification of the day 1 ( remind the user he has the app)
  - set the icon as Premium when is purchased
  - Find acquisition channels for free
@@ -25,6 +24,10 @@
  SECONDARY
 - func where i delete the old session for performances purpuses
 - permissions of notfications alert if are set to no
+ 
+ antipattern
+ - the remind to turn on notification is not good
+ - the tomato timer when is on it get trigged when the trackview get initialised so we have an animation and not quite a good pattern 
  
  
 */

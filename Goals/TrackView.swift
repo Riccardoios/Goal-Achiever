@@ -10,6 +10,8 @@
 import SwiftUI
 import StoreKit
 
+var alreadyAskedForReview:Bool = false
+
 struct TrackView: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
@@ -33,8 +35,8 @@ struct TrackView: View {
     var sortedSums = [Int32]()
     var sortedImages = [String]()
     
+    
     var body: some View {
-        
         
         VStack{
             
@@ -63,14 +65,14 @@ struct TrackView: View {
                     RatingView(rating: .constant(score))
                         .modifier(ShadowLightModifier())
                         .padding(.bottom)
-                        .onAppear{
-                            if score >= 4 {
-                                //request review
-                                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                                    SKStoreReviewController.requestReview(in: scene)
-                                }
-                            }
-                        }
+//                        .onAppear{
+//                            if score >= 4 {
+//                                //request review
+//                                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+//                                    SKStoreReviewController.requestReview(in: scene)
+//                                }
+//                            }
+//                        }
                     
                 }
                 
@@ -97,7 +99,7 @@ struct TrackView: View {
                 Group {
                     Text("Your last 7 days")
                         .foregroundColor(Color(timerVM.firstColorText))
-                        .font(.system(size: timerVM.firstSizeFont/1.5))
+                        .font(.system(size: timerVM.firstSizeFont / 1.5))
                         .modifier(ShadowLightModifier())
                         .padding(.top)
                     
@@ -299,59 +301,80 @@ struct TrackView: View {
             values = [0, 0, 0, 0, 0, 0, 0]
         }
         
-        //for the emoji and the rating:
-        let arrIdealWeek = [goals.first?.monday, goals.first?.tuesday, goals.first?.wednesday, goals.first?.thursday, goals.first?.friday, goals.first?.saturnday, goals.first?.sunday]
+        //for the feed and the rating:
+        let arrIdealWeek = [goals.first?.sunday, goals.first?.monday, goals.first?.tuesday, goals.first?.wednesday, goals.first?.thursday, goals.first?.friday, goals.first?.saturnday]
         
         var nDaysToWork = 0.0
         
+        //get the nDaysToWork setted from the user
         for day in arrIdealWeek {
             if day == true {
                 nDaysToWork+=1
+                
             }
         }
         
         var workedDays = 0.0
         
+        
+        // count how many days you worked in the last week (values)
         for ammountSecsDay in values {
-            if ammountSecsDay > 1500 { //25 minutes
-                workedDays += 1.0
+            if ammountSecsDay > 0.0 { //25 minutes
+                workedDays += 1
             }
         }
         
-        if values.reduce(0, +) > 4500 { //25 minutes 3 times
-            workedDays = 3.0
-        }
         
-        
-        
-        if nDaysToWork > 0 { // if the user set ammount of days to work
-            
+        // if the user set ammount of days to work
+        if nDaysToWork > 0 {
+            //get a coeficent:
             coef7days = workedDays/nDaysToWork
             
+        } else { // in case the user doesn't set an ammount set as it should work 3 days
             
-        } else {
             coef7days = workedDays/3.0
-            
         }
         
         switch coef7days {
         case 1...:
+            
+            if !alreadyAskedForReview {
+                alreadyAskedForReview = true
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+                
+            }
+            
             score = 5
             emoji = "🤩"
             
-        case 0.75..<1:
+        case 0.8..<1:
+            
+            if !alreadyAskedForReview {
+                alreadyAskedForReview = true
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+                
+            }
+            
             score = 4
             emoji = "😎"
             
-        case 0.66..<0.75:
+        case 0.6..<0.8:
             score = 3
             emoji = "😄"
             
-        case 0.5..<0.66:
+        case 0.4..<0.6:
+            score = 2
+            emoji = "🙂"
+            
+        case 0.2..<0.4:
             score = 2
             emoji = "😐"
             
-        case 0..<0.5:
+        case 0..<0.2:
             score = 1
             emoji = "😔"
             

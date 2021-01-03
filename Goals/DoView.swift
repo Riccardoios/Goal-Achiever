@@ -45,8 +45,7 @@ struct DoView: View {
                 
         })
         
-        return
-            
+         return
             ZStack {
                 VStack {
                     HStack(alignment:.top){
@@ -114,6 +113,12 @@ struct DoView: View {
 //                                        self.timerVM.normalTimer = 0
 
                                     }
+                                    .onAppear{
+                                        isTomatoTimer = timerVM.isTomatoTimerForNotification
+                                    }
+                                    .onDisappear{
+                                        timerVM.isTomatoTimerForNotification = isTomatoTimer
+                                    }
                                   
                             }
                             .frame(width: 80, height: 80)
@@ -169,10 +174,11 @@ struct DoView: View {
                             HStack {
                                 
                                 Button(action: {self.timerVM.classicVibration();
-                                    if isTomatoTimer {
+                                    if isTomatoTimer{
                                     self.timerVM.backward()
                                     } else {
-                                        saveSession(input: Int32(self.timerVM.normalTimer))
+//                                        saveSession(input: Int32(self.timerVM.normalTimer))
+                                        self.timerVM.classicVibration()
                                         self.timerVM.backwardNormalTimer();
                                         
                                     }
@@ -215,10 +221,10 @@ struct DoView: View {
                                                 self.timerVM.playPauseNormalTimer()
                                                 
                                             }
-                                            .onAppear{
-                                                self.timerVM.normalTimer = 0
-//                                                self.timerVM.myTimer?.invalidate()
-                                            }
+                                        //                                            .onAppear{
+                                        //                                                self.timerVM.normalTimer = 0
+                                        //                                                self.timerVM.myTimer?.invalidate()
+                                        //                                            }
                                         
                                     }
                                     
@@ -290,9 +296,8 @@ struct DoView: View {
                     .onDisappear{
                         
                         self.saveSession(input: self.timerVM.secondForSession)
-                        self.timerVM.normalTimer = 0
-//
-                       
+//                        self.timerVM.normalTimer = 0
+
                     }
                     
                 
@@ -311,6 +316,7 @@ struct DoView: View {
         
         //reset the second for session
         self.timerVM.secondForSession = 0
+        
         print ("from save the session those are the seconds", newSession.secondsWorked)
         
         try? self.moc.save()

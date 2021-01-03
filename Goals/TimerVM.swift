@@ -80,6 +80,17 @@ class TimerViewModel: ObservableObject {
                     }
     }
     
+    @UserDefault("isTomatoTimerForNotification", defaultValue: false)
+    var isTomatoTimerForNotification: Bool {
+        willSet {
+            objectWillChange.send()
+                    }
+    }
+    
+    
+//    @Published var isTomatoTimer = false
+    
+    
     @Published var arrayOfInput = [25,5,4,15]
     //  @Published var indexOfTimersArray = 0
     @Published var percentage: CGFloat = 0
@@ -96,7 +107,8 @@ class TimerViewModel: ObservableObject {
     @Published var secondSizeFont : CGFloat = 22
     @Published var secondForSession: Int32 = 0
     
-    @Published var saveSessionValue:Int32 = 1
+    
+//    @Published var saveSessionValue: Int32 = 1
     
     //  @Published var remidUserToActivateNotification = true // this one needs to be stored on userdefault for the moment i will put it
     //  var arrayForThePercentage =  [10, 5, 10]// this has to be the same as timersarray and it shouldn be modify the nuber inside because they rappresent the 100% of the bar (the denominator)
@@ -145,7 +157,8 @@ class TimerViewModel: ObservableObject {
     func backwardNormalTimer() {
         myTimer?.invalidate()
         normalTimer = 0
-        isPressedNormalTimer+=1
+        isPressedNormalTimer = 0
+        
     }
     
     
@@ -376,10 +389,10 @@ class TimerViewModel: ObservableObject {
         } else {
             
             // in this case the timer is activated
-            
+            if isTomatoTimerForNotification {
             setNotification(within: self.timersArray[self.indexOfTimersArray])
+            }
             
-            // set the timer at
             
             timeDateBackground = Calendar.current.dateComponents([.hour, .minute, .second], from: Date()) //save the time it is now
             
