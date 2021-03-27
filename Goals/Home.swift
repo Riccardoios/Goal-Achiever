@@ -11,6 +11,10 @@
  
  TO DO LIST:
 
+ 
+ - perfomrmance check: see if taking off all the new binding increase the performance
+ \\ see settingview - save button - show panel view and other set bools changed 
+ 
  testing with sanbox premimum if the logic of istomatotimer = false is correct
  
 
