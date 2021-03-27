@@ -9,6 +9,10 @@ import SwiftUI
 
 struct AddSessionView: View {
     
+    @Binding var showPlanView: Bool
+    @Binding var showDoView: Bool
+    @Binding var showChartsView: Bool
+    
     @EnvironmentObject var timerVM : TimerViewModel
     @State var sessionTimeMinutes:Int = 1
     @State var isPressed = false
@@ -72,7 +76,9 @@ struct AddSessionView: View {
                             self.saveFunction(timerVM.secondForSession)
                             rectangularize.toggle()
                             isAddSessionPressed = false
-                            
+                            showPlanView = false
+                            showDoView = false
+                            showChartsView = true
                         }
                 }
                 

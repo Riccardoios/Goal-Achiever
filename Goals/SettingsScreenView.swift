@@ -10,7 +10,11 @@ import SwiftUI
 
 struct SettingsScreenView: View {
     
-    //    @State var textPressed = false
+    @Binding var showPlanView: Bool
+    @Binding var showDoView: Bool
+    @Binding var showChartsView: Bool
+    @Binding var showSettingView:Bool
+    //@State var textPressed = false
     @EnvironmentObject var timerVM : TimerViewModel
     @EnvironmentObject var subManager: SubscriptionManager
     var spaceInTheSpacer: CGFloat = 25
@@ -127,7 +131,7 @@ struct SettingsScreenView: View {
         //            }
         //
         //        }
-        
+       
         
         return
             
@@ -135,13 +139,16 @@ struct SettingsScreenView: View {
                 
                 ZStack {
                         
+                    
+                    
                         VStack {
-                            
                             HStack {
                                 
-                                Text("Settings")
+                            
+                                Text("🍅 Timer Setup")
+                                    .lineLimit(1)
                                     .foregroundColor(Color(timerVM.firstColorText))
-                                    .font(.system(size: timerVM.firstSizeFont))
+                                    .font(.system(size: 32))
                                     .modifier(ShadowLightModifier())
                                     .padding()
                                 
@@ -151,13 +158,18 @@ struct SettingsScreenView: View {
                                     
                                     self.timerVM.indexOfTimersArray = 0;
                                     
-                                    //                                self.timerVM.changeColorCircleBar(Sequence: self.arrayOfIndexesOfChangedValues);
+                                    // self.timerVM.changeColorCircleBar(Sequence: self.arrayOfIndexesOfChangedValues);
                                     
                                     self.timerVM.reset()
                                     self.animateSave.toggle()
                                     self.timerVM.classicVibration()
                                     
                                     print (self.timerVM.arrayOfInput)
+                                    
+                                    showPlanView = false
+                                    showDoView = true
+                                    showChartsView = false
+                                    showSettingView = false
                                     
                                 }) {
                                     ZStack{
@@ -408,6 +420,10 @@ struct SettingsScreenView: View {
                         }
                         //                    .animation(.none)
                         //this work for disactivate the all animation linear for the bar preference view
+                    
+                    ZStack {
+                        
+                    }
                         
                     }
                     .animation(.linear)
@@ -455,9 +471,13 @@ struct SettingsScreenView_Previews: PreviewProvider {
             //                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
             //            .previewDisplayName("iPad pro")
             
-            SettingsScreenView().environmentObject(TimerViewModel())
-                .previewDevice(PreviewDevice(rawValue: "iPhone XR"))
-                .previewDisplayName("iPhone XR")
+            SettingsScreenView(showPlanView: .constant(false),
+                               showDoView: .constant(false),
+                               showChartsView: .constant(false),
+                               showSettingView: .constant(true))
+            .environmentObject(TimerViewModel())
+            .previewDevice(PreviewDevice(rawValue: "iPhone XR"))
+            .previewDisplayName("iPhone XR")
             
             
         }

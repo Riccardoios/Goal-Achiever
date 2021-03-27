@@ -9,6 +9,7 @@
 
 import SwiftUI
 import StoreKit
+import Purchases
 
 struct DoView: View {
     
@@ -23,7 +24,9 @@ struct DoView: View {
     @EnvironmentObject var timerVM : TimerViewModel
     @EnvironmentObject var subManager: SubscriptionManager
     
-    
+    @Binding var showPlanView: Bool
+    @Binding var showDoView: Bool
+    @Binding var showChartsView: Bool
 //    @State var wQuestionB: CGFloat = 40
 //    @State var hQuestionB: CGFloat = 40
     
@@ -60,6 +63,7 @@ struct DoView: View {
                             //MARK: - ? BUTTON
                             ColorButtonView(isPressed: $rectangularize, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
                                 .padding(.leading)
+                                
 
                                
                         }
@@ -148,7 +152,7 @@ struct DoView: View {
 //                    Spacer()
                     
 //                    VStack {
-                    CrownView(rectangularize: $rectangularize, isTomatoTimer: $isTomatoTimer, isAddSessionPressed: $isAddSessionPressed) { (par) in
+                    CrownView(showPlanView:$showPlanView, showDoView:$showDoView, showChartsView:$showChartsView, rectangularize: $rectangularize, isTomatoTimer: $isTomatoTimer, isAddSessionPressed: $isAddSessionPressed) { (par) in
                         saveSession(input: par)
                     }
                     .animation(.linear)
@@ -292,6 +296,13 @@ struct DoView: View {
                         self.mightAnimateQuestionMarkButton()
 //                        self.timerVM.isPressedNormalTimer += 1
                         
+                        Purchases.shared.purchaserInfo { (purchaserInfo, error) in
+                            if purchaserInfo?.entitlements.all["pro"]?.isActive == false {
+                                self.isTomatoTimer = false
+                                
+                            }
+                        }
+                        
                     }
                     .onDisappear{
                         
@@ -359,7 +370,8 @@ struct DoView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DoView().environmentObject(TimerViewModel())
+            DoView(showPlanView: .constant(false), showDoView: .constant(true), showChartsView: .constant(false))
+                .environmentObject(TimerViewModel())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
                 .previewDisplayName("iPhone SE")
             

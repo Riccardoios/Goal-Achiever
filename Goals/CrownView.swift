@@ -11,11 +11,15 @@ import SwiftUI
 struct CrownView: View {
     
     @EnvironmentObject var timerVM: TimerViewModel
+    
+    @Binding var showPlanView: Bool
+    @Binding var showDoView: Bool
+    @Binding var showChartsView: Bool
+    
     @Binding var rectangularize: Bool
-    
     @Binding var isTomatoTimer:Bool
-    
     @Binding var isAddSessionPressed:Bool
+    
     var saveFunction: (Int32) -> Void
     
     var body: some View {
@@ -120,7 +124,12 @@ struct CrownView: View {
                     .frame(height:240)
                     }
                     if isAddSessionPressed == true {
-                        AddSessionView(rectangularize: $rectangularize, isAddSessionPressed: $isAddSessionPressed, saveFunction: saveFunction)
+                        AddSessionView(showPlanView:$showPlanView,
+                                       showDoView:$showDoView,
+                                       showChartsView:$showChartsView,
+                                       rectangularize: $rectangularize,
+                                       isAddSessionPressed: $isAddSessionPressed,
+                                       saveFunction: saveFunction)
                     }
                     
                     

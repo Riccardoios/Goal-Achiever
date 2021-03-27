@@ -11,12 +11,25 @@
  
  TO DO LIST:
 
+ testing with sanbox premimum if the logic of istomatotimer = false is correct
+ 
+
  
  - Notification of the day 1 ( remind the user he has the app)
+ 
  - set the icon as Premium when is purchased
+ 
+ - new graph for the streak
+ 
+ - method for cleaning the data of the old goal
+ 
  - Find acquisition channels for free
+ 
  - add subscirption weekly and maybe lifetime
+ 
  - personalise app color view in settings
+ 
+ - when i create a new goal have the timer to 0:00
 
 - advertise as much as I can
 - it is really time to go to upWork
@@ -96,14 +109,14 @@ struct Home: View {
                         
                     }
                     if showDoView {
-                        DoView()
+                        DoView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView)
                     }
                     if showChartsView {
                         TrackView(goals: goals, sessions: sessions)
                     }
                     
                     if showSettingsView {
-                        SettingsScreenView()
+                        SettingsScreenView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingView: $showSettingsView)
                     }
                     
                   
@@ -130,6 +143,7 @@ struct Home: View {
             Purchases.shared.purchaserInfo { (purchaserInfo, error) in
                 if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
                     self.subManager.subscriptionStatus = true
+                    
                 }
             }
             
@@ -146,10 +160,13 @@ struct Home_Previews: PreviewProvider {
         Home().environmentObject(TimerViewModel())
     }
 }
+
 extension UIDevice {
+    
     var hasNotch: Bool {
         let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom > 0
+        
     }
 }
 
