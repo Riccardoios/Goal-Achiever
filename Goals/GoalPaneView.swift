@@ -32,7 +32,7 @@ struct GoalPaneView: View {
     var body: some View {
             ZStack {
             
-            Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00))
+//            Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00))
             
             RoundedRectangle(cornerRadius: 45)
                 .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
@@ -47,12 +47,12 @@ struct GoalPaneView: View {
                         
                         Text(self.goals.image ?? "😇")
                         .font(.system(size: 40))
-                        .modifier(ShadowLightModifier())
+//                        .modifier(ShadowLightModifier())
                         .padding()
                         
                         Spacer()
                         
-                        ColorButtonView(isPressed: $enlarge, color: timerVM.firstColorText, orText: true, textValue: "i", textSize: 20, antiRiSize: 40, antiRiCorner: 40, rectSize: 30, rectCorner: 30)
+                        ColorButtonView(isPressed: $enlarge, orText: true, textValue: "i", textSize: 20, antiRiSize: 40, antiRiCorner: 40, rectSize: 30, rectCorner: 30)
                             .onTapGesture {
                                 self.enlarge.toggle()
                                 self.timerVM.classicVibration()

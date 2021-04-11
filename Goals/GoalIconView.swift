@@ -25,8 +25,8 @@ struct GoalIconView: View {
             
             Text(emoji)
                 .font(.system(size: 40))
-                .modifier(ShadowLightModifier())
-                .modifier(ShadowLightModifier())
+//                .modifier(ShadowLightModifier())
+//                .modifier(ShadowLightModifier())
             
             
         }

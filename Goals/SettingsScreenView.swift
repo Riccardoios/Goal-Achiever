@@ -490,10 +490,10 @@ struct SettingsScreenView_Previews: PreviewProvider {
 struct ShadowLightModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 1, y: 1)
-            .shadow(color: Color.white.opacity(1), radius: 1, x: -1, y: -1)
-            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 1, y: 1)
-            .shadow(color: Color.white.opacity(1), radius: 1, x: -1, y: -1)
+            .shadow(color: Color.black.opacity(0.35), radius: 2, x: 1, y: 1)
+            .shadow(color: Color.white.opacity(1), radius: 1, x: -2, y: -2)
+//            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 1, y: 1)
+//            .shadow(color: Color.white.opacity(1), radius: 1, x: -1, y: -1)
     }
 }
 

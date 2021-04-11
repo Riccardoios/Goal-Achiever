@@ -110,11 +110,12 @@ struct Home: View {
                     
                     if showPlanView {
                         PlanView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView)
-                        
                     }
+                    
                     if showDoView {
                         DoView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView)
                     }
+                    
                     if showChartsView {
                         TrackView(goals: goals, sessions: sessions)
                     }
@@ -123,8 +124,6 @@ struct Home: View {
                         SettingsScreenView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingView: $showSettingsView)
                     }
                     
-                  
-                   
                         MenuPane(showPlan: $showPlanView , showDo: $showDoView , showCharts: $showChartsView, showSettings: $showSettingsView)
                         .ignoresSafeArea(.keyboard, edges: .vertical)
                     

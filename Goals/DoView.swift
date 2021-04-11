@@ -61,7 +61,7 @@ struct DoView: View {
                             
                             
                             //MARK: - ? BUTTON
-                            ColorButtonView(isPressed: $rectangularize, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
+                            ColorButtonView(isPressed: $rectangularize, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
                                 .padding(.leading)
                                 
 
@@ -372,6 +372,7 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             DoView(showPlanView: .constant(false), showDoView: .constant(true), showChartsView: .constant(false))
                 .environmentObject(TimerViewModel())
+                .environmentObject(SubscriptionManager())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
                 .previewDisplayName("iPhone SE")
             

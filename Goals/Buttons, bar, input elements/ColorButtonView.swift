@@ -12,7 +12,7 @@ struct ColorButtonView: View {
     
     @EnvironmentObject var timerVM: TimerViewModel
     @Binding var isPressed : Bool
-    @State var color:UIColor //= #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+    @State var color: UIColor //= UIColor(Color(red: 71, green: 174, blue: 242))
     var orText : Bool = false
     var textValue = "MON"
     var textSize : CGFloat = 15
@@ -21,7 +21,6 @@ struct ColorButtonView: View {
     var rectSize : CGFloat = 50
     var rectCorner : CGFloat = 10
 
-    
     var body: some View {
         
          ZStack {
@@ -31,26 +30,28 @@ struct ColorButtonView: View {
             AntiRilievoView(width: antiRiSize, height: antiRiSize, cornerRadius: antiRiCorner)
                 .opacity(isPressed ? 1 : 0)
             
-            Group {
-                RoundedRectangle(cornerRadius: rectCorner)
-                    .frame(width:rectSize, height:rectSize)
-                    .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
-                    .brightness(-0.3)
-                    .opacity(0.6)
-                    .blur(radius: 2)
-                    .offset(x: 3, y: 3)
+//            Group {
+//                RoundedRectangle(cornerRadius: rectCorner)
+//                    .frame(width:rectSize, height:rectSize)
+//                    .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
+//                    .brightness(-0.3)
+//                    .opacity(0.6)
+//                    .blur(radius: 2)
+//                    .offset(x: 3, y: 3)
+//
+//                RoundedRectangle(cornerRadius: rectCorner)
+//                    .frame(width:rectSize, height:rectSize)
+//                    .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+//                    .opacity(1.5)
+//                    .blur(radius: 2)
+//                    .offset(x: -3, y: -3)
                 
                 RoundedRectangle(cornerRadius: rectCorner)
                     .frame(width:rectSize, height:rectSize)
-                    .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                    .opacity(1.5)
-                    .blur(radius: 2)
-                    .offset(x: -3, y: -3)
-                
-                RoundedRectangle(cornerRadius: rectCorner)
-                    .frame(width:rectSize, height:rectSize)
                     .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
-            }
+                    .modifier(ShadowLightModifier())
+                    
+//            }
             .opacity(isPressed ? 0 : 1)
             
             
@@ -64,9 +65,10 @@ struct ColorButtonView: View {
             }
             } else {
                 Text(textValue)
-                    .font(.system(size: textSize))
-                .foregroundColor(Color(color))
-                .modifier(ShadowLightModifier())
+                    .font(.system(size: textSize, weight: .regular))
+//                    .foregroundColor(color)
+                    
+//                .modifier(ShadowLightModifier())
                 .onTapGesture {
                         self.isPressed.toggle()
                         self.timerVM.classicVibration()

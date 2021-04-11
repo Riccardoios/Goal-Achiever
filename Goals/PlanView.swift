@@ -41,7 +41,7 @@ struct PlanView: View {
             
             ScrollView(.vertical, showsIndicators: true){
                 
-                LazyVStack(alignment: .leading, spacing: 50) {
+                LazyVStack(alignment: .leading, spacing: 20) {
                     
                     Group {
                         
@@ -80,10 +80,18 @@ struct PlanView: View {
                             //                                GoalPaneView(goals: index, enlarge: .constant(index = 0 ? true : false), showPlanView: self.$showPlanView, showDoView: self.$showDoView, showChartsView: self.$showChartsView)
                             //
                             //                            })
-                            ForEach(goals, id:\.self, content: { index in
-                                GoalPaneView(goals: index, showPlanView: self.$showPlanView, showDoView: self.$showDoView, showChartsView: self.$showChartsView)
+                            HStack {
                                 
-                            })
+                                Spacer()
+                                
+                                ForEach(goals, id:\.self, content: { index in
+                                    GoalPaneView(goals: index, showPlanView: self.$showPlanView, showDoView: self.$showDoView, showChartsView: self.$showChartsView)
+                                    
+                                })
+                                
+                                Spacer()
+                                
+                            }
                             
                         }
                         
@@ -165,6 +173,34 @@ struct PlanView: View {
                             .padding(.horizontal)
                             .keyboardType(.numberPad)
                         
+                        Text("Choose one image")
+                            .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
+                            .foregroundColor(Color(timerVM.firstColorText))
+                            .modifier(ShadowLightModifier())
+                            .padding(.horizontal)
+                        
+                        
+                        
+                        ScrollView(.horizontal) {
+                            
+                            LazyHStack {
+                                ForEach(0..<emojisArray.count) { item in
+                                    
+                                    GoalIconView(emoji: self.emojisArray[item], isSelected: item == self.selectedIndex ? true : false)
+                                        
+                                        .onTapGesture {
+                                            self.selectedIndex = item
+                                            self.timerVM.classicVibration()
+                                        }
+                                        .frame(width:100, height:130)
+                                    
+                                }
+                            }
+                            .frame(height:130)
+                            .padding(.horizontal)
+                            
+                        }
+                        
                         Text("Give it a short title")
                             .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
                             .foregroundColor(Color(timerVM.firstColorText))
@@ -183,52 +219,10 @@ struct PlanView: View {
                                 }
                             }
                         
-                        Text("Choose one image")
-                            .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
-                            .foregroundColor(Color(timerVM.firstColorText))
-                            .modifier(ShadowLightModifier())
-                            .padding(.horizontal)
                         
-                        
-                        
-                        ScrollView(.horizontal) {
-                            
-                            HStack {
-                                ForEach(0..<emojisArray.count) { item in
-                                    
-                                    GoalIconView(emoji: self.emojisArray[item], isSelected: item == self.selectedIndex ? true : false)
-                                        
-                                        .onTapGesture {
-                                            self.selectedIndex = item
-                                            self.timerVM.classicVibration()
-                                        }
-                                        .frame(width:100, height:130)
-                                    
-                                }
-                            }
-                            .frame(height:130)
-                            .padding(.horizontal)
-                            
-                        }
                         
                         Group {
                             Group {
-                                Text("What are your ideal days to work for your goal?")
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .lineLimit(nil)
-                                    .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .modifier(ShadowLightModifier())
-                                    .padding(.horizontal)
-                                
-                                HStack{
-                                    
-                                    Spacer()
-                                    
-                                    weekButtons(weekArray: $weekSelection)
-                                    
-                                    Spacer()
-                                }
                                 
                                 Text("What time would you like to be reminded?")
                                     .fixedSize(horizontal: false, vertical: true)
@@ -283,6 +277,24 @@ struct PlanView: View {
                                     .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
                                     .modifier(ShadowLightModifier())
                                     .padding(.horizontal)
+                                
+                                
+                                Text("What are your ideal days to work for your goal?")
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .lineLimit(nil)
+                                    .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
+                                    .foregroundColor(Color(timerVM.firstColorText))
+                                    .modifier(ShadowLightModifier())
+                                    .padding(.horizontal)
+                                
+                                HStack{
+                                    
+                                    Spacer()
+                                    
+                                    weekButtons(weekArray: $weekSelection)
+                                    
+                                    Spacer()
+                                }
                                 
                                 Spacer()
                                     .frame(height:50)
@@ -441,7 +453,9 @@ struct PlanView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        PlanView(showPlanView: .constant(true), showDoView: .constant(false), showChartsView: .constant(false)).environmentObject(TimerViewModel())
+        PlanView(showPlanView: .constant(true), showDoView: .constant(false), showChartsView: .constant(false))
+            .environmentObject(TimerViewModel())
+            .environmentObject(SubscriptionManager())
         
     }
 }

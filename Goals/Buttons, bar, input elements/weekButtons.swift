@@ -20,27 +20,24 @@ struct weekButtons: View {
     
     var body: some View {
             
-        HStack(spacing:0) {
-                Group {
+        LazyHStack(spacing:0) {
                         
-                    ColorButtonView(isPressed: $weekArray[0], color: timerVM.firstColorText, orText: true, textValue: "SU", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner)
+                    ColorButtonView(isPressed: $weekArray[0], orText: true, textValue: "SU", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner)
                     
                     
-                    ColorButtonView(isPressed: $weekArray[1], color: timerVM.firstColorText, orText: true, textValue: "MO", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
+                    ColorButtonView(isPressed: $weekArray[1], orText: true, textValue: "MO", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
                     
-                    ColorButtonView(isPressed: $weekArray[2], color: timerVM.firstColorText, orText: true, textValue: "TU", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
+                    ColorButtonView(isPressed: $weekArray[2], orText: true, textValue: "TU", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
                     
-                }
-                Group {
-                    ColorButtonView(isPressed: $weekArray[3], color: timerVM.firstColorText, orText: true, textValue: "WE", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
+                
+                    ColorButtonView(isPressed: $weekArray[3], orText: true, textValue: "WE", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
                    
-                    ColorButtonView(isPressed: $weekArray[4], color: timerVM.firstColorText, orText: true, textValue: "TH", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
+                    ColorButtonView(isPressed: $weekArray[4], orText: true, textValue: "TH", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
                     
-                    ColorButtonView(isPressed: $weekArray[5], color: timerVM.firstColorText, orText: true, textValue: "FR", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
+                    ColorButtonView(isPressed: $weekArray[5], orText: true, textValue: "FR", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
                     
-                    ColorButtonView(isPressed: $weekArray[6], color: timerVM.firstColorText, orText: true, textValue: "SA", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
-                    
-                }
+                    ColorButtonView(isPressed: $weekArray[6], orText: true, textValue: "SA", antiRiSize: antiRiSize, antiRiCorner: antiRiCorner, rectSize: rectSize, rectCorner: rectCorner )
+                  
                 
             }
             .padding(.vertical, 15)
