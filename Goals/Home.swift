@@ -11,9 +11,9 @@
  
  TO DO LIST:
 
- 
+ - change the description of the listing in the apple app store from focus app to goal achiever app
  - perfomrmance check: see if taking off all the new binding increase the performance
- \\ see settingview - save button - show panel view and other set bools changed 
+it doesnt change 
  
  testing with sanbox premimum if the logic of istomatotimer = false is correct
  

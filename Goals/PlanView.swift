@@ -41,7 +41,7 @@ struct PlanView: View {
             
             ScrollView(.vertical, showsIndicators: true){
                 
-                VStack(alignment: .leading) {
+                LazyVStack(alignment: .leading, spacing: 50) {
                     
                     Group {
                         
