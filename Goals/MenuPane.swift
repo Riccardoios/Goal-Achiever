@@ -53,8 +53,10 @@ struct MenuPane: View {
                             
                             
                             Text("PLAN")
+                                .fontWeight(.medium)
                                 .foregroundColor(showPlan ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
-                                .modifier(ShadowLightModifier())
+                                .shadow(color: Color.black.opacity(0.3), radius: 0.5, x: 0.5, y: 0.5)
+                                .shadow(color: Color.white.opacity(0.9), radius: 0.5, x: -1, y: -1)
                                 .animation(.linear)
                             
                         }
@@ -74,8 +76,10 @@ struct MenuPane: View {
                             
                             
                             Text("DO")
+                                .fontWeight(.medium)
                                 .foregroundColor(showDo ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
-                                .modifier(ShadowLightModifier())
+                                .shadow(color: Color.black.opacity(0.3), radius: 0.5, x: 0.5, y: 0.5)
+                                .shadow(color: Color.white.opacity(0.9), radius: 0.5, x: -1, y: -1)
                                 .animation(.linear)
                             
                             
@@ -95,8 +99,10 @@ struct MenuPane: View {
                             }
                             
                             Text("TRACK")
+                                .fontWeight(.medium)
                                 .foregroundColor(showCharts ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
-                                .modifier(ShadowLightModifier())
+                                .shadow(color: Color.black.opacity(0.3), radius: 0.5, x: 0.5, y: 0.5)
+                                .shadow(color: Color.white.opacity(0.9), radius: 0.5, x: -1, y: -1)
                                 .animation(.linear)
                         }
                         
@@ -116,8 +122,10 @@ struct MenuPane: View {
                             
                             
                             Text("SETUP")
+                                .fontWeight(.medium)
                                 .foregroundColor(showSettings ? Color(timerVM.firstColorText) : Color(#colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)))
-                                .modifier(ShadowLightModifier())
+                                .shadow(color: Color.black.opacity(0.3), radius: 0.5, x: 0.5, y: 0.5)
+                                .shadow(color: Color.white.opacity(0.9), radius: 0.5, x: -1, y: -1)
                                 .animation(.linear)
                             
                         }

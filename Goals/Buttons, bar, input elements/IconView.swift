@@ -29,10 +29,8 @@ struct IconView: View {
                     .padding(9)
                     .aspectRatio(contentMode: .fill))
             
-            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 1, y: 1)
-            .shadow(color: Color.white.opacity(0.9), radius: 1, x: -1, y: -1)
-            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 2, y: 2)
-            .shadow(color: Color.white.opacity(0.9), radius: 1, x: -2, y: -2)
+            .shadow(color: Color.black.opacity(0.3), radius: 0.75, x: 2, y: 2)
+            .shadow(color: Color.white.opacity(0.9), radius: 0.75, x: -1, y: -1)
             .frame(width: 50 * myCoef, height: 50 * myCoef)
         
     }
