@@ -38,19 +38,19 @@ struct TrackView: View {
     
     var body: some View {
         
-        VStack{
+        ScrollView{
             
-            ScrollView{
+            LazyVStack(spacing:20) {
                 
                 // MARK: - TITLE VIEW
-                Group {
+                
                     FoocusTitleView(isTomatoTimer: .constant(false))
                     
                     Text("Statistics and Feedback")
                         .foregroundColor(Color(timerVM.firstColorText))
                         .font(.system(size: timerVM.secondSizeFont))
                         .modifier(ShadowLightModifier())
-                }
+                
                 
                 
                 // MARK: - EMOJI AND RATING VIEW
@@ -65,14 +65,14 @@ struct TrackView: View {
                     RatingView(rating: .constant(score))
                         .modifier(ShadowLightModifier())
                         .padding(.bottom)
-//                        .onAppear{
-//                            if score >= 4 {
-//                                //request review
-//                                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-//                                    SKStoreReviewController.requestReview(in: scene)
-//                                }
-//                            }
-//                        }
+                    //                        .onAppear{
+                    //                            if score >= 4 {
+                    //                                //request review
+                    //                                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    //                                    SKStoreReviewController.requestReview(in: scene)
+                    //                                }
+                    //                            }
+                    //                        }
                     
                 }
                 
@@ -107,36 +107,36 @@ struct TrackView: View {
                         
                         AntiRilievoView(width: screen.width - 30, height: 250, cornerRadius: 30)
                         
-                        HStack {
+                        LazyHStack {
                             
                             VStack{
                                 
                                 Text("\(timerVM.renameTheSec(seconds: tagsY[3]))  -")
                                     .font(.system(size: 15))
-                                    .foregroundColor(Color(self.timerVM.firstColorText))
-                                    .modifier(ShadowLightModifier())
+                                    .foregroundColor(Color(self.timerVM.firstColorTextDarker))
+//                                    .modifier(ShadowLightModifier())
                                 
                                 Spacer().frame(height:22)
                                 
                                 Text("\(timerVM.renameTheSec(seconds: tagsY[2]))  -")
                                     .font(.system(size: 15))
-                                    .foregroundColor(Color(self.timerVM.firstColorText))
-                                    .modifier(ShadowLightModifier())
+                                    .foregroundColor(Color(self.timerVM.firstColorTextDarker))
+//                                    .modifier(ShadowLightModifier())
                                 
                                 Spacer().frame(height:22)
                                 
                                 Text("\(timerVM.renameTheSec(seconds: tagsY[1]))  -")
                                     .font(.system(size: 15))
-                                    .foregroundColor(Color(self.timerVM.firstColorText))
-                                    .modifier(ShadowLightModifier())
+                                    .foregroundColor(Color(self.timerVM.firstColorTextDarker))
+//                                    .modifier(ShadowLightModifier())
                                 
                                 
                                 Spacer().frame(height:22)
                                 
                                 Text("\(timerVM.renameTheSec(seconds: tagsY[0]))  -")
                                     .font(.system(size: 15))
-                                    .foregroundColor(Color(self.timerVM.firstColorText))
-                                    .modifier(ShadowLightModifier())
+                                    .foregroundColor(Color(self.timerVM.firstColorTextDarker))
+//                                    .modifier(ShadowLightModifier())
                                 
                                 Spacer()
                                 

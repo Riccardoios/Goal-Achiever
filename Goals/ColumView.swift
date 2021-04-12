@@ -37,8 +37,8 @@ struct ColumView: View {
             }
             
             Text(tag)
-                .foregroundColor(Color(timerVM.firstColorText))
-                .modifier(ShadowLightModifier())
+                .foregroundColor(Color(timerVM.firstColorTextDarker))
+//                .modifier(ShadowLightModifier())
             
             
         }

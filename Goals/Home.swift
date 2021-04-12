@@ -10,7 +10,7 @@
 /*
  
  TO DO LIST:
-
+- remeber to set false for premium content
  - change the description of the listing in the apple app store from focus app to goal achiever app
  - perfomrmance check: see if taking off all the new binding increase the performance
 it doesnt change 
