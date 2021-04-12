@@ -65,8 +65,8 @@ struct ColorButtonView: View {
             }
             } else {
                 Text(textValue)
-                    .font(.system(size: textSize, weight: .regular))
-//                    .foregroundColor(color)
+                    .font(.system(size: textSize, weight: .semibold))
+                    .foregroundColor(Color(color))
                     
 //                .modifier(ShadowLightModifier())
                 .onTapGesture {

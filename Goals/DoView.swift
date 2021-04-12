@@ -61,7 +61,7 @@ struct DoView: View {
                             
                             
                             //MARK: - ? BUTTON
-                            ColorButtonView(isPressed: $rectangularize, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
+                            ColorButtonView(isPressed: $rectangularize, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
                                 .padding(.leading)
                                 
 

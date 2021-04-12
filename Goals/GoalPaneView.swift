@@ -52,7 +52,7 @@ struct GoalPaneView: View {
                         
                         Spacer()
                         
-                        ColorButtonView(isPressed: $enlarge, orText: true, textValue: "i", textSize: 20, antiRiSize: 40, antiRiCorner: 40, rectSize: 30, rectCorner: 30)
+                        ColorButtonView(isPressed: $enlarge, color: timerVM.firstColorText, orText: true, textValue: "i", textSize: 20, antiRiSize: 40, antiRiCorner: 40, rectSize: 30, rectCorner: 30)
                             .onTapGesture {
                                 self.enlarge.toggle()
                                 self.timerVM.classicVibration()

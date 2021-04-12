@@ -101,7 +101,8 @@ class TimerViewModel: ObservableObject {
     @Published var colorBar2 = UIColor(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 0.7845141267))
     
     @Published var backgroundColor = (#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00))
-    @Published var firstColorText = (#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
+    @Published var firstColorText = (#colorLiteral(red: 0.2793222368, green: 0.6815040112, blue: 0.9476354718, alpha: 1))
+    @Published var firstColorTextDarker = (#colorLiteral(red: 0.2383330776, green: 0.5854108496, blue: 0.8240187518, alpha: 1))
     @Published var secondColorText = (#colorLiteral(red: 0.968627451, green: 0.5294117647, blue: 0.2392156863, alpha: 0.8337435788))
     @Published var firstSizeFont : CGFloat = 45
     @Published var secondSizeFont : CGFloat = 22

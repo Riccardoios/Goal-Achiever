@@ -111,7 +111,7 @@ struct PlanView: View {
                                 
                                 Spacer()
                                 
-                                ColorButtonView(isPressed: $showGoalExamples, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: timerVM.secondSizeFont, antiRiSize: 40, antiRiCorner: 40, rectSize: 30, rectCorner: 30)
+                                ColorButtonView(isPressed: $showGoalExamples, color: timerVM.firstColorTextDarker, orText: true, textValue: "?", textSize: timerVM.secondSizeFont, antiRiSize: 40, antiRiCorner: 40, rectSize: 30, rectCorner: 30)
                                     .padding(.trailing)
                                     .onTapGesture {
                                         self.showGoalExamples.toggle()
