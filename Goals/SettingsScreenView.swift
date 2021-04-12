@@ -17,7 +17,7 @@ struct SettingsScreenView: View {
     //@State var textPressed = false
     @EnvironmentObject var timerVM : TimerViewModel
     @EnvironmentObject var subManager: SubscriptionManager
-    var spaceInTheSpacer: CGFloat = 25
+    //    var spaceInTheSpacer: CGFloat = 25
     @State var animateSave = false
     @State var showPayWall = false
     
@@ -97,314 +97,244 @@ struct SettingsScreenView: View {
                 self.timerVM.updateArrayOfInputsAndTimersArray()
             }
         )
-        //        func detectAnyChanges() {
-        //            // save all the indexes changed in an array
-        //
-        //            // i have an array of false values and they will be changed how to detect them?
-        //            // just toggle the last 2
-        //            // check if myarr is different than myarr previus
-        //            if myArr != MyPreviousArr {
-        //
-        //                // it is changed
-        //                // detect which one is changed
-        //                // print ("detected a change")
-        //                // i want to know which one is changed
-        //
-        //                for i in 0...3 {
-        //                    if myArr[i] != MyPreviousArr[i] {
-        //                        arrayOfIndexesOfChangedValues.append(i)
-        //                    }
-        //
-        //                }
-        //                // print (arrayOfIndexesOfChangedValues)
-        //
-        //
-        //                if arrayOfIndexesOfChangedValues.count >= 3 {
-        //
-        //                //  print ("ok now i toggle this index:", (arrayOfIndexesOfChangedValues.count - 3) )
-        //
-        //                    myArr[arrayOfIndexesOfChangedValues[arrayOfIndexesOfChangedValues.count - 3]].toggle()
-        //                }
-        //                // here I save the chaged value in the "previusArr"
-        //                 MyPreviousArr = myArr
-        //
-        //            }
-        //
-        //        }
-       
+        
         
         return
             
-            ScrollView(.vertical) {
+            ScrollView(.vertical, showsIndicators:false) {
                 
-                ZStack {
+                    
+                    LazyVStack(alignment: .leading, spacing: 40) {
+                        
+                        HStack {
+                            Text("🍅 Timer Setup")
+                                .lineLimit(1)
+                                .foregroundColor(Color(timerVM.firstColorText))
+                                .font(.system(size: 32))
+                                .modifier(ShadowLightModifier())
+                                .padding()
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                
+                                self.timerVM.indexOfTimersArray = 0;
+                                
+                                // self.timerVM.changeColorCircleBar(Sequence: self.arrayOfIndexesOfChangedValues);
+                                
+                                self.timerVM.reset()
+                                self.animateSave.toggle()
+                                self.timerVM.classicVibration()
+                                
+//                                print (self.timerVM.arrayOfInput)
+                                
+                                showPlanView = false
+                                showDoView = true
+                                showChartsView = false
+                                showSettingView = false
+                                
+                            }) {
+                                ZStack{
+                                    
+                                    ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
+                                    
+                                    Text("Save")
+                                        .foregroundColor(Color(timerVM.firstColorText))
+                                        .modifier(ShadowLightModifier())
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        .padding(.top, 30)
+                        
+                        
+                        ZStack {
+                            
+                            Button {
+                                self.showPayWall = true
+                            } label: {
+                                ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
+                            }
+                            .sheet(isPresented: $showPayWall) {
+                                PayWallView().environmentObject(TimerViewModel())
+                            }
+                            
+                            
+                            Text("Go Premium 💎")
+                                .modifier(ShadowLightModifier())
+                                .font(.system(size: timerVM.secondSizeFont))
+                                .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                            
+                            
+                            
+                        }
+                        
+                        
                         
                     
-                    
-                        VStack {
-                            HStack {
-                                
+                        
+                        
+                        
+                        
+                        
+                        
+                        //                        HStack {
+                        //
+                        //                                Text("Custom colors circle bar:")
+                        //                                    .font(.system(size: 23, weight: .regular))
+                        //                                    .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
+                        //                                    .modifier(ShadowLightModifier())
+                        //                                    .padding(.leading, 33)
+                        //
+                        //                            Spacer()
+                        //
+                        //                        }
+                        
+                        
+                        //                        HStack {
+                        //
+                        //
+                        //                            ColorButtonView(isPressed: activateYellow, color: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
+                        //
+                        //
+                        //                            Spacer()
+                        //
+                        //                            ColorButtonView(isPressed: activateRed, color: #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 0.7845141267))
+                        //
+                        //
+                        //
+                        //                            Spacer()
+                        //
+                        //
+                        //                            ColorButtonView(isPressed: activateGreen, color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
+                        //
+                        //
+                        //
+                        //
+                        //                            Spacer()
+                        //
+                        //
+                        //                            ColorButtonView(isPressed: activateBlue, color: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
+                        //
+                        //
+                        //                        }
+                        //                        .padding(.horizontal, 20)
+                        
+                        
+//                        LazyVStack(alignment: .leading, spacing:30) {
+                            //                                Spacer()
+                            //                                    .frame(height: spaceInTheSpacer)
+                        
+                        
+                            Text("No-stop timers:")
+                                .font(.system(size: 25, weight: .regular))
+                                .foregroundColor(Color(timerVM.firstColorText))
+                                .modifier(ShadowLightModifier())
                             
-                                Text("🍅 Timer Setup")
-                                    .lineLimit(1)
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .font(.system(size: 32))
-                                    .modifier(ShadowLightModifier())
-                                    .padding()
-                                
-                                Spacer()
-                                
-                                Button(action: {
+                            
+                            ToggleButton(toggle: enableNoStop)
+                            
+                            
+                            Group {
+                                HStack {
+                                    Text("Focus time:")
                                     
-                                    self.timerVM.indexOfTimersArray = 0;
-                                    
-                                    // self.timerVM.changeColorCircleBar(Sequence: self.arrayOfIndexesOfChangedValues);
-                                    
-                                    self.timerVM.reset()
-                                    self.animateSave.toggle()
-                                    self.timerVM.classicVibration()
-                                    
-                                    print (self.timerVM.arrayOfInput)
-                                    
-                                    showPlanView = false
-                                    showDoView = true
-                                    showChartsView = false
-                                    showSettingView = false
-                                    
-                                }) {
-                                    ZStack{
-                                        
-                                        WaveAnimationView(animate: animateSave, lineWidth: 5, repetitions: 1)
-                                            .frame(width: 110, height: 110)
-                                        
-                                        ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
-                                        
-                                        Text("Save")
-                                            .foregroundColor(Color(timerVM.firstColorText))
-                                            .modifier(ShadowLightModifier())
-                                        
-                                    }
-                                    
+                                    Text("\(self.timerVM.arrayOfInput[0]) min")
                                 }
-                                
-                            }
-                            .padding(.top, 30)
+                                .foregroundColor(Color(timerVM.firstColorText))
+                                .font(.system(size: 25))
+                                .modifier(ShadowLightModifier())
+//                                .padding(.horizontal)
+//                                .padding(.leading)
+//                                .animation(.none)
                             
-                            //                        ZStack {
-                            //                            AntiRilievoView(width: screen.width - 50, height: textPressed ? 420 : 120, cornerRadious: 30)
-                            //
-                            //
-                            //
-                            //                            Text("Our focus is limited and precious\(textPressed ? ". There are many research out there that proved a person need about 10 to 25 minutes to achieve high focus, and you also cannot effectively do something really intensive for much longer that 25-30 minutes. Foocus app help to reduce that loosing focus effect. And you only need 5 minutes of break to recover your high focus." : ". (tap here) ")")
-                            //
-                            //                                .font(.system(size: 23, weight: .regular))
-                            //                                .fixedSize(horizontal: false, vertical: true)
-                            //                                .padding(27)
-                            //                                .padding(.horizontal, 10)
-                            //                                .foregroundColor(textPressed ? Color(timerVM.firstColorText) :  Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
-                            //                                .modifier(ShadowLightModifier())
-                            //                                .onTapGesture {
-                            //                                    self.textPressed.toggle()
-                            //                                    self.timerVM.classicVibration()
-                            //                            }
-                            //
-                            //                        }
-                            Spacer()
-                                .frame(height: spaceInTheSpacer)
-                            
-                            
-                            
-                            ZStack {
                                 
-                                Button {
-                                    self.showPayWall = true
-                                } label: {
-                                    ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
-                                }
-                                .sheet(isPresented: $showPayWall) {
-                                    PayWallView().environmentObject(TimerViewModel())
-                                        }
-                                
-                                
-                                Text("Go Premium 💎")
-                                    .modifier(ShadowLightModifier())
-                                    .font(.system(size: timerVM.secondSizeFont))
-                                    .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
-                                
+                                BarPreferenceView(lowerBound: 10,
+                                                  upperBound: 99,
+                                                  output: focusTime,
+                                                  movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[0], lowerBound: 10, upperBound:99),
+                                                  accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[0], lowerBound: 10, upperBound:99))
                                 
                                 
                             }
-                            .padding(.horizontal, 33)
-                            .padding(.bottom, 10)
+                            //                                .frame(height:100)
                             
                             
-                            HStack {
-                                
-                                Text("No-stop timers:")
-                                    .font(.system(size: 23, weight: .regular))
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .modifier(ShadowLightModifier())  
-                                
-                                Spacer()
-                                
-                                ToggleButton(toggle: enableNoStop)
+                            
+                            //                                Spacer()
+                            //                                    .frame(height: spaceInTheSpacer)
+                            
+                            Group {
+                                HStack {
+                                    Text("Break time:")
+                                    
+                                    Text("\(self.timerVM.arrayOfInput[1]) min")
+                                }
+                                .foregroundColor(Color(timerVM.firstColorText))
+                                .font(.system(size: 25))
+                                .modifier(ShadowLightModifier())
+//                                .padding(.horizontal)
+//                                .padding(.leading)
+//
+                                BarPreferenceView(lowerBound: 1, upperBound: 15, output: breakTime, movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[1], lowerBound: 1, upperBound:15),
+                                                  accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[1], lowerBound: 1, upperBound:15))
                                 
                                 
                             }
-                            .padding(.horizontal, 33)
-                            .padding(.bottom, 10)
+                            //                                .frame(height:100)
                             
                             
+                            //                                Spacer()
+                            //                                    .frame(height: spaceInTheSpacer)
                             
-                            
-                            
-                            
-                            //                        HStack {
-                            //
-                            //                                Text("Custom colors circle bar:")
-                            //                                    .font(.system(size: 23, weight: .regular))
-                            //                                    .foregroundColor(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
-                            //                                    .modifier(ShadowLightModifier())
-                            //                                    .padding(.leading, 33)
-                            //
-                            //                            Spacer()
-                            //
-                            //                        }
-                            
-                            
-                            //                        HStack {
-                            //
-                            //
-                            //                            ColorButtonView(isPressed: activateYellow, color: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
-                            //
-                            //
-                            //                            Spacer()
-                            //
-                            //                            ColorButtonView(isPressed: activateRed, color: #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 0.7845141267))
-                            //
-                            //
-                            //
-                            //                            Spacer()
-                            //
-                            //
-                            //                            ColorButtonView(isPressed: activateGreen, color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-                            //
-                            //
-                            //
-                            //
-                            //                            Spacer()
-                            //
-                            //
-                            //                            ColorButtonView(isPressed: activateBlue, color: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
-                            //
-                            //
-                            //                        }
-                            //                        .padding(.horizontal, 20)
-                            
-                            
-                            VStack {
-                                Spacer()
-                                    .frame(height: spaceInTheSpacer)
-                                
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("Focus time:")
-                                        
-                                        Text("\(self.timerVM.arrayOfInput[0]) min")
-                                    }
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .font(.system(size: 23))
-                                    .modifier(ShadowLightModifier())
-                                    .padding(.horizontal)
-                                    .padding(.leading)
-                                    .animation(.none)
+                            Group {
+                                HStack {
+                                    Text("Long break time:")
                                     
-                                    BarPreferenceView(lowerBound: 10,
-                                                      upperBound: 99,
-                                                      output: focusTime,
-                                                      movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[0], lowerBound: 10, upperBound:99),
-                                                      accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[0], lowerBound: 10, upperBound:99))
-                                    
+                                    Text("\(self.timerVM.arrayOfInput[3]) min")
                                 }
-                                .frame(height:100)
+                                .foregroundColor(Color(timerVM.firstColorText))
+                                .font(.system(size: 25))
+                                .modifier(ShadowLightModifier())
+//                                .padding(.horizontal)
+//                                .padding(.leading)
                                 
                                 
+                                BarPreferenceView(lowerBound: 15, upperBound: 60, output: longBreak, movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[3], lowerBound: 15, upperBound:60),
+                                                  accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[3], lowerBound: 15, upperBound:60))
                                 
-                                Spacer()
-                                    .frame(height: spaceInTheSpacer)
                                 
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("Break time:")
-                                        
-                                        Text("\(self.timerVM.arrayOfInput[1]) min")
-                                    }
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .font(.system(size: 23))
-                                    .modifier(ShadowLightModifier())
-                                    .padding(.horizontal)
-                                    .padding(.leading)
+                            }
+                            //                                .frame(height:100)
+                            
+                            
+                            //                                Spacer()
+                            //                                    .frame(height: spaceInTheSpacer)
+                            
+                            Group {
+                                HStack {
+                                    Text("How many times?")
                                     
-                                    BarPreferenceView(lowerBound: 1, upperBound: 15, output: breakTime, movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[1], lowerBound: 1, upperBound:15),
-                                                      accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[1], lowerBound: 1, upperBound:15))
-                                    
+                                    Text("\(self.timerVM.arrayOfInput[2]) times")
                                 }
-                                .frame(height:100)
+                                .foregroundColor(Color(timerVM.firstColorText))
+                                .font(.system(size: 25))
+                                .modifier(ShadowLightModifier())
+//                                .padding(.horizontal)
+//                                .padding(.leading)
                                 
+                                BarPreferenceView(lowerBound: 1, upperBound: 10, output: cycles, movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[2], lowerBound: 1, upperBound:10),
+                                                  accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[2], lowerBound: 1, upperBound:10))
+//                                Spacer()
+//                                    .frame(height:100)
                                 
-                                Spacer()
-                                    .frame(height: spaceInTheSpacer)
-                                
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("Long break time:")
-                                        
-                                        Text("\(self.timerVM.arrayOfInput[3]) min")
-                                    }
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .font(.system(size: 23))
-                                    .modifier(ShadowLightModifier())
-                                    .padding(.horizontal)
-                                    .padding(.leading)
-                                    
-                                    
-                                    BarPreferenceView(lowerBound: 15, upperBound: 60, output: longBreak, movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[3], lowerBound: 15, upperBound:60),
-                                                      accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[3], lowerBound: 15, upperBound:60))
-                                    
-                                }
-                                .frame(height:100)
-                                
-                                
-                                Spacer()
-                                    .frame(height: spaceInTheSpacer)
-                                
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("How many times?")
-                                        
-                                        Text("\(self.timerVM.arrayOfInput[2]) times")
-                                    }
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .font(.system(size: 23))
-                                    .modifier(ShadowLightModifier())
-                                    .padding(.horizontal)
-                                    .padding(.leading)
-                                    
-                                    BarPreferenceView(lowerBound: 1, upperBound: 10, output: cycles, movingWheelState: inputBarValue(input: self.timerVM.arrayOfInput[2], lowerBound: 1, upperBound:10),
-                                                      accumulatedMoving: inputBarValue(input: self.timerVM.arrayOfInput[2], lowerBound: 1, upperBound:10))
-                                    
-                                }
-                                .frame(height:100)
-                                
-                                
-                                Spacer()
-                                    .frame(height: spaceInTheSpacer)
                             }
                             
-                            ZStack {
+                            ZStack{
                                 ButtonView(width: 170, height: 70, cornerRadius: 25, showImage: false)
                                     .onTapGesture {
-                                        
                                         self.timerVM.settingsOnDefault()
                                         self.timerVM.isPressedTomatoTimer = 0
                                         self.timerVM.enableNoStop = false
@@ -414,25 +344,12 @@ struct SettingsScreenView: View {
                                     .foregroundColor(Color(timerVM.firstColorText))
                                     .font(.system(size: timerVM.secondSizeFont))
                                     .modifier(ShadowLightModifier())
-                                
                             }
-                            
-                        }
-                        //                    .animation(.none)
-                        //this work for disactivate the all animation linear for the bar preference view
-                    
-                    ZStack {
                         
                     }
-                        
-                    }
-                    .animation(.linear)
+                    .padding(.horizontal)
                     
-                
             }
-            .background(Color(#colorLiteral(red:0.89, green:0.90, blue:0.93, alpha:1.00)))
-            .edgesIgnoringSafeArea(.all)
-        
         
     }
     
@@ -463,9 +380,9 @@ struct SettingsScreenView: View {
 struct SettingsScreenView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-//            SettingsScreenView().environmentObject(TimerViewModel())
-//                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
-//                .previewDisplayName("iPhone SE")
+            //            SettingsScreenView().environmentObject(TimerViewModel())
+            //                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+            //                .previewDisplayName("iPhone SE")
             
             //            SettingsScreenView(showView: .constant(true), ballActive: .constant(true)).environmentObject(TimerViewModel())
             //                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
@@ -475,9 +392,9 @@ struct SettingsScreenView_Previews: PreviewProvider {
                                showDoView: .constant(false),
                                showChartsView: .constant(false),
                                showSettingView: .constant(true))
-            .environmentObject(TimerViewModel())
-            .previewDevice(PreviewDevice(rawValue: "iPhone XR"))
-            .previewDisplayName("iPhone XR")
+                .environmentObject(TimerViewModel())
+                .previewDevice(PreviewDevice(rawValue: "iPhone XR"))
+                .previewDisplayName("iPhone XR")
             
             
         }
@@ -492,8 +409,8 @@ struct ShadowLightModifier: ViewModifier {
         content
             .shadow(color: Color.black.opacity(0.35), radius: 2, x: 1, y: 1)
             .shadow(color: Color.white.opacity(1), radius: 1, x: -2, y: -2)
-//            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 1, y: 1)
-//            .shadow(color: Color.white.opacity(1), radius: 1, x: -1, y: -1)
+        //            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 1, y: 1)
+        //            .shadow(color: Color.white.opacity(1), radius: 1, x: -1, y: -1)
     }
 }
 

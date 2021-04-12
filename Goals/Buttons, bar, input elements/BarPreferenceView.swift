@@ -16,18 +16,18 @@ struct BarPreferenceView: View {
     @State var lowerBound : Int = 10
     @State var upperBound : Int = 60
     @Binding var output : Int
-//    @State var output : Int = 0
+    //    @State var output : Int = 0
     
     @State var movingWheelState : CGSize = .zero
     @State var accumulatedMoving : CGSize = .zero   
     var body: some View {
         
-            ZStack{
-                
-//            VStack {
-//                Text("\(output)")
-//                Spacer()
-//            }
+        ZStack{
+            
+            //            VStack {
+            //                Text("\(output)")
+            //                Spacer()
+            //            }
             
             VStack{
                 
@@ -37,24 +37,42 @@ struct BarPreferenceView: View {
                         Spacer().frame(width:screen.width / 4)
                     }
                     
+                    
                     Group {
-                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
+                        
+                        Color(#colorLiteral(red: 0.681924929, green: 0.6859496321, blue: 0.7170756985, alpha: 1))
+                            .frame(width: 2, height: 10)
+                            .cornerRadius(9)
+                        
+                        //                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
+                        Color(#colorLiteral(red: 0.681924929, green: 0.6859496321, blue: 0.7170756985, alpha: 1))
+                            .frame(width: 2, height: 10)
+                            .cornerRadius(9)
+                        //                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
+                        Color(#colorLiteral(red: 0.681924929, green: 0.6859496321, blue: 0.7170756985, alpha: 1))
+                            .frame(width: 2, height: 10)
+                            .cornerRadius(9)
+                        //                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
+                        Color(#colorLiteral(red: 0.681924929, green: 0.6859496321, blue: 0.7170756985, alpha: 1))
+                            .frame(width: 2, height: 10)
+                            .cornerRadius(9)
+                        //                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                         
                         Spacer()
                         
-                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
+                        Color(#colorLiteral(red: 0.681924929, green: 0.6859496321, blue: 0.7170756985, alpha: 1))
+                            .frame(width: 2, height: 10)
+                            .cornerRadius(9)
+                        //                        AntiRilievoView(width: 14, height: 20, cornerRadius: 9)
                     }
                     
                     if screen.width >= 768 {
@@ -67,14 +85,14 @@ struct BarPreferenceView: View {
                 
             }
             
-                if screen.width < 768 {
-                    AntiRilievoView(width: screen.width - 50 , height: 20, cornerRadius: 30)
-                } else {
-                    AntiRilievoView(width: 364 , height: 20, cornerRadius: 30)
-                }
-                
+            if screen.width < 768 {
+                AntiRilievoView(width: screen.width - 50 , height: 20, cornerRadius: 30)
+            } else {
+                AntiRilievoView(width: 364 , height: 20, cornerRadius: 30)
+            }
+            
             ZStack {
-               
+                
                 Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 1)).brightness(0.1)
                 
                 Circle()
@@ -86,7 +104,7 @@ struct BarPreferenceView: View {
                     .fill(
                         
                         LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9567099214, green: 0.9566277862, blue: 0.9730718732, alpha: 1)), Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 0.567583476))]), startPoint: .leading, endPoint: .trailing)
-                )
+                    )
                     .frame(width: 30)
                     .rotationEffect(Angle(degrees: 220))
                 
@@ -94,19 +112,15 @@ struct BarPreferenceView: View {
             .frame(width: 40)
             .clipShape(Circle())
             .shadow(color: Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 1)), radius: 2, x: 2, y: 2)
-            
-                
-                
-            
             .offset(x: movingWheelState.width)
-        .gesture(
-            DragGesture().onChanged({ (value) in
-                
+            .gesture(
+                DragGesture().onChanged({ (value) in
+                    
                     self.movingWheelState = CGSize(width: value.translation.width + self.accumulatedMoving.width, height: 0)
-                
-                self.output = self.whichRange(lowerBound: self.lowerBound, upperBound: self.upperBound)
-                
-            })
+                    
+                    self.output = self.whichRange(lowerBound: self.lowerBound, upperBound: self.upperBound)
+                    
+                })
                 .onEnded({ (value) in
                     self.movingWheelState = CGSize(width: value.translation.width + self.accumulatedMoving.width, height: 0)
                     
@@ -117,12 +131,12 @@ struct BarPreferenceView: View {
                     if self.movingWheelState.width < -150 {
                         self.movingWheelState.width = -150
                     }
-                
+                    
                     self.accumulatedMoving = self.movingWheelState
-                   
+                    
                     self.output = self.whichRange(lowerBound: self.lowerBound, upperBound: self.upperBound)
                 })
-
+                
             )
             
             
@@ -143,7 +157,7 @@ struct BarPreferenceView: View {
         
         return output + lowerBound
     }
-  
+    
     
 }
 

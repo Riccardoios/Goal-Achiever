@@ -70,10 +70,10 @@ struct Home: View {
     @EnvironmentObject var subManager: SubscriptionManager
     @Environment(\.managedObjectContext) var moc
     
-    @State var showPlanView = true
+    @State var showPlanView = false
     @State var showDoView = false
     @State var showChartsView = false
-    @State var showSettingsView = false
+    @State var showSettingsView = true
     @State var showPayWallView = false
     
     @FetchRequest(entity: Goal.entity(), sortDescriptors: [
