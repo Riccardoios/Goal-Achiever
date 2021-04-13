@@ -13,7 +13,8 @@ struct SettingsScreenView: View {
     @Binding var showPlanView: Bool
     @Binding var showDoView: Bool
     @Binding var showChartsView: Bool
-    @Binding var showSettingView:Bool
+    @Binding var showSettingView: Bool
+    @Binding var showPayWallView: Bool
     //@State var textPressed = false
     @EnvironmentObject var timerVM : TimerViewModel
     @EnvironmentObject var subManager: SubscriptionManager
@@ -100,7 +101,7 @@ struct SettingsScreenView: View {
         
         
         return
-            
+        
             ScrollView(.vertical, showsIndicators:false) {
                 
                     
@@ -155,13 +156,16 @@ struct SettingsScreenView: View {
                             ZStack {
                                 
                                 Button {
-                                    self.showPayWall = true
+                                    
+                                    self.showSettingView = false
+                                    self.showPayWallView = true
+                                    
                                 } label: {
                                     ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
                                 }
-                                .sheet(isPresented: $showPayWall) {
-                                    PayWallView().environmentObject(TimerViewModel())
-                                }
+//                                .sheet(isPresented: $showPayWall) {
+//                                    PayWallView().environmentObject(TimerViewModel())
+//                                }
                                 
                                 
                                 Text("Go Premium 💎")
@@ -344,7 +348,9 @@ struct SettingsScreenView: View {
                     }
                     .padding(.horizontal)
                     
-            }
+            
+            
+        }
         
     }
     
@@ -384,7 +390,8 @@ struct SettingsScreenView_Previews: PreviewProvider {
             SettingsScreenView(showPlanView: .constant(false),
                                showDoView: .constant(false),
                                showChartsView: .constant(false),
-                               showSettingView: .constant(true))
+                               showSettingView: .constant(true),
+                               showPayWallView: .constant(false))
                 .environmentObject(TimerViewModel())
                 .previewDevice(PreviewDevice(rawValue: "iPhone XR"))
                 .previewDisplayName("iPhone XR")

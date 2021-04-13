@@ -11,9 +11,13 @@
  
  TO DO LIST:
 - remeber to set false for premium content
+ 
+ - continue with the paywallview and its binding plus set the menu as it is seetings pressed?
+ - trackview it has still lags
+ 
+ 
  - change the description of the listing in the apple app store from focus app to goal achiever app
- - perfomrmance check: see if taking off all the new binding increase the performance
-it doesnt change 
+
  
  testing with sanbox premimum if the logic of istomatotimer = false is correct
  
@@ -121,7 +125,10 @@ struct Home: View {
                     }
                     
                     if showSettingsView {
-                        SettingsScreenView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingView: $showSettingsView)
+                        SettingsScreenView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingView: $showSettingsView, showPayWallView: $showPayWallView)
+                    }
+                    if showPayWallView {
+                        PayWallView()
                     }
                     
                         MenuPane(showPlan: $showPlanView , showDo: $showDoView , showCharts: $showChartsView, showSettings: $showSettingsView)

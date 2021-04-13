@@ -100,7 +100,7 @@ struct PayWallView: View {
                 Color(#colorLiteral(red: 0.8937353492, green: 0.9016036391, blue: 0.9264202714, alpha: 1))
                     .ignoresSafeArea(.all)
                 
-                VStack{
+                LazyVStack(spacing:40){
                     
                     ZStack {
                     
@@ -119,8 +119,9 @@ struct PayWallView: View {
                                 ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
                                 
                                 Image(systemName:"xmark")
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                                    .modifier(ShadowLightModifier())
+                                    .foregroundColor(Color(timerVM.firstColorTextDarker))
+//                                    .modifier(ShadowLightModifier())
+                                
                                  
                             }
                             .padding()
@@ -154,16 +155,15 @@ struct PayWallView: View {
 //                    Text("\(subManager.offeringObj.debugDescription)")
                     
                     
-                    ZStack{
-                        
-                        AntiRilievoView(width: screen.width - 25, height: 400, cornerRadius: 40)
-                            .offset(x:7.5, y:-15)
+//                    ZStack{
                         
                         
-                        VStack(alignment: .leading, spacing: 5) {
+                        
+                        VStack(alignment: .leading, spacing: 20) {
                             
                             Text("📊 Unlock More Charts")
                                 .padding(.leading, 30)
+                                .modifier(ShadowLightModifier())
                             
                             HStack {
                                 
@@ -179,6 +179,7 @@ struct PayWallView: View {
                             
                             Text("🍅 Tomato Method")
                                 .padding(.leading, 30)
+                                .modifier(ShadowLightModifier())
                             
                             
                             HStack {
@@ -196,6 +197,7 @@ struct PayWallView: View {
                             
                             Text("⏰ Set notifications at specific time")
                                 .padding(.leading, 30)
+                                .modifier(ShadowLightModifier())
                             
                             HStack {
                                 
@@ -224,11 +226,10 @@ struct PayWallView: View {
 //                                    .padding(.trailing, 40)
 //                            }
                         }
-                        .modifier(ShadowLightModifier())
                         .font(.system(size: 21))
                         
                         
-                    }
+//                    }
                     
                    
                     
@@ -258,7 +259,7 @@ struct PayWallView: View {
                         })
                     }
                     
-                    Spacer().frame(height:50)
+//                    Spacer().frame(height:50)
                     
                     if subManager.subscriptionStatus == false {
                         
@@ -315,6 +316,7 @@ struct PayWallView: View {
                 }
                 .ignoresSafeArea(.all)
                 .foregroundColor(Color(#colorLiteral(red: 0.2393075824, green: 0.6728859544, blue: 0.9679804444, alpha: 1)))
+                .animation(.linear)
                 .padding(.bottom, 50)
                 .padding(.top, 10)
                 

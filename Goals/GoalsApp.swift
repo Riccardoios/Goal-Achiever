@@ -16,6 +16,7 @@ struct GoalsApp: App {
     var body: some Scene {
         WindowGroup {
             Home()
+//            PayWallView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(TimerViewModel())
                 .environmentObject(SubscriptionManager())
