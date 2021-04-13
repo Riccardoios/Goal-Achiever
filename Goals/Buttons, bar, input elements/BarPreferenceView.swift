@@ -13,6 +13,7 @@ import SwiftUI
 
 struct BarPreferenceView: View {
     
+    @EnvironmentObject var timerVM : TimerViewModel
     @State var lowerBound : Int = 10
     @State var upperBound : Int = 60
     @Binding var output : Int
@@ -86,55 +87,80 @@ struct BarPreferenceView: View {
             }
             
             if screen.width < 768 {
-                AntiRilievoView(width: screen.width - 50 , height: 20, cornerRadius: 30)
+                Rectangle()
+                    .frame(width: screen.width - 50, height: 10)
+                    .cornerRadius(30)
+                    .foregroundColor(Color(timerVM.backgroundColor))
+                    .shadow(color: Color.black.opacity(0.35), radius: 2, x: 1, y: 1)
+                    .shadow(color: Color.white.opacity(1), radius: 1, x: -2, y: -2)
+                
+                
+//                AntiRilievoView(width: screen.width - 50 , height: 20, cornerRadius: 30)
             } else {
-                AntiRilievoView(width: 364 , height: 20, cornerRadius: 30)
+                
+                Rectangle()
+                    .frame(width: 364, height: 10)
+                    .cornerRadius(30)
+                    .foregroundColor(Color(timerVM.backgroundColor))
+                    .shadow(color: Color.black.opacity(0.35), radius: 2, x: 1, y: 1)
+                    .shadow(color: Color.white.opacity(1), radius: 1, x: -2, y: -2)
+                
+//                AntiRilievoView(width: 364 , height: 20, cornerRadius: 30)
             }
             
             ZStack {
                 
-                Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 1)).brightness(0.1)
-                
+//                Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 1)).brightness(0.1)
+//
+//                Circle()
+//                    .foregroundColor(Color(#colorLiteral(red: 0.9567099214, green: 0.9566277862, blue: 0.9730718732, alpha: 1)))
+//                    .blur(radius: 4)
+//                    .offset(x: -8, y: -8)
+//
+//                Circle()
+//                    .fill(
+//
+//                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9567099214, green: 0.9566277862, blue: 0.9730718732, alpha: 1)), Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 0.567583476))]), startPoint: .leading, endPoint: .trailing)
+//                    )
+//                    .frame(width: 30)
+//                    .rotationEffect(Angle(degrees: 220))
                 Circle()
-                    .foregroundColor(Color(#colorLiteral(red: 0.9567099214, green: 0.9566277862, blue: 0.9730718732, alpha: 1)))
-                    .blur(radius: 4)
-                    .offset(x: -8, y: -8)
-                
-                Circle()
-                    .fill(
-                        
-                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9567099214, green: 0.9566277862, blue: 0.9730718732, alpha: 1)), Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 0.567583476))]), startPoint: .leading, endPoint: .trailing)
-                    )
-                    .frame(width: 30)
-                    .rotationEffect(Angle(degrees: 220))
+                    .foregroundColor(Color(timerVM.backgroundColor))
+                    .frame(width:40)
+                    .modifier(ShadowLightModifier())
                 
             }
             .frame(width: 40)
-            .clipShape(Circle())
-            .shadow(color: Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 1)), radius: 2, x: 2, y: 2)
+//            .clipShape(Circle())
+//            .shadow(color: Color(#colorLiteral(red: 0.5996333957, green: 0.6073881984, blue: 0.6364005208, alpha: 1)), radius: 2, x: 2, y: 2)
             .offset(x: movingWheelState.width)
             .gesture(
+                
+                
                 DragGesture().onChanged({ (value) in
                     
-                    self.movingWheelState = CGSize(width: value.translation.width + self.accumulatedMoving.width, height: 0)
+                        self.movingWheelState = CGSize(width: value.translation.width + self.accumulatedMoving.width, height: 0)
+                        
+                        self.output = self.whichRange(lowerBound: self.lowerBound, upperBound: self.upperBound)
                     
-                    self.output = self.whichRange(lowerBound: self.lowerBound, upperBound: self.upperBound)
                     
                 })
                 .onEnded({ (value) in
-                    self.movingWheelState = CGSize(width: value.translation.width + self.accumulatedMoving.width, height: 0)
                     
-                    if self.movingWheelState.width > 150 {
-                        self.movingWheelState.width = 150
-                    }
+                        self.movingWheelState = CGSize(width: value.translation.width + self.accumulatedMoving.width, height: 0)
+                        
+                        if self.movingWheelState.width > 150 {
+                            self.movingWheelState.width = 150
+                        }
+                        
+                        if self.movingWheelState.width < -150 {
+                            self.movingWheelState.width = -150
+                        }
+                        
+                        self.accumulatedMoving = self.movingWheelState
+                        
+                        self.output = self.whichRange(lowerBound: self.lowerBound, upperBound: self.upperBound)
                     
-                    if self.movingWheelState.width < -150 {
-                        self.movingWheelState.width = -150
-                    }
-                    
-                    self.accumulatedMoving = self.movingWheelState
-                    
-                    self.output = self.whichRange(lowerBound: self.lowerBound, upperBound: self.upperBound)
                 })
                 
             )

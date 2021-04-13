@@ -20,8 +20,8 @@ struct ToggleButton: View {
             
             Text("ON   OFF")
                 .font(.system(size: 12, weight: .regular))
-                .foregroundColor(Color(timerVM.firstColorText))
-                .modifier(ShadowLightModifier())
+                .foregroundColor(Color(timerVM.firstColorTextDarker))
+//                .modifier(ShadowLightModifier())
             
             
             Circle()

@@ -104,13 +104,13 @@ struct SettingsScreenView: View {
             ScrollView(.vertical, showsIndicators:false) {
                 
                     
-                    LazyVStack(alignment: .leading, spacing: 40) {
+                    LazyVStack(alignment: .leading, spacing: 45) {
                         
                         HStack {
                             Text("🍅 Timer Setup")
                                 .lineLimit(1)
                                 .foregroundColor(Color(timerVM.firstColorText))
-                                .font(.system(size: 32))
+                                .font(.system(size: 40))
                                 .modifier(ShadowLightModifier())
                                 .padding()
                             
@@ -139,8 +139,8 @@ struct SettingsScreenView: View {
                                     ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
                                     
                                     Text("Save")
-                                        .foregroundColor(Color(timerVM.firstColorText))
-                                        .modifier(ShadowLightModifier())
+                                        .foregroundColor(Color(timerVM.firstColorTextDarker))
+//                                        .modifier(ShadowLightModifier())
                                     
                                 }
                                 
@@ -149,36 +149,31 @@ struct SettingsScreenView: View {
                         }
                         .padding(.top, 30)
                         
-                        
-                        ZStack {
+                        HStack{
+                            Spacer()
                             
-                            Button {
-                                self.showPayWall = true
-                            } label: {
-                                ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
+                            ZStack {
+                                
+                                Button {
+                                    self.showPayWall = true
+                                } label: {
+                                    ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
+                                }
+                                .sheet(isPresented: $showPayWall) {
+                                    PayWallView().environmentObject(TimerViewModel())
+                                }
+                                
+                                
+                                Text("Go Premium 💎")
+//                                    .modifier(ShadowLightModifier())
+                                    .font(.system(size: timerVM.secondSizeFont))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                                
+                                
+                                
                             }
-                            .sheet(isPresented: $showPayWall) {
-                                PayWallView().environmentObject(TimerViewModel())
-                            }
-                            
-                            
-                            Text("Go Premium 💎")
-                                .modifier(ShadowLightModifier())
-                                .font(.system(size: timerVM.secondSizeFont))
-                                .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
-                            
-                            
-                            
+                            Spacer()
                         }
-                        
-                        
-                        
-                    
-                        
-                        
-                        
-                        
-                        
                         
                         //                        HStack {
                         //
@@ -191,7 +186,6 @@ struct SettingsScreenView: View {
                         //                            Spacer()
                         //
                         //                        }
-                        
                         
                         //                        HStack {
                         //
@@ -233,9 +227,7 @@ struct SettingsScreenView: View {
                                 .foregroundColor(Color(timerVM.firstColorText))
                                 .modifier(ShadowLightModifier())
                             
-                            
                             ToggleButton(toggle: enableNoStop)
-                            
                             
                             Group {
                                 HStack {
@@ -331,7 +323,8 @@ struct SettingsScreenView: View {
 //                                    .frame(height:100)
                                 
                             }
-                            
+                        HStack{
+                            Spacer()
                             ZStack{
                                 ButtonView(width: 170, height: 70, cornerRadius: 25, showImage: false)
                                     .onTapGesture {
@@ -341,10 +334,12 @@ struct SettingsScreenView: View {
                                     }
                                 
                                 Text("Default Set-Up")
-                                    .foregroundColor(Color(timerVM.firstColorText))
+                                    .foregroundColor(Color(timerVM.firstColorTextDarker))
                                     .font(.system(size: timerVM.secondSizeFont))
-                                    .modifier(ShadowLightModifier())
+//                                    .modifier(ShadowLightModifier())
                             }
+                            Spacer()
+                        }
                         
                     }
                     .padding(.horizontal)
@@ -370,10 +365,8 @@ struct SettingsScreenView: View {
         let outputOfRange300 = percentageOfRange300 - 150
         // -150...150 range300 (upper - lower)
         
-        
         return (CGSize(width: outputOfRange300, height: 0))
     }
-    
     
 }
 
