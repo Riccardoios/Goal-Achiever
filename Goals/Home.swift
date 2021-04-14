@@ -12,7 +12,7 @@
  TO DO LIST:
 - remeber to set false for premium content
  
- - continue with the paywallview and its binding plus set the menu as it is seetings pressed?
+ - continue with the paywallview and its binding in the parent view it is presented
  - trackview it has still lags
  
  
@@ -113,7 +113,7 @@ struct Home: View {
                 VStack {
                     
                     if showPlanView {
-                        PlanView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView)
+                        PlanView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingsView: $showSettingsView, showPayWall: $showPayWallView)
                     }
                     
                     if showDoView {
@@ -128,12 +128,13 @@ struct Home: View {
                         SettingsScreenView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingView: $showSettingsView, showPayWallView: $showPayWallView)
                     }
                     if showPayWallView {
-                        PayWallView()
+                        PayWallView(showPayWall: $showPayWallView, showSettingView: $showSettingsView)
                     }
                     
+                    if !showPayWallView {
                         MenuPane(showPlan: $showPlanView , showDo: $showDoView , showCharts: $showChartsView, showSettings: $showSettingsView)
                         .ignoresSafeArea(.keyboard, edges: .vertical)
-                    
+                    }
 //                    .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                         
                         if !UIDevice.current.hasNotch {

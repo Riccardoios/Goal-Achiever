@@ -12,9 +12,9 @@ import SwiftUI
 struct MenuPane: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
-    @Binding var showPlan : Bool
-    @Binding var showDo : Bool
-    @Binding var showCharts : Bool
+    @Binding var showPlan: Bool
+    @Binding var showDo: Bool
+    @Binding var showCharts: Bool
     @Binding var showSettings: Bool
     
     var body: some View {

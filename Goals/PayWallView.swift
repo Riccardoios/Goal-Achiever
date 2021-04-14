@@ -21,6 +21,9 @@ struct PayWallView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var subManager: SubscriptionManager
     
+    @Binding var showPayWall: Bool
+    @Binding var showSettingView: Bool
+    
     var arrOfDetails2 = [["1.99", "3.99", "35.00", "45.00"], [" / Week = 🍬", " / Month = ☕️", " / Year = 🥮", " / Lifetime = 🍱"]]
     
     var body: some View {
@@ -110,9 +113,9 @@ struct PayWallView: View {
                         Spacer()
                         
                         Button(action: {
-                             
-                            self.presentationMode.wrappedValue.dismiss()
-                            
+//                            self.presentationMode.wrappedValue.dismiss()
+                            showPayWall = false
+                            showSettingView = true
                         }) {
                             ZStack{
                                 
@@ -125,7 +128,7 @@ struct PayWallView: View {
                                  
                             }
                             .padding()
-                            .offset(x: 15, y: -15)
+                            .offset(y: -15)
                             
                         }
                         
@@ -342,7 +345,7 @@ struct PayWallView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        PayWallView()
+        PayWallView(showPayWall: .constant(true), showSettingView: .constant(false))
         
     }
 }

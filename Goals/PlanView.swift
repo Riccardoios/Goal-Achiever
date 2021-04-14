@@ -34,6 +34,8 @@ struct PlanView: View {
     @Binding var showPlanView: Bool
     @Binding var showDoView: Bool
     @Binding var showChartsView: Bool
+    @Binding var showSettingsView: Bool
+    @Binding var showPayWall: Bool
     
     var body: some View {
         
@@ -261,6 +263,14 @@ struct PlanView: View {
                                     
                                     if subManager.subscriptionStatus == false {
                                         PremiumOnlyView(width:screen.width, height:100)
+                                            .onTapGesture{
+                                                self.showPayWall = true
+                                                self.showSettingsView = false
+                                                self.showPlanView = false
+                                                self.showDoView = false
+                                                self.showChartsView = false
+                                                
+                                            }
                                     }
                                 }
                                 
@@ -453,7 +463,7 @@ struct PlanView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        PlanView(showPlanView: .constant(true), showDoView: .constant(false), showChartsView: .constant(false))
+        PlanView(showPlanView: .constant(true), showDoView: .constant(false), showChartsView: .constant(false), showSettingsView: .constant(false), showPayWall:.constant(false))
             .environmentObject(TimerViewModel())
             .environmentObject(SubscriptionManager())
         
