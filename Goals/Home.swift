@@ -12,7 +12,7 @@
  TO DO LIST:
 - remeber to set false for premium content
  
- - continue with the paywallview and its binding in the parent view it is presented
+
  - trackview it has still lags
  
  
