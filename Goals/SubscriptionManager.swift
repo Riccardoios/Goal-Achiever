@@ -22,7 +22,7 @@ public class SubscriptionManager: ObservableObject {
     @Published public var lifetime: Purchases.Package?
     @Published public var inPaymentProgress = false
     @Published public var offeringObj : Purchases.Offering?
-    @Published public var subscriptionStatus = false // the released version need false here
+    @Published public var subscriptionStatus = true // the released version need false here
     
     
     init() {

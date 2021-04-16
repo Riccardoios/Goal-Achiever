@@ -46,7 +46,7 @@ struct TrackView: View {
         
         ScrollView{
             
-            LazyVStack(spacing:20) {
+            LazyVStack(spacing:25) {
                 
                 // MARK: - TITLE VIEW
                 
@@ -85,20 +85,20 @@ struct TrackView: View {
                 // MARK: - MOTIVATION QUOTE
                 Group {
                     
-                    ZStack{
+//                    ZStack{
                         
-                        AntiRilievoView(width: screen.width - 50, height: UIDevice.current.hasNotch ? 220 : 190, cornerRadius: 50)
+//                        AntiRilievoView(width: screen.width - 50, height: UIDevice.current.hasNotch ? 220 : 190, cornerRadius: 50)
                         
                         
                         Text(timerVM.motivationQuote)
-                            .modifier(ShadowLightModifier())
                             .foregroundColor(Color(timerVM.secondColorText))
                             .font(.system(size: UIDevice.current.hasNotch ? 22 : 19 ))
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(nil)
                             .frame(width: screen.width - 75)
                             .frame(minHeight:100)
-                    }
+                            .modifier(ShadowLightModifier())
+//                    }
                 }
                 //MARK: - LAST SEVEN DAYS CHARTS
                 
@@ -111,9 +111,9 @@ struct TrackView: View {
                     
                     ZStack{
                         
-                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadius: 30)
+//                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadius: 30)
                         
-                        LazyHStack {
+                        HStack {
                             
                             VStack{
                                 
@@ -203,9 +203,9 @@ struct TrackView: View {
                         .modifier(ShadowLightModifier())
                         .padding(.top)
                     
-                    ZStack{
+//                    ZStack{
                         
-                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadius: 30)
+//                        AntiRilievoView(width: screen.width - 30, height: 250, cornerRadius: 30)
                         
                         
                         VStack (alignment: .leading, spacing: 10) {
@@ -235,9 +235,10 @@ struct TrackView: View {
                                 }
                                 
                             }
+                            Spacer()
                         }
                         .frame(width:screen.width - 150, height: 250)
-                    }
+//                    }
                     
                 }
             }
