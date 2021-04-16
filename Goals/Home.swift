@@ -117,11 +117,11 @@ struct Home: View {
                     }
                     
                     if showDoView {
-                        DoView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView)
+                        DoView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingsView: $showSettingsView, showPayWallView: $showPayWallView)
                     }
                     
                     if showChartsView {
-                        TrackView(goals: goals, sessions: sessions)
+                        TrackView(goals: goals, sessions: sessions, showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingsView: $showSettingsView, showPayWallView: $showPayWallView)
                     }
                     
                     if showSettingsView {

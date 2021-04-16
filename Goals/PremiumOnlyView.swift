@@ -11,6 +11,7 @@ struct PremiumOnlyView: View {
     
 //    @State var showPayWall = false
 //    @State var showSettingView = false
+    
     var width:CGFloat = 80
     var height:CGFloat = 80
     var opacity:Double = 0.55

@@ -27,8 +27,8 @@ struct DoView: View {
     @Binding var showPlanView: Bool
     @Binding var showDoView: Bool
     @Binding var showChartsView: Bool
-//    @State var wQuestionB: CGFloat = 40
-//    @State var hQuestionB: CGFloat = 40
+    @Binding var showSettingsView: Bool
+    @Binding var showPayWallView: Bool
     
     @State var isTomatoTimer = false
     @State var animateButton = false
@@ -129,6 +129,14 @@ struct DoView: View {
                             
                             if subManager.subscriptionStatus == false {
                             PremiumOnlyView()
+                                .onTapGesture{
+                                    self.showPayWallView = true
+                                    self.showSettingsView = false
+                                    self.showPlanView = false
+                                    self.showDoView = false
+                                    self.showChartsView = false
+                                    
+                                }
                             }
                         }
                         .padding(.trailing)
@@ -370,7 +378,7 @@ struct DoView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DoView(showPlanView: .constant(false), showDoView: .constant(true), showChartsView: .constant(false))
+            DoView(showPlanView: .constant(false), showDoView: .constant(true), showChartsView: .constant(false), showSettingsView: .constant(true), showPayWallView: .constant(false))
                 .environmentObject(TimerViewModel())
                 .environmentObject(SubscriptionManager())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))

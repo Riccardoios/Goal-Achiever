@@ -17,6 +17,12 @@ struct TrackView: View {
     @EnvironmentObject var timerVM : TimerViewModel
     @EnvironmentObject var subManager: SubscriptionManager
     
+    @Binding var showPlanView: Bool
+    @Binding var showDoView: Bool
+    @Binding var showChartsView: Bool
+    @Binding var showSettingsView: Bool
+    @Binding var showPayWallView: Bool
+    
     //emoji and motivation views
     var emoji = "😄"
     
@@ -161,6 +167,15 @@ struct TrackView: View {
                         
                         if subManager.subscriptionStatus == false {
                             PremiumOnlyView(width:screen.width - 30, height: 250, opacity: 0.6, cornerRadius: 30)
+                                .onTapGesture{
+                                    self.showPayWallView = true
+                                    self.showSettingsView = false
+                                    self.showPlanView = false
+                                    self.showDoView = false
+                                    self.showChartsView = false
+                                    
+                                }
+                            
                         }
                         
                     }
@@ -231,9 +246,13 @@ struct TrackView: View {
         
     }
     
-    init(goals: FetchedResults<Goal>, sessions: FetchedResults<Sessions>) {
+    init(goals: FetchedResults<Goal>, sessions: FetchedResults<Sessions>,  showPlanView: Binding<Bool>, showDoView: Binding<Bool>, showChartsView: Binding<Bool>, showSettingsView: Binding<Bool>, showPayWallView: Binding<Bool>) {
         
-        
+        self._showPlanView = showPlanView
+        self._showDoView = showDoView
+        self._showChartsView = showChartsView
+        self._showSettingsView = showSettingsView
+        self._showPayWallView = showPayWallView
         
         let firstGoal = goals.first?.title ?? "the impossible title is here" //too long to be real
         
