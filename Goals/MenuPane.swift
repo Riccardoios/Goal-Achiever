@@ -37,6 +37,8 @@ struct MenuPane: View {
                     
                     HStack {
                         
+                        //banner?
+                        
                         Spacer()
                         
                         VStack(alignment: .center, spacing: -3.0) {

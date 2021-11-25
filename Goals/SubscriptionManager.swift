@@ -5,7 +5,6 @@
 //  Created by Riccardo Carlotto on 23/11/2020.
 //
 
-
 // sandboxuser riccardo.rich@libero.it Gennaro0987
 
 import Foundation
@@ -16,14 +15,12 @@ public class SubscriptionManager: ObservableObject {
     
     public static let shared = SubscriptionManager()
     
-    
     @Published public var monthlySubscription: Purchases.Package?
     @Published public var yearlySubscription: Purchases.Package?
     @Published public var lifetime: Purchases.Package?
     @Published public var inPaymentProgress = false
     @Published public var offeringObj : Purchases.Offering?
     @Published public var subscriptionStatus = false // the released version need false here
-    
     
     init() {
         Purchases.configure(withAPIKey: "uDVuRXSmgsVJJJxeGnUMrkqLfgyoudge")

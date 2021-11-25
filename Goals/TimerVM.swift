@@ -260,7 +260,6 @@ class TimerViewModel: ObservableObject {
         
         isPressedTomatoTimer = 0
         
-        
     }
     
     func setTimers(worktime:Int, breaktime:Int, cycles:Int) -> Array<Int> {

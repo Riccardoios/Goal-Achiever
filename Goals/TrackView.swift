@@ -6,7 +6,6 @@
 //  Copyright © 2020 Riccardo Carlotto. All rights reserved.
 //
 
-
 import SwiftUI
 import StoreKit
 

@@ -50,7 +50,6 @@
  - the remind to turn on notification is not good
  - the tomato timer when is on it get trigged when the trackview get initialised so we have an animation and not quite a good pattern 
  
- 
 */
 
 /// BUGS:
@@ -86,6 +85,7 @@ struct Home: View {
     //for the graphic charts
     
     @FetchRequest(entity: Sessions.entity(), sortDescriptors: []) var sessions: FetchedResults<Sessions>
+    var interstitial:Interstitial
     
     
     var body: some View {
@@ -125,15 +125,23 @@ struct Home: View {
                     }
                     
                     if showSettingsView {
+                        
                         SettingsScreenView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingView: $showSettingsView, showPayWallView: $showPayWallView)
+                            .onAppear {
+                                self.interstitial.showAd()
+                            }
                     }
                     if showPayWallView {
                         PayWallView(showPayWall: $showPayWallView, showSettingView: $showSettingsView)
                     }
                     
                     if !showPayWallView {
+                        
                         MenuPane(showPlan: $showPlanView , showDo: $showDoView , showCharts: $showChartsView, showSettings: $showSettingsView)
                         .ignoresSafeArea(.keyboard, edges: .vertical)
+                        
+                        Banner()
+                        
                     }
 //                    .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                         
@@ -161,6 +169,11 @@ struct Home: View {
         }
         
     }
+    }
+    
+    init() {
+        
+        self.interstitial = Interstitial()
     }
     
     

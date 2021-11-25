@@ -6,13 +6,28 @@
 //
 
 import SwiftUI
+import AppTrackingTransparency
+import GoogleMobileAds
 
 @main
 struct GoalsApp: App {
-    
 
     let persistenceController = PersistenceController.shared
 
+    init() {
+        
+        if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+            
+        }
+        else {
+            ATTrackingManager.requestTrackingAuthorization { _ in
+                GADMobileAds.sharedInstance().start(completionHandler: nil)
+            }
+            
+        }
+        
+    }
+    
     var body: some Scene {
         WindowGroup {
             Home()

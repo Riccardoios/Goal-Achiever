@@ -369,6 +369,7 @@ struct PlanView: View {
                                 }
                                 
                             }
+                            
                             Spacer()
                                 .frame(height: 200)
                         }

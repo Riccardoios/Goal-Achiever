@@ -111,7 +111,7 @@ struct SettingsScreenView: View {
                             Text("🍅 Timer Setup")
                                 .lineLimit(1)
                                 .foregroundColor(Color(timerVM.firstColorText))
-                                .font(.system(size: 40))
+                                .font(.system(size: 35))
                                 .modifier(ShadowLightModifier())
                                 .padding()
                             
