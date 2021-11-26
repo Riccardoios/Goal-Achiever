@@ -69,6 +69,9 @@ let myCoef = screen.size.width / 375 // if iphone x = 1 if iphone se = 0.82
 struct Home: View {
     
     @State var showHome = false
+    
+    @EnvironmentObject var store: IAPStore
+    
     @EnvironmentObject var timerVM : TimerViewModel
 //    @EnvironmentObject var subManager: SubscriptionManager
     @Environment(\.managedObjectContext) var moc
@@ -112,27 +115,32 @@ struct Home: View {
                              
                 VStack {
                     
+                    
                     if showPlanView {
                         PlanView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingsView: $showSettingsView, showPayWall: $showPayWallView)
+                            
                     }
                     
                     if showDoView {
                         DoView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingsView: $showSettingsView, showPayWallView: $showPayWallView)
+                            
                     }
                     
                     if showChartsView {
                         TrackView(goals: goals, sessions: sessions, showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingsView: $showSettingsView, showPayWallView: $showPayWallView)
+                            .onAppear {
+                                self.interstitial.showAd()
+                            }
                     }
                     
                     if showSettingsView {
                         
                         SettingsScreenView(showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingView: $showSettingsView, showPayWallView: $showPayWallView)
-                            .onAppear {
-                                self.interstitial.showAd()
-                            }
+                            
                     }
                     if showPayWallView {
                         PayWallView(showPayWall: $showPayWallView, showSettingView: $showSettingsView)
+                            .environmentObject(store)
                     }
                     
                     if !showPayWallView {
@@ -140,7 +148,9 @@ struct Home: View {
                         MenuPane(showPlan: $showPlanView , showDo: $showDoView , showCharts: $showChartsView, showSettings: $showSettingsView)
                         .ignoresSafeArea(.keyboard, edges: .vertical)
                         
-                        Banner()
+                        if !store.isSubscribed {
+                            Banner()
+                        }
                         
                     }
 //                    .transition(.asymmetric(insertion: .opacity, removal: .opacity))

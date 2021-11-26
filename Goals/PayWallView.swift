@@ -13,13 +13,14 @@
  */
 
 import SwiftUI
+import StoreKit
 
 
 struct PayWallView: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
     @Environment(\.presentationMode) var presentationMode
-//    @EnvironmentObject var subManager: SubscriptionManager
+    @EnvironmentObject var store: IAPStore
     
     @Binding var showPayWall: Bool
     @Binding var showSettingView: Bool
@@ -27,74 +28,6 @@ struct PayWallView: View {
     var arrOfDetails2 = [["1.99", "3.99", "35.00", "45.00"], [" / Week = 🍬", " / Month = ☕️", " / Year = 🥮", " / Lifetime = 🍱"]]
     
     var body: some View {
-      
-        // check the legend of the 2d arr
-        
-//        var arrOfPackage: [Purchases.Package]{
-//
-//            var result = [Purchases.Package]()
-//            let packages = subManager.offeringObj?.availablePackages
-//
-//            guard packages != nil else {
-//                return result
-//            }
-//
-//            for i in 0..<packages!.count {
-//                let package = packages![i]
-//                result.append(package)
-//            }
-//
-//            return result
-//        }
-        
-//        var arrOfDetails: [[String]] {
-//            var arrOfDuration = [String]()              //arrOfDetail[0]
-//            var arrOfPrice = [String]()                 //arrOfDetail[1]
-//            var arrOfIdentifier = [String]()            //arrOfDetail[2]
-//
-//            let packages = subManager.offeringObj?.availablePackages
-//
-//            guard packages != nil else {
-//                return [arrOfPrice, arrOfDuration]
-//            }
-//
-//            var duration = ""
-//
-//            for i in 0..<packages!.count {
-//
-//                let product = packages![i].product
-//                let subscriptionPeriod = product.subscriptionPeriod
-//                let price = packages![i].localizedPriceString
-//                var titleProduct = packages![i].identifier.description.capitalized
-//
-//                for _ in 1...4 { //remove firat three characters
-//                    titleProduct.remove(at: titleProduct.startIndex)
-//                }
-//
-//                switch subscriptionPeriod!.unit {
-//
-//                case SKProduct.PeriodUnit.week:
-//                    duration = " per Week = 🍬"
-//                case SKProduct.PeriodUnit.month:
-//                    duration = " per Month = ☕️"
-//                case SKProduct.PeriodUnit.year:
-//                    duration = " per Year = 🥮"
-//                    //before it was like so inside the "" \(subscriptionPeriod!.numberOfUnits) per Year = 🥮
-////                case SKProduct.PeriodUnit:
-////                    duration = " / \(subscriptionPeriod!.numberOfUnits) Lifetime = 🍱"
-//                default:
-//                    duration = ""
-//                }
-//
-//                arrOfPrice.append(price)
-//                arrOfDuration.append(duration)
-//                arrOfIdentifier.append(titleProduct)
-//
-//
-//            }
-//
-//            return [arrOfPrice, arrOfDuration, arrOfIdentifier]
-//        }
         
         return ScrollView(showsIndicators: true) {
             
@@ -106,42 +39,39 @@ struct PayWallView: View {
                 LazyVStack(spacing:40){
                     
                     ZStack {
-                    
-                    HStack{
                         
-                        
-                        Spacer()
-                        
-                        Button(action: {
-//                            self.presentationMode.wrappedValue.dismiss()
-                            showPayWall = false
-                            showSettingView = true
-                        }) {
-                            ZStack{
+                        HStack{
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                //                            self.presentationMode.wrappedValue.dismiss()
+                                showPayWall = false
+                                showSettingView = true
+                            }) {
+                                ZStack{
+                                    
+                                    ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
+                                    
+                                    Image(systemName:"xmark")
+                                        .foregroundColor(Color(timerVM.firstColorTextDarker))
+                                    
+                                }
+                                .padding()
+                                .offset(y: -15)
                                 
-                                ButtonView(width: 50, height: 50, cornerRadius: 90, showImage: false)
-                                
-                                Image(systemName:"xmark")
-                                    .foregroundColor(Color(timerVM.firstColorTextDarker))
-//                                    .modifier(ShadowLightModifier())
-                                
-                                 
                             }
-                            .padding()
-                            .offset(y: -15)
                             
                         }
                         
-                    }
-                    
-                    
-                    Text("Go Premium")
-                        .font(.system(size: 40, weight:.semibold))
-                        .foregroundColor(Color(#colorLiteral(red: 0.2393075824, green: 0.6728859544, blue: 0.9679804444, alpha: 1)))
-                        .modifier(ShadowLightModifier())
-                    
-                    }
                         
+                        Text("Go Premium")
+                            .font(.system(size: 40, weight:.semibold))
+                            .foregroundColor(Color(#colorLiteral(red: 0.2393075824, green: 0.6728859544, blue: 0.9679804444, alpha: 1)))
+                            .modifier(ShadowLightModifier())
+                        
+                    }
+                    
                     Circle()
                         .foregroundColor(Color(#colorLiteral(red: 0.2393075824, green: 0.6728859544, blue: 0.9679804444, alpha: 1)))
                         .mask(Image("goal")
@@ -152,151 +82,98 @@ struct PayWallView: View {
                         .modifier(ShadowLightModifier())
                         .padding(.horizontal, -20)
                         .padding(.top, -20)
-                        
-//                    Text("\(subManager.offeringObj?.serverDescription ?? "Unkown")")
-//                    Text("\(subManager.offeringObj?.identifier ?? "Unkown") + identifier")
-//                    Text("\(subManager.offeringObj.debugDescription)")
                     
-                    
-//                    ZStack{
+                    VStack(alignment: .leading, spacing: 20) {
                         
+                        Text("📊 Unlock More Charts")
+                            .padding(.leading, 30)
+                            .modifier(ShadowLightModifier())
                         
-                        
-                        VStack(alignment: .leading, spacing: 20) {
+                        HStack {
                             
-                            Text("📊 Unlock More Charts")
-                                .padding(.leading, 30)
-                                .modifier(ShadowLightModifier())
+                            Spacer()
+                                .frame(width:60)
                             
-                            HStack {
-                                
-                                Spacer()
-                                    .frame(width:60)
-                                
-                                Text("To display data and invite further explorations")
-                                    .font(.system(size: 17))
-                                    .foregroundColor(Color(timerVM.secondColorText))
-                                    .padding(.bottom, 20)
-                                    .padding(.trailing, 40)
-                            }
-                            
-                            Text("🍅 Tomato Method")
-                                .padding(.leading, 30)
-                                .modifier(ShadowLightModifier())
-                            
-                            
-                            HStack {
-                                
-                                Spacer()
-                                    .frame(width:60)
-                                
-                                Text("A time management method that enhance your focus towards your goals")
-                                    .font(.system(size: 17))
-                                    .foregroundColor(Color(timerVM.secondColorText))
-                                    .padding(.bottom, 20)
-                                    .padding(.trailing, 40)
-                                
-                            }
-                            
-                            Text("⏰ Set notifications at specific time")
-                                .padding(.leading, 30)
-                                .modifier(ShadowLightModifier())
-                            
-                            HStack {
-                                
-                                Spacer()
-                                    .frame(width:60)
-                                
-                                Text("To precisely set a reminder for your goal")
-                                    .font(.system(size: 17))
-                                    .foregroundColor(Color(timerVM.secondColorText))
-                                    .padding(.bottom, 20)
-                                    .padding(.trailing, 40)
-                                
-                            }
-//                            Text("🎨 Personalise the app colour")
-//                                .padding(.leading, 30)
-//                            
-//                            HStack {
-//                                
-//                                Spacer()
-//                                    .frame(width:60)
-//                                
-//                                Text("Make Goal Achiever even prettier")
-//                                    .font(.system(size: 17))
-//                                    .foregroundColor(Color(timerVM.secondColorText))
-//                                    .padding(.bottom, 20)
-//                                    .padding(.trailing, 40)
-//                            }
+                            Text("To display data and invite further explorations")
+                                .font(.system(size: 17))
+                                .foregroundColor(Color(timerVM.secondColorText))
+                                .padding(.bottom, 20)
+                                .padding(.trailing, 40)
                         }
-                        .font(.system(size: 21))
+                        
+                        Text("🍅 Tomato Method")
+                            .padding(.leading, 30)
+                            .modifier(ShadowLightModifier())
                         
                         
-//                    }
-                    
-                   
-                    
-//                    ForEach((0..<arrOfDetails[0].count).reversed(), id: \.self) { i in
-                        
-//                        Button(action: {
-//
-//                            purchase(package: arrOfPackage[i])
-//
-//                        }, label: {
+                        HStack {
                             
-//                            ZStack{
-//
-//                                ButtonView(width: screen.width - 150, height: 90, cornerRadius: 30, showImage: false)
-//                                //height was 60
-//                                VStack {
-//                                    Text(arrOfDetails[2][i])
-//
-//                                    HStack {
-//                                        Text(arrOfDetails[0][i] + arrOfDetails[1][i])
-//                                    }
-//                                }
-//                                .modifier(ShadowLightModifier())
-//                                .font(.system(size: timerVM.secondSizeFont - 4))
-//                                .frame(width: screen.width - 160, height: 60)
-//                            }
-//                        })
-//                    }
+                            Spacer()
+                                .frame(width:60)
+                            
+                            Text("A time management method that enhance your focus towards your goals")
+                                .font(.system(size: 17))
+                                .foregroundColor(Color(timerVM.secondColorText))
+                                .padding(.bottom, 20)
+                                .padding(.trailing, 40)
+                            
+                        }
+                        
+                        Text("⏰ Set notifications at specific time")
+                            .padding(.leading, 30)
+                            .modifier(ShadowLightModifier())
+                        
+                        HStack {
+                            
+                            Spacer()
+                                .frame(width:60)
+                            
+                            Text("To precisely set a reminder for your goal")
+                                .font(.system(size: 17))
+                                .foregroundColor(Color(timerVM.secondColorText))
+                                .padding(.bottom, 20)
+                                .padding(.trailing, 40)
+                            
+                        }
+                    }
+                    .font(.system(size: 21))
                     
-//                    Spacer().frame(height:50)
                     
-//                    if subManager.subscriptionStatus == false {
-//
-//                        Button(action: {
-//                            Purchases.shared.restoreTransactions { (purchaserInfo, error) in
-//
-//                                if let purchaserInfo = purchaserInfo {
-//                                    if purchaserInfo.entitlements["pro"]?.isActive == true {
-//
-//                                        self.subManager.subscriptionStatus = true
-//                                        self.presentationMode.wrappedValue.dismiss()
-//
-//                                    }
-//                                }
-//                                //... check purchaserInfo to see if entitlement is now active
-//                            }
-//                        }) {
-//                            Text("Restore Purchase")
-//                                .underline()
-//                                .font(.system(size: 15))
-//                                .modifier(ShadowLightModifier())
-//                                .foregroundColor(Color(timerVM.firstColorText))
-//
-//                        }
-//
-//                    }
+                    ForEach(store.product, id:\.self) { product in
+                        
+                        ProductRow(product: product)
+                        
+                    }
                     
-//                    Text("Payment will be charged to your iTunes account at confirmation of purchase - Subscription automatically renews bla bla bla ")
-//                        .fixedSize(horizontal: false, vertical: true)
-//                        .lineLimit(nil)
-//                        .font(.system(size: 15))
-//                        .modifier(ShadowLightModifier())
-//                        .foregroundColor(Color(timerVM.secondColorText))
-//                        .padding()
+                    Spacer().frame(height:50)
+                    
+                    //                    if subManager.subscriptionStatus == false {
+                    //
+                    //                        Button(action: {
+                    //                            Purchases.shared.restoreTransactions { (purchaserInfo, error) in
+                    //
+                    //                                if let purchaserInfo = purchaserInfo {
+                    //                                    if purchaserInfo.entitlements["pro"]?.isActive == true {
+                    //
+                    //                                        self.subManager.subscriptionStatus = true
+                    //                                        self.presentationMode.wrappedValue.dismiss()
+                    //
+                    //                                    }
+                    //                                }
+                    //                                //... check purchaserInfo to see if entitlement is now active
+                    //                            }
+                    //                        }) {
+                    //                            Text("Restore Purchase")
+                    //                                .underline()
+                    //                                .font(.system(size: 15))
+                    //                                .modifier(ShadowLightModifier())
+                    //                                .foregroundColor(Color(timerVM.firstColorText))
+                    //
+                    //                        }
+                    //
+                    //                    }
+                    
+                    
                     
                     HStack {
                         
@@ -314,8 +191,11 @@ struct PayWallView: View {
                     }
                     .padding()
                     
-                        
                     
+                    
+                }
+                .onAppear{
+                    store.requestProducts()
                 }
                 .ignoresSafeArea(.all)
                 .foregroundColor(Color(#colorLiteral(red: 0.2393075824, green: 0.6728859544, blue: 0.9679804444, alpha: 1)))
@@ -323,29 +203,92 @@ struct PayWallView: View {
                 .padding(.bottom, 50)
                 .padding(.top, 10)
                 
-               
+                
                 
                 
             }
         }
     }
     
-//    func purchase(package: Purchases.Package) {
-//
-//            Purchases.shared.purchasePackage(package) { (transaction, purchaserInfo, error, userCancelled) in
-//                if purchaserInfo?.entitlements["pro"]?.isActive == true {
-//                    self.subManager.subscriptionStatus = true
-//                self.presentationMode.wrappedValue.dismiss()
-//
-//              }
-//            }
-//    }
     
 }
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         PayWallView(showPayWall: .constant(true), showSettingView: .constant(false))
+            .environmentObject(TimerViewModel())
         
     }
+}
+
+struct ProductRow: View {
+    
+    @EnvironmentObject var store: IAPStore
+    @State var isPresented = false
+    let product: SKProduct
+    let price: String
+    
+    init(product: SKProduct) {
+        self.product = product
+        let formatter = NumberFormatter()
+        formatter.locale = product.priceLocale
+        formatter.numberStyle = .currency
+        price = formatter.string(from: product.price) ?? ""
+    }
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: nil) {
+                Text("\(product.localizedTitle) - \(price)")
+                Text(product.localizedDescription)
+            }
+            Spacer()
+            
+            if store.isSubscribed {
+                CheckedView()
+            } else {
+                PurchaseButton(product: product)
+            }
+            
+        }
+        .padding()
+    }
+}
+
+struct PurchaseButton: View {
+    
+    @EnvironmentObject var store: IAPStore
+    let product: SKProduct
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "cart")
+            Text("Buy")
+        }
+        .onTapGesture {
+            store.buyProduct(product: product)
+        }
+        .padding(10)
+        .foregroundColor(.yellow)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.yellow, lineWidth: 2)
+        )
+        
+    }
+    
+}
+
+struct CheckedView: View {
+    
+    var body: some View {
+        Image(systemName: "checkmark")
+            .padding(10)
+            .foregroundColor(.black)
+            .overlay(
+                Circle()
+                    .stroke(Color.black, lineWidth: 2)
+            )
+    }
+    
 }

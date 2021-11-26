@@ -13,8 +13,13 @@ import GoogleMobileAds
 struct GoalsApp: App {
 
     let persistenceController = PersistenceController.shared
-
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    let store: IAPStore
+    
     init() {
+        
+        self.store = IAPStore(productsIDs: ["ga_5999_1y_", "ga_399_1m"])
+        appDelegate.store = store
         
         if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
             
@@ -34,6 +39,7 @@ struct GoalsApp: App {
 //            PayWallView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(TimerViewModel())
+                .environmentObject(store)
 //                .environmentObject(SubscriptionManager())
         }
     }
