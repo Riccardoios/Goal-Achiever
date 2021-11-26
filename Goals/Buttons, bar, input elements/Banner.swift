@@ -36,8 +36,3 @@ struct Banner: View {
     }
 }
 
-struct Banner_Previews: PreviewProvider {
-    static var previews: some View {
-        Banner()
-    }
-}

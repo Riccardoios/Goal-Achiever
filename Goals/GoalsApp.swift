@@ -34,7 +34,7 @@ struct GoalsApp: App {
 //            PayWallView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(TimerViewModel())
-                .environmentObject(SubscriptionManager())
+//                .environmentObject(SubscriptionManager())
         }
     }
     

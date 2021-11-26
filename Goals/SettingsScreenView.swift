@@ -17,7 +17,7 @@ struct SettingsScreenView: View {
     @Binding var showPayWallView: Bool
     //@State var textPressed = false
     @EnvironmentObject var timerVM : TimerViewModel
-    @EnvironmentObject var subManager: SubscriptionManager
+//    @EnvironmentObject var subManager: SubscriptionManager
     //    var spaceInTheSpacer: CGFloat = 25
     @State var animateSave = false
     @State var showPayWall = false

@@ -5,6 +5,8 @@
 //  Created by Riccardo Carlotto on 10/11/2020.
 //
 // check the wave animatio that i transform in a rectangule let's see if to keep it or come back to a circle
+
+
 import SwiftUI
 
 struct LaunchView: View {
@@ -48,8 +50,6 @@ struct LaunchView: View {
                     }
                 }
             
-            
-            
             VStack{
                 
                 Circle()
@@ -91,9 +91,6 @@ struct LaunchView: View {
                 .modifier(ShadowLightModifier())
                 .animation(.easeInOut(duration: 5.0))
                 .offset(x: -2.5, y: -34.5)
-                
-
-            
             
         }
         

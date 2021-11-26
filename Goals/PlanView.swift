@@ -27,7 +27,7 @@ struct PlanView: View {
     @State var weekSelection : [Bool] = [false, false, false, false, false, false, false]
     @State var motivationText : String = ""
     @EnvironmentObject var timerVM : TimerViewModel
-    @EnvironmentObject var subManager: SubscriptionManager
+//    @EnvironmentObject var subManager: SubscriptionManager
     @State var showGoalExamples = false
     @State var notificationTime = Date() // this guy has to be implemented in the logic of the notification
     
@@ -65,7 +65,7 @@ struct PlanView: View {
                                 AntiRilievoView(width: screen.width - 25, height: goals.isEmpty ? 100 * myCoef : 0, cornerRadius: 30)
                                 
                                 if goals.isEmpty {
-                                    Text("You have 0 goals yet, Create one filling up the short form below 😉")
+                                    Text("You have 0 goals yet... \nStart by completing this short screen 😉")
                                         .font(.system(size: (timerVM.secondSizeFont - 3) * myCoef, weight: .regular))
                                         .fixedSize(horizontal: false, vertical: true)
                                         .lineLimit(nil)
@@ -261,17 +261,17 @@ struct PlanView: View {
                                         
                                     }
                                     
-                                    if subManager.subscriptionStatus == false {
-                                        PremiumOnlyView(width:screen.width, height:100)
-                                            .onTapGesture{
-                                                self.showPayWall = true
-                                                self.showSettingsView = false
-                                                self.showPlanView = false
-                                                self.showDoView = false
-                                                self.showChartsView = false
-                                                
-                                            }
-                                    }
+//                                    if subManager.subscriptionStatus == false {
+//                                        PremiumOnlyView(width:screen.width, height:100)
+//                                            .onTapGesture{
+//                                                self.showPayWall = true
+//                                                self.showSettingsView = false
+//                                                self.showPlanView = false
+//                                                self.showDoView = false
+//                                                self.showChartsView = false
+//
+//                                            }
+//                                    }
                                 }
                                 
                                 Text("Only you can best motivate yourself, write a sentence:")
@@ -355,9 +355,9 @@ struct PlanView: View {
                                         
                                     }) {
                                         ZStack{
-                                            ButtonView(width: 200, height: 90, cornerRadius: 30, showImage: false)
+                                            ButtonView(width: 250, height: 90, cornerRadius: 30, showImage: false)
                                             
-                                            Text("Save Goal")
+                                            Text("Save and proceed...")
                                                 .foregroundColor(Color(timerVM.firstColorText))
                                                 .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
                                                 .modifier(ShadowLightModifier())
@@ -466,7 +466,7 @@ struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
         PlanView(showPlanView: .constant(true), showDoView: .constant(false), showChartsView: .constant(false), showSettingsView: .constant(false), showPayWall:.constant(false))
             .environmentObject(TimerViewModel())
-            .environmentObject(SubscriptionManager())
+//            .environmentObject(SubscriptionManager())
         
     }
 }

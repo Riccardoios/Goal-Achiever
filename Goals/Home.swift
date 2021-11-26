@@ -61,7 +61,7 @@
 
 import SwiftUI
 import CoreData
-import Purchases
+//import Purchases
 
 let screen = UIScreen.main.bounds
 let myCoef = screen.size.width / 375 // if iphone x = 1 if iphone se = 0.82
@@ -70,7 +70,7 @@ struct Home: View {
     
     @State var showHome = false
     @EnvironmentObject var timerVM : TimerViewModel
-    @EnvironmentObject var subManager: SubscriptionManager
+//    @EnvironmentObject var subManager: SubscriptionManager
     @Environment(\.managedObjectContext) var moc
     
     @State var showPlanView = true
@@ -159,12 +159,12 @@ struct Home: View {
             self.timerVM.incrementAppRuns()
             
             //check for user entitlements 
-            Purchases.shared.purchaserInfo { (purchaserInfo, error) in
-                if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
-                    self.subManager.subscriptionStatus = true
-                    
-                }
-            }
+//            Purchases.shared.purchaserInfo { (purchaserInfo, error) in
+//                if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
+//                    self.subManager.subscriptionStatus = true
+//                    
+//                }
+//            }
             
         }
         

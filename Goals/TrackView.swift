@@ -14,7 +14,7 @@ var alreadyAskedForReview:Bool = false
 struct TrackView: View {
     
     @EnvironmentObject var timerVM : TimerViewModel
-    @EnvironmentObject var subManager: SubscriptionManager
+//    @EnvironmentObject var subManager: SubscriptionManager
     
     @Binding var showPlanView: Bool
     @Binding var showDoView: Bool
@@ -162,20 +162,20 @@ struct TrackView: View {
                             
                             //                            }
                         }
-                        .blur(radius: subManager.subscriptionStatus ? 0 : 7)
+//                        .blur(radius: subManager.subscriptionStatus ? 0 : 7)
                         
-                        if subManager.subscriptionStatus == false {
-                            PremiumOnlyView(width:screen.width - 30, height: 250, opacity: 0.6, cornerRadius: 30)
-                                .onTapGesture{
-                                    self.showPayWallView = true
-                                    self.showSettingsView = false
-                                    self.showPlanView = false
-                                    self.showDoView = false
-                                    self.showChartsView = false
-                                    
-                                }
-                            
-                        }
+//                        if subManager.subscriptionStatus == false {
+//                            PremiumOnlyView(width:screen.width - 30, height: 250, opacity: 0.6, cornerRadius: 30)
+//                                .onTapGesture{
+//                                    self.showPayWallView = true
+//                                    self.showSettingsView = false
+//                                    self.showPlanView = false
+//                                    self.showDoView = false
+//                                    self.showChartsView = false
+//
+//                                }
+//
+//                        }
                         
                     }
                 }

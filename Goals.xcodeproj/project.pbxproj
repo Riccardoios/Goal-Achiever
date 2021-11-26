@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,14 +11,13 @@
 		3A00822B274FD2B6001F8359 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00822A274FD2B6001F8359 /* Banner.swift */; };
 		3A00822D274FDA34001F8359 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00822C274FDA34001F8359 /* Interstitial.swift */; };
 		3A0361C02559DAEF0001142A /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0361BF2559DAEF0001142A /* LaunchView.swift */; };
-		3A1FC7F32563A51C00596576 /* Purchases in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1FC7F22563A51C00596576 /* Purchases */; };
 		3A1FC7F82564F2AC00596576 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1FC7EE25634A0300596576 /* StoreKit.framework */; };
 		3A3BAF40257215F100056A4F /* PayWallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3BAF3F257215F100056A4F /* PayWallView.swift */; };
 		3A497E9625987EBF007FF682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A497E9525987EBF007FF682 /* Assets.xcassets */; };
 		3A4E38C7259A4D5C00E72471 /* AddSessionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E38C6259A4D5C00E72471 /* AddSessionButton.swift */; };
+		3A56F5842750D6AA0068C80C /* IAPStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A56F5832750D6AA0068C80C /* IAPStore.swift */; };
 		3A643939258582E200A01360 /* PremiumOnlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A643938258582E200A01360 /* PremiumOnlyView.swift */; };
 		3A9652A12553F8100054C5A5 /* WaveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */; };
-		3AABFE21256B9D7D00A7BAE8 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABFE20256B9D7D00A7BAE8 /* SubscriptionManager.swift */; };
 		3AD36E4F259C53C200090EFC /* AddSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD36E4E259C53C200090EFC /* AddSessionView.swift */; };
 		3AEAC3432548F0ED0056B8C9 /* GoalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */; };
 		3AEAC34A2548F0EE0056B8C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AEAC3492548F0EE0056B8C9 /* Preview Assets.xcassets */; };
@@ -61,9 +60,9 @@
 		3A3BAF3F257215F100056A4F /* PayWallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallView.swift; sourceTree = "<group>"; };
 		3A497E9525987EBF007FF682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A4E38C6259A4D5C00E72471 /* AddSessionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSessionButton.swift; sourceTree = "<group>"; };
+		3A56F5832750D6AA0068C80C /* IAPStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPStore.swift; sourceTree = "<group>"; };
 		3A643938258582E200A01360 /* PremiumOnlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumOnlyView.swift; sourceTree = "<group>"; };
 		3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
-		3AABFE20256B9D7D00A7BAE8 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		3AD36E4E259C53C200090EFC /* AddSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSessionView.swift; sourceTree = "<group>"; };
 		3AEAC33F2548F0ED0056B8C9 /* Goals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsApp.swift; sourceTree = "<group>"; };
@@ -106,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A1FC7F32563A51C00596576 /* Purchases in Frameworks */,
 				3A1FC7F82564F2AC00596576 /* StoreKit.framework in Frameworks */,
 				14CF8F9A13F7E6D88C0C5D03 /* Pods_Goals.framework in Frameworks */,
 			);
@@ -122,6 +120,26 @@
 				030E973E4E01142DF5A9A7D0 /* Pods_Goals.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A56F5822750D65A0068C80C /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				3AEAC3792548F5470056B8C9 /* ColumView.swift */,
+				3AEAC3692548F5460056B8C9 /* CrownView.swift */,
+				3A4E38C6259A4D5C00E72471 /* AddSessionButton.swift */,
+				3AD36E4E259C53C200090EFC /* AddSessionView.swift */,
+				3AEAC3712548F5460056B8C9 /* FoocusTitleView.swift */,
+				3AEAC3662548F5450056B8C9 /* GoalIconView.swift */,
+				3AEAC3682548F5460056B8C9 /* GoalPaneView.swift */,
+				3AEAC3762548F5470056B8C9 /* MenuPane.swift */,
+				3AEAC3642548F5450056B8C9 /* RatingView.swift */,
+				3AEAC3622548F5450056B8C9 /* RingView.swift */,
+				3AEAC3702548F5460056B8C9 /* TimerView.swift */,
+				3AEAC36C2548F5460056B8C9 /* TimerVM.swift */,
+				3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		3A881279254A3A39004B0440 /* Buttons, bar, input elements */ = {
@@ -180,23 +198,11 @@
 				3AEAC3652548F5450056B8C9 /* SettingsScreenView.swift */,
 				3AEAC3602548F5450056B8C9 /* AntiRilievoView.swift */,
 				3A643938258582E200A01360 /* PremiumOnlyView.swift */,
-				3A881279254A3A39004B0440 /* Buttons, bar, input elements */,
-				3AEAC3792548F5470056B8C9 /* ColumView.swift */,
-				3AEAC3692548F5460056B8C9 /* CrownView.swift */,
-				3A4E38C6259A4D5C00E72471 /* AddSessionButton.swift */,
-				3AD36E4E259C53C200090EFC /* AddSessionView.swift */,
-				3AEAC3712548F5460056B8C9 /* FoocusTitleView.swift */,
-				3AEAC3662548F5450056B8C9 /* GoalIconView.swift */,
-				3AEAC3682548F5460056B8C9 /* GoalPaneView.swift */,
-				3AEAC3762548F5470056B8C9 /* MenuPane.swift */,
-				3AEAC35C2548F4AD0056B8C9 /* Persistence.swift */,
-				3AEAC3642548F5450056B8C9 /* RatingView.swift */,
-				3AEAC3622548F5450056B8C9 /* RingView.swift */,
-				3AEAC3702548F5460056B8C9 /* TimerView.swift */,
-				3AEAC36C2548F5460056B8C9 /* TimerVM.swift */,
-				3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */,
 				3A3BAF3F257215F100056A4F /* PayWallView.swift */,
-				3AABFE20256B9D7D00A7BAE8 /* SubscriptionManager.swift */,
+				3A881279254A3A39004B0440 /* Buttons, bar, input elements */,
+				3A56F5822750D65A0068C80C /* Subviews */,
+				3A56F5832750D6AA0068C80C /* IAPStore.swift */,
+				3AEAC35C2548F4AD0056B8C9 /* Persistence.swift */,
 				3AEAC3502548F0EE0056B8C9 /* Info.plist */,
 				3A497E9525987EBF007FF682 /* Assets.xcassets */,
 				3AEAC34D2548F0EE0056B8C9 /* Goals.xcdatamodeld */,
@@ -242,7 +248,6 @@
 			);
 			name = Goals;
 			packageProductDependencies = (
-				3A1FC7F22563A51C00596576 /* Purchases */,
 			);
 			productName = Goals;
 			productReference = 3AEAC33F2548F0ED0056B8C9 /* Goals.app */;
@@ -272,7 +277,6 @@
 			);
 			mainGroup = 3AEAC3362548F0ED0056B8C9;
 			packageReferences = (
-				3A1FC7F12563A51C00596576 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = 3AEAC3402548F0ED0056B8C9 /* Products */;
 			projectDirPath = "";
@@ -365,7 +369,6 @@
 				3AEAC3942548F5470056B8C9 /* ColumView.swift in Sources */,
 				3AEAC38F2548F5470056B8C9 /* IconView.swift in Sources */,
 				3AEAC3882548F5470056B8C9 /* ToggleButton.swift in Sources */,
-				3AABFE21256B9D7D00A7BAE8 /* SubscriptionManager.swift in Sources */,
 				3AEAC3862548F5470056B8C9 /* TrackView.swift in Sources */,
 				3A9652A12553F8100054C5A5 /* WaveAnimationView.swift in Sources */,
 				3AEAC3932548F5470056B8C9 /* weekButtons.swift in Sources */,
@@ -373,6 +376,7 @@
 				3AEAC37E2548F5470056B8C9 /* ColorButtonView.swift in Sources */,
 				3AD36E4F259C53C200090EFC /* AddSessionView.swift in Sources */,
 				3AEAC3892548F5470056B8C9 /* ButtonView.swift in Sources */,
+				3A56F5842750D6AA0068C80C /* IAPStore.swift in Sources */,
 				3A00822D274FDA34001F8359 /* Interstitial.swift in Sources */,
 				3AEAC38C2548F5470056B8C9 /* FoocusTitleView.swift in Sources */,
 				3AEAC3822548F5470056B8C9 /* ProgressBar.swift in Sources */,
@@ -574,25 +578,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		3A1FC7F12563A51C00596576 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.7.6;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3A1FC7F22563A51C00596576 /* Purchases */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A1FC7F12563A51C00596576 /* XCRemoteSwiftPackageReference "purchases-ios" */;
-			productName = Purchases;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3AEAC34D2548F0EE0056B8C9 /* Goals.xcdatamodeld */ = {

@@ -9,7 +9,7 @@
 
 import SwiftUI
 import StoreKit
-import Purchases
+//import Purchases
 
 struct DoView: View {
     
@@ -22,7 +22,7 @@ struct DoView: View {
     ]) var goals: FetchedResults<Goal> // from the oldest to the newst
     
     @EnvironmentObject var timerVM : TimerViewModel
-    @EnvironmentObject var subManager: SubscriptionManager
+//    @EnvironmentObject var subManager: SubscriptionManager
     
     @Binding var showPlanView: Bool
     @Binding var showDoView: Bool
@@ -130,17 +130,17 @@ struct DoView: View {
                             }
                             .frame(width: 80, height: 80)
                             
-                            if subManager.subscriptionStatus == false {
-                            PremiumOnlyView()
-                                .onTapGesture{
-                                    self.showPayWallView = true
-                                    self.showSettingsView = false
-                                    self.showPlanView = false
-                                    self.showDoView = false
-                                    self.showChartsView = false
-                                    
-                                }
-                            }
+//                            if subManager.subscriptionStatus == false {
+//                            PremiumOnlyView()
+//                                .onTapGesture{
+//                                    self.showPayWallView = true
+//                                    self.showSettingsView = false
+//                                    self.showPlanView = false
+//                                    self.showDoView = false
+//                                    self.showChartsView = false
+//
+//                                }
+//                            }
                         }
                         .padding(.trailing)
                         
@@ -307,12 +307,12 @@ struct DoView: View {
                         self.mightAnimateQuestionMarkButton()
 //                        self.timerVM.isPressedNormalTimer += 1
                         
-                        Purchases.shared.purchaserInfo { (purchaserInfo, error) in
-                            if purchaserInfo?.entitlements.all["pro"]?.isActive == false {
-                                self.isTomatoTimer = false
-                                
-                            }
-                        }
+//                        Purchases.shared.purchaserInfo { (purchaserInfo, error) in
+//                            if purchaserInfo?.entitlements.all["pro"]?.isActive == false {
+//                                self.isTomatoTimer = false
+//
+//                            }
+//                        }
                         
                     }
                     .onDisappear{
@@ -391,7 +391,7 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             DoView(showPlanView: .constant(false), showDoView: .constant(true), showChartsView: .constant(false), showSettingsView: .constant(true), showPayWallView: .constant(false))
                 .environmentObject(TimerViewModel())
-                .environmentObject(SubscriptionManager())
+//                .environmentObject(SubscriptionManager())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
                 .previewDisplayName("iPhone SE")
             

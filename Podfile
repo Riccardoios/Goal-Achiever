@@ -6,5 +6,6 @@ target 'Goals' do
   use_frameworks!
 
 pod 'Google-Mobile-Ads-SDK'
+pod 'SwiftyStoreKit'
 
 end
