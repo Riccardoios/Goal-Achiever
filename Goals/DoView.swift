@@ -63,9 +63,9 @@ struct DoView: View {
                             //MARK: - ? BUTTON
                             ColorButtonView(isPressed: $rectangularize, color: timerVM.firstColorText, orText: true, textValue: "?", textSize: 30, antiRiSize: 50, antiRiCorner: 50, rectSize: 40, rectCorner: 40)
                                 .padding(.leading)
-                                .onAppear{
-                                    yo()
-                                }
+//                                .onAppear{
+//                                    yo()
+//                                }
                                 
 
                                
@@ -375,13 +375,13 @@ struct DoView: View {
     }
 
     
-    func yo() {
-        print ("i am debugging")
-        UNUserNotificationCenter.current().getPendingNotificationRequests { notif in
-            print ("title", notif.first?.content.title)
-            print ("nextTriggerDate:", (notif.first?.trigger as? UNCalendarNotificationTrigger)?.nextTriggerDate() as Date?)
-        }
-    }
+//    func yo() {
+//        print ("i am debugging")
+//        UNUserNotificationCenter.current().getPendingNotificationRequests { notif in
+//            print ("title", notif.first?.content.title)
+//            print ("nextTriggerDate:", (notif.first?.trigger as? UNCalendarNotificationTrigger)?.nextTriggerDate() as Date?)
+//        }
+//    }
     
         
 }

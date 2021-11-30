@@ -352,7 +352,7 @@ struct PlanView: View {
                                         self.showDoView = true
                                         self.showPlanView = false
                                         self.showChartsView = false
-                                        
+                                  
                                     }) {
                                         ZStack{
                                             ButtonView(width: 250, height: 90, cornerRadius: 30, showImage: false)
@@ -362,6 +362,8 @@ struct PlanView: View {
                                                 .font(.system(size: timerVM.secondSizeFont * myCoef, weight: .regular ))
                                                 .modifier(ShadowLightModifier())
                                         }
+                                        
+                                        
                                     }
                                     
                                     Spacer()

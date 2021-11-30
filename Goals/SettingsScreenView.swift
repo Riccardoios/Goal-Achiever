@@ -17,7 +17,7 @@ struct SettingsScreenView: View {
     @Binding var showPayWallView: Bool
     //@State var textPressed = false
     @EnvironmentObject var timerVM : TimerViewModel
-//    @EnvironmentObject var subManager: SubscriptionManager
+    @EnvironmentObject var store: IAPStore
     //    var spaceInTheSpacer: CGFloat = 25
     @State var animateSave = false
     @State var showPayWall = false
@@ -26,6 +26,32 @@ struct SettingsScreenView: View {
     //    @State var MyPreviousArr = [true, true, false, false] // same
     //    @State var arrayOfIndexesOfChangedValues = [0,1] // same
     
+    
+    fileprivate func extractedFunc() -> ZStack<TupleView<(Button<ButtonView>, Text)>> {
+        return ZStack {
+            
+            Button {
+                
+                self.showSettingView = false
+                self.showPayWallView = true
+                
+            } label: {
+                ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
+            }
+            //                                .sheet(isPresented: $showPayWall) {
+            //                                    PayWallView().environmentObject(TimerViewModel())
+            //                                }
+            
+            
+            Text("Remove Ads 🎉")
+                //                                    .modifier(ShadowLightModifier())
+                .font(.system(size: timerVM.secondSizeFont))
+                .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+            
+            
+            
+        }
+    }
     
     var body: some View {
         
@@ -105,7 +131,7 @@ struct SettingsScreenView: View {
             ScrollView(.vertical, showsIndicators:false) {
                 
                     
-                    LazyVStack(alignment: .leading, spacing: 45) {
+                    LazyVStack(spacing: 45) {
                         
                         HStack {
                             Text("🍅 Timer Setup")
@@ -150,34 +176,34 @@ struct SettingsScreenView: View {
                         }
                         .padding(.top, 30)
                         
-                        HStack{
-                            Spacer()
+                       
+                        ZStack {
                             
-                            ZStack {
+                            Button {
                                 
-                                Button {
-                                    
-                                    self.showSettingView = false
-                                    self.showPayWallView = true
-                                    
-                                } label: {
-                                    ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
-                                }
-//                                .sheet(isPresented: $showPayWall) {
-//                                    PayWallView().environmentObject(TimerViewModel())
-//                                }
+                                self.showSettingView = false
+                                self.showPayWallView = true
                                 
-                                
-                                Text("Go Premium 💎")
-//                                    .modifier(ShadowLightModifier())
-                                    .font(.system(size: timerVM.secondSizeFont))
-                                    .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
-                                
-                                
-                                
+                            } label: {
+                                ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
                             }
-                            Spacer()
+                            //                                .sheet(isPresented: $showPayWall) {
+                            //                                    PayWallView().environmentObject(TimerViewModel())
+                            //                                }
+                            
+                            
+                            Text("Remove Ads 🎉")
+                                //                                    .modifier(ShadowLightModifier())
+                                .font(.system(size: timerVM.secondSizeFont))
+                                .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                            
+                            
+                            
                         }
+                        
+//                            .padding(.leading, 40)
+                           
+                        
                         
                         //                        HStack {
                         //
@@ -327,30 +353,107 @@ struct SettingsScreenView: View {
 //                                    .frame(height:100)
                                 
                             }
-                        HStack{
-                            Spacer()
-                            ZStack{
-                                ButtonView(width: 170, height: 70, cornerRadius: 25, showImage: false)
-                                    .onTapGesture {
-                                        self.timerVM.settingsOnDefault()
-                                        self.timerVM.isPressedTomatoTimer = 0
-                                        self.timerVM.enableNoStop = false
-                                    }
-                                
-                                Text("Default Set-Up")
-                                    .foregroundColor(Color(timerVM.firstColorTextDarker))
-                                    .font(.system(size: timerVM.secondSizeFont))
-//                                    .modifier(ShadowLightModifier())
+                        Group {
+                            HStack{
+                                Spacer()
+                                ZStack{
+                                    ButtonView(width: 170, height: 70, cornerRadius: 25, showImage: false)
+                                        .onTapGesture {
+                                            self.timerVM.settingsOnDefault()
+                                            self.timerVM.isPressedTomatoTimer = 0
+                                            self.timerVM.enableNoStop = false
+                                        }
+                                    
+                                    Text("Default Set-Up")
+                                        .foregroundColor(Color(timerVM.firstColorTextDarker))
+                                        .font(.system(size: timerVM.secondSizeFont))
+                                    //                                    .modifier(ShadowLightModifier())
+                                }
+                                Spacer()
                             }
-                            Spacer()
                         }
+                        
+//                        PayWallView(showPayWall: .constant(true), showSettingView: .constant(true))
+                        
+                        Group {
+                            
+                            Text("Subscriptions")
+                                .font(.system(size: 35, weight: .regular))
+                                .foregroundColor(Color(timerVM.firstColorText))
+                                .modifier(ShadowLightModifier())
+                            
+                            VStack(alignment: .leading, spacing: 20) {
+                                
+                                Text("👨🏻‍💻 Support the developer")
+                                    .modifier(ShadowLightModifier())
+                                
+                                Text("🎉 No more Adverts!")
+                                    .modifier(ShadowLightModifier())
+                                
+                                
+       
+                            }
+                            .font(.system(size: 30))
+
+
+                            ForEach(store.product, id:\.self) { product in
+
+                                ProductRow(product: product)
+                                    .padding(.horizontal, 40)
+                                    .foregroundColor(Color(timerVM.firstColorText))
+
+                            }
+
+                            Spacer()
+
+                            HStack(alignment: .center) {
+                                Button {
+                                    store.restorePurchases()
+
+                                } label: {
+                                    Text("Restore Purchase")
+                                        .underline()
+                                        .font(.system(size: 15))
+                                        .modifier(ShadowLightModifier())
+                                        .foregroundColor(Color(timerVM.firstColorText))
+                                }
+                            }
+
+
+                            HStack {
+
+                                Link("Privacy Policy", destination: URL(string: "https://riccardoios.github.io/goal-achiever")!)
+                                    .font(.system(size: 15))
+                                    .modifier(ShadowLightModifier())
+                                    .foregroundColor(Color(timerVM.firstColorText))
+
+                                Divider()
+
+                                Link("Terms of Use", destination: URL(string: "https://riccardoios.github.io/goal-achiever-Terms-of-Use")!)
+                                    .font(.system(size: 15))
+                                    .modifier(ShadowLightModifier())
+                                    .foregroundColor(Color(timerVM.firstColorText))
+                            }
+                            .padding()
+
+                        }
+                    
+                    
+
+                    
+                    
+                    
+                }
+                .onAppear{
+                    store.requestProducts()
+                }
                         
                     }
                     .padding(.horizontal)
                     
             
             
-        }
+        
         
     }
     

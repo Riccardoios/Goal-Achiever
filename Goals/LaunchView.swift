@@ -6,7 +6,6 @@
 //
 // check the wave animatio that i transform in a rectangule let's see if to keep it or come back to a circle
 
-
 import SwiftUI
 
 struct LaunchView: View {

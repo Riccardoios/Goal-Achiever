@@ -85,93 +85,80 @@ struct PayWallView: View {
                     
                     VStack(alignment: .leading, spacing: 20) {
                         
-                        Text("📊 Unlock More Charts")
-                            .padding(.leading, 30)
+                        Text("👨🏻‍💻 Support the developer")
                             .modifier(ShadowLightModifier())
                         
-                        HStack {
-                            
-                            Spacer()
-                                .frame(width:60)
-                            
-                            Text("To display data and invite further explorations")
-                                .font(.system(size: 17))
-                                .foregroundColor(Color(timerVM.secondColorText))
-                                .padding(.bottom, 20)
-                                .padding(.trailing, 40)
-                        }
+//                        HStack {
+//
+//                            Spacer()
+//                                .frame(width:60)
+//
+//                            Text("To display data and invite further explorations")
+//                                .font(.system(size: 17))
+//                                .foregroundColor(Color(timerVM.secondColorText))
+//                                .padding(.bottom, 20)
+//                                .padding(.trailing, 40)
+//                        }
                         
-                        Text("🍅 Tomato Method")
-                            .padding(.leading, 30)
+                        Text("🎉 No more Adverts!")
                             .modifier(ShadowLightModifier())
                         
                         
-                        HStack {
-                            
-                            Spacer()
-                                .frame(width:60)
-                            
-                            Text("A time management method that enhance your focus towards your goals")
-                                .font(.system(size: 17))
-                                .foregroundColor(Color(timerVM.secondColorText))
-                                .padding(.bottom, 20)
-                                .padding(.trailing, 40)
-                            
-                        }
+//                        HStack {
+//
+//                            Spacer()
+//                                .frame(width:60)
+//
+//                            Text("A time management method that enhance your focus towards your goals")
+//                                .font(.system(size: 17))
+//                                .foregroundColor(Color(timerVM.secondColorText))
+//                                .padding(.bottom, 20)
+//                                .padding(.trailing, 40)
+//
+//                        }
                         
-                        Text("⏰ Set notifications at specific time")
-                            .padding(.leading, 30)
-                            .modifier(ShadowLightModifier())
-                        
-                        HStack {
+//                        Text("⏰ Set notifications at specific time")
+//                            .padding(.leading, 30)
+//                            .modifier(ShadowLightModifier())
+//
+//                        HStack {
+//
+//                            Spacer()
+//                                .frame(width:60)
+//
+//                            Text("To precisely set a reminder for your goal")
+//                                .font(.system(size: 17))
+//                                .foregroundColor(Color(timerVM.secondColorText))
+//                                .padding(.bottom, 20)
+//                                .padding(.trailing, 40)
                             
-                            Spacer()
-                                .frame(width:60)
-                            
-                            Text("To precisely set a reminder for your goal")
-                                .font(.system(size: 17))
-                                .foregroundColor(Color(timerVM.secondColorText))
-                                .padding(.bottom, 20)
-                                .padding(.trailing, 40)
-                            
-                        }
+//                        }
                     }
-                    .font(.system(size: 21))
+                    .font(.system(size: 30))
+                    
+                    Spacer()
+                    
+                        ForEach(store.product, id:\.self) { product in
+                            
+                            ProductRow(product: product)
+                                .padding(.horizontal, 40)
+                            
+                        }
                     
                     
-                    ForEach(store.product, id:\.self) { product in
+                    Spacer()
+                   
+                    Button {
+                        store.restorePurchases()
                         
-                        ProductRow(product: product)
-                        
+                    } label: {
+                            Text("Restore Purchase")
+                                .underline()
+                                .font(.system(size: 15))
+                                .modifier(ShadowLightModifier())
+                                .foregroundColor(Color(timerVM.firstColorText))
                     }
-                    
-                    Spacer().frame(height:50)
-                    
-                    //                    if subManager.subscriptionStatus == false {
-                    //
-                    //                        Button(action: {
-                    //                            Purchases.shared.restoreTransactions { (purchaserInfo, error) in
-                    //
-                    //                                if let purchaserInfo = purchaserInfo {
-                    //                                    if purchaserInfo.entitlements["pro"]?.isActive == true {
-                    //
-                    //                                        self.subManager.subscriptionStatus = true
-                    //                                        self.presentationMode.wrappedValue.dismiss()
-                    //
-                    //                                    }
-                    //                                }
-                    //                                //... check purchaserInfo to see if entitlement is now active
-                    //                            }
-                    //                        }) {
-                    //                            Text("Restore Purchase")
-                    //                                .underline()
-                    //                                .font(.system(size: 15))
-                    //                                .modifier(ShadowLightModifier())
-                    //                                .foregroundColor(Color(timerVM.firstColorText))
-                    //
-                    //                        }
-                    //
-                    //                    }
+
                     
                     
                     
@@ -237,21 +224,23 @@ struct ProductRow: View {
     }
     
     var body: some View {
-        HStack {
+        HStack(alignment:.center) {
             VStack(alignment: .leading, spacing: nil) {
                 Text("\(product.localizedTitle) - \(price)")
                 Text(product.localizedDescription)
             }
+            
             Spacer()
             
-            if store.isSubscribed {
+            if store.isPurchased(product.productIdentifier) {
                 CheckedView()
             } else {
                 PurchaseButton(product: product)
             }
             
         }
-        .padding()
+        .modifier(ShadowLightModifier())
+//        .padding()
     }
 }
 

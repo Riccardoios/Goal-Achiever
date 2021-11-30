@@ -18,6 +18,10 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         SKPaymentQueue.default().add(self)  // this method add an observer which is appdelegate but appdelegate needs to conform to SKPaymentTRansactionObserver
         
+        DispatchQueue.main.async {
+            self.store.veryfingReceipt()
+        }
+        
         return true
     }
     
@@ -77,13 +81,12 @@ extension AppDelegate: SKPaymentTransactionObserver {
         // here we process the succesful transaction
         //check for proper identifier
         
-        guard let _ = identifier else { return }
+        guard let identifier = identifier else { return }
+        
+        store.addPurchase(purchaseIdentifier: identifier)
         
         store.isSubscribed = true
-        
-       
-        
-       
+        UserDefaults.standard.set(true, forKey:"isSubscribed")
     }
     
 }

@@ -76,6 +76,7 @@ struct Home: View {
 //    @EnvironmentObject var subManager: SubscriptionManager
     @Environment(\.managedObjectContext) var moc
     
+//    #error("set true showplan and false paywall and showhome false")
     @State var showPlanView = true
     @State var showDoView = false
     @State var showChartsView = false
@@ -92,16 +93,6 @@ struct Home: View {
     
     
     var body: some View {
-        
-        //        let permissionsBinding = Binding (
-        //            get: {self.timerVM.remidUserToActivateNotification},
-        //            set: {
-        //                //self.timerVM.requestNotificationAutorization();
-        //                self.timerVM.remidUserToActivateNotification = $0
-        //
-        //        })
-        //
-        //        return
         
         if showHome == false {
             LaunchView(showHome: $showHome)
@@ -129,7 +120,9 @@ struct Home: View {
                     if showChartsView {
                         TrackView(goals: goals, sessions: sessions, showPlanView: $showPlanView, showDoView: $showDoView, showChartsView: $showChartsView, showSettingsView: $showSettingsView, showPayWallView: $showPayWallView)
                             .onAppear {
-                                self.interstitial.showAd()
+                                if !store.isSubscribed {
+                                    self.interstitial.showAd()
+                                }
                             }
                     }
                     
