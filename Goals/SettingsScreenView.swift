@@ -192,7 +192,7 @@ struct SettingsScreenView: View {
                             //                                }
                             
                             
-                            Text("Remove Ads 🎉")
+                            Text(store.isSubscribed ? "My Subscription 🎊" : "Remove Ads 🎉")
                                 //                                    .modifier(ShadowLightModifier())
                                 .font(.system(size: timerVM.secondSizeFont))
                                 .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
@@ -375,68 +375,68 @@ struct SettingsScreenView: View {
                         
 //                        PayWallView(showPayWall: .constant(true), showSettingView: .constant(true))
                         
-                        Group {
-                            
-                            Text("Subscriptions")
-                                .font(.system(size: 35, weight: .regular))
-                                .foregroundColor(Color(timerVM.firstColorText))
-                                .modifier(ShadowLightModifier())
-                            
-                            VStack(alignment: .leading, spacing: 20) {
-                                
-                                Text("👨🏻‍💻 Support the developer")
-                                    .modifier(ShadowLightModifier())
-                                
-                                Text("🎉 No more Adverts!")
-                                    .modifier(ShadowLightModifier())
-                                
-                                
-       
-                            }
-                            .font(.system(size: 30))
-
-
-                            ForEach(store.product, id:\.self) { product in
-
-                                ProductRow(product: product)
-                                    .padding(.horizontal, 40)
-                                    .foregroundColor(Color(timerVM.firstColorText))
-
-                            }
-
-                            Spacer()
-
-                            HStack(alignment: .center) {
-                                Button {
-                                    store.restorePurchases()
-
-                                } label: {
-                                    Text("Restore Purchase")
-                                        .underline()
-                                        .font(.system(size: 15))
-                                        .modifier(ShadowLightModifier())
-                                        .foregroundColor(Color(timerVM.firstColorText))
-                                }
-                            }
-
-
-                            HStack {
-
-                                Link("Privacy Policy", destination: URL(string: "https://riccardoios.github.io/goal-achiever")!)
-                                    .font(.system(size: 15))
-                                    .modifier(ShadowLightModifier())
-                                    .foregroundColor(Color(timerVM.firstColorText))
-
-                                Divider()
-
-                                Link("Terms of Use", destination: URL(string: "https://riccardoios.github.io/goal-achiever-Terms-of-Use")!)
-                                    .font(.system(size: 15))
-                                    .modifier(ShadowLightModifier())
-                                    .foregroundColor(Color(timerVM.firstColorText))
-                            }
-                            .padding()
-
-                        }
+//                        Group {
+//                            
+//                            Text("Subscriptions")
+//                                .font(.system(size: 35, weight: .regular))
+//                                .foregroundColor(Color(timerVM.firstColorText))
+//                                .modifier(ShadowLightModifier())
+//                            
+//                            VStack(alignment: .leading, spacing: 20) {
+//                                
+//                                Text("👨🏻‍💻 Support the developer")
+//                                    .modifier(ShadowLightModifier())
+//                                
+//                                Text("🎉 No more Adverts!")
+//                                    .modifier(ShadowLightModifier())
+//                                
+//                                
+//       
+//                            }
+//                            .font(.system(size: 30))
+//
+//
+//                            ForEach(store.product, id:\.self) { product in
+//
+//                                ProductRow(product: product)
+//                                    .padding(.horizontal, 40)
+//                                    .foregroundColor(Color(timerVM.firstColorText))
+//
+//                            }
+//
+//                            Spacer()
+//
+//                            HStack(alignment: .center) {
+//                                Button {
+//                                    store.restorePurchases()
+//
+//                                } label: {
+//                                    Text("Restore Purchase")
+//                                        .underline()
+//                                        .font(.system(size: 15))
+//                                        .modifier(ShadowLightModifier())
+//                                        .foregroundColor(Color(timerVM.firstColorText))
+//                                }
+//                            }
+//
+//
+//                            HStack {
+//
+//                                Link("Privacy Policy", destination: URL(string: "https://riccardoios.github.io/goal-achiever")!)
+//                                    .font(.system(size: 15))
+//                                    .modifier(ShadowLightModifier())
+//                                    .foregroundColor(Color(timerVM.firstColorText))
+//
+//                                Divider()
+//
+//                                Link("Terms of Use", destination: URL(string: "https://riccardoios.github.io/goal-achiever-Terms-of-Use")!)
+//                                    .font(.system(size: 15))
+//                                    .modifier(ShadowLightModifier())
+//                                    .foregroundColor(Color(timerVM.firstColorText))
+//                            }
+//                            .padding()
+//
+//                        }
                     
                     
 

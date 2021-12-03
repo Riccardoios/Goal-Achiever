@@ -144,9 +144,10 @@ struct PayWallView: View {
                                 .padding(.horizontal, 40)
                             
                         }
+                        .foregroundColor(Color(timerVM.firstColorText))
                     
                     
-                    Spacer()
+                    
                    
                     Button {
                         store.restorePurchases()
@@ -159,9 +160,6 @@ struct PayWallView: View {
                                 .foregroundColor(Color(timerVM.firstColorText))
                     }
 
-                    
-                    
-                    
                     HStack {
                         
                         Link("Privacy Policy", destination: URL(string: "https://riccardoios.github.io/goal-achiever")!)
@@ -185,7 +183,7 @@ struct PayWallView: View {
                     store.requestProducts()
                 }
                 .ignoresSafeArea(.all)
-                .foregroundColor(Color(#colorLiteral(red: 0.2393075824, green: 0.6728859544, blue: 0.9679804444, alpha: 1)))
+//                .foregroundColor(Color(#colorLiteral(red: 0.2393075824, green: 0.6728859544, blue: 0.9679804444, alpha: 1)))
                 .animation(.linear)
                 .padding(.bottom, 50)
                 .padding(.top, 10)

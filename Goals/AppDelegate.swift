@@ -8,6 +8,8 @@
 
 import Foundation
 import StoreKit
+import Firebase
+
 
 class AppDelegate: NSObject {
     var store: IAPStore!
@@ -21,6 +23,8 @@ extension AppDelegate: UIApplicationDelegate {
         DispatchQueue.main.async {
             self.store.veryfingReceipt()
         }
+        
+        FirebaseApp.configure()
         
         return true
     }

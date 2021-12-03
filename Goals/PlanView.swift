@@ -27,7 +27,7 @@ struct PlanView: View {
     @State var weekSelection : [Bool] = [false, false, false, false, false, false, false]
     @State var motivationText : String = ""
     @EnvironmentObject var timerVM : TimerViewModel
-//    @EnvironmentObject var subManager: SubscriptionManager
+    @EnvironmentObject var store: IAPStore
     @State var showGoalExamples = false
     @State var notificationTime = Date() // this guy has to be implemented in the logic of the notification
     
@@ -352,7 +352,7 @@ struct PlanView: View {
                                         self.showDoView = true
                                         self.showPlanView = false
                                         self.showChartsView = false
-                                  
+                                        
                                     }) {
                                         ZStack{
                                             ButtonView(width: 250, height: 90, cornerRadius: 30, showImage: false)
@@ -370,6 +370,33 @@ struct PlanView: View {
                                     
                                 }
                                 
+                            }
+                           
+                            Spacer()
+                            
+                            if !store.isSubscribed {
+                                HStack {
+                                    Spacer()
+                                    
+                                    ZStack {
+                                        
+                                        Button {
+                                            
+                                            self.showPlanView = false
+                                            self.showPayWall = true
+                                            
+                                        } label: {
+                                            ButtonView(width: 190, height: 60, cornerRadius: 30, showImage: false)
+                                        }
+                                        
+                                        Text("Remove Ads 🎉")
+                                            //                                    .modifier(ShadowLightModifier())
+                                            .font(.system(size: timerVM.secondSizeFont))
+                                            .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                                        
+                                    }
+                                    Spacer()
+                                }
                             }
                             
                             Spacer()
