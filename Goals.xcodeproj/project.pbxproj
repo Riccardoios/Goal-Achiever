@@ -20,6 +20,7 @@
 		3A643939258582E200A01360 /* PremiumOnlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A643938258582E200A01360 /* PremiumOnlyView.swift */; };
 		3A9652A12553F8100054C5A5 /* WaveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */; };
 		3AADB4E4275A2303000A69B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AADB4E3275A2303000A69B4 /* GoogleService-Info.plist */; };
+		3ABD93CF2799ACD700C49D79 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3ABD93CE2799ACD600C49D79 /* README.md */; };
 		3AD36E4F259C53C200090EFC /* AddSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD36E4E259C53C200090EFC /* AddSessionView.swift */; };
 		3AEAC3432548F0ED0056B8C9 /* GoalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */; };
 		3AEAC34A2548F0EE0056B8C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AEAC3492548F0EE0056B8C9 /* Preview Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		3A643938258582E200A01360 /* PremiumOnlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumOnlyView.swift; sourceTree = "<group>"; };
 		3A9652A02553F8100054C5A5 /* WaveAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
 		3AADB4E3275A2303000A69B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3ABD93CE2799ACD600C49D79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		3AD36E4E259C53C200090EFC /* AddSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSessionView.swift; sourceTree = "<group>"; };
 		3AEAC33F2548F0ED0056B8C9 /* Goals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEAC3422548F0ED0056B8C9 /* GoalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsApp.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		3AEAC3362548F0ED0056B8C9 = {
 			isa = PBXGroup;
 			children = (
+				3ABD93CE2799ACD600C49D79 /* README.md */,
 				3AEAC3412548F0ED0056B8C9 /* Goals */,
 				3AEAC3402548F0ED0056B8C9 /* Products */,
 				3A1FC7ED25634A0300596576 /* Frameworks */,
@@ -298,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ABD93CF2799ACD700C49D79 /* README.md in Resources */,
 				3AEAC3992548F5B40056B8C9 /* transport.mp3 in Resources */,
 				3AEAC3982548F5B40056B8C9 /* future_sms.mp3 in Resources */,
 				3AADB4E4275A2303000A69B4 /* GoogleService-Info.plist in Resources */,
